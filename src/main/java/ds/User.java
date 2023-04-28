@@ -4,18 +4,23 @@ public class User {
     private int id;
     private String login;
     private String password;
-    private String name;
-    private String surname;
+    private String userType;
+    private String userName;
+    private String userSurname;
 
-    public User(int id, String login, String password, String name, String surname) {
+    public User(int id, String login, String password, String userType, String userName, String surname) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.name = name;
-        this.surname = surname;
+        this.userType = userType;
+        this.userName = userName;
+        this.userSurname = userSurname;
     }
 
-    public User(String login, int anInt, String person_name, String person_surname, String person_email) {
+    public User(String login, int anInt, String person_name, String person_surname) {
+    }
+
+    public User(int id, String userName, String userSurname, String userType) {
     }
 
     // Getters and Setters
@@ -43,20 +48,22 @@ public class User {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getUserType() { return userType; }
+
+    public void setUserType(String userType) { this.userType = userType; }
+
+    public String getName() { return userName; }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = userName;
     }
 
     public String getSurname() {
-        return surname;
+        return userSurname;
     }
 
     public void setSurname(String surname) {
-        this.surname = surname;
+        this.userSurname = userSurname;
     }
 
     @Override
@@ -65,8 +72,9 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", userType='" + userType + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userSurname='" + userSurname + '\'' +
                 '}';
     }
 }

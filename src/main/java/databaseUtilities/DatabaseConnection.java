@@ -11,9 +11,9 @@ public class DatabaseConnection {
         Connection conn = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String DB_URL = "jdbc:mysql://localhost/ccsys";
-            String USER = "admin";
-            String PASS = "123";
+            String DB_URL = "jdbc:mysql://localhost/museum";
+            String USER = "root";
+            String PASS = "admin";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException | ClassNotFoundException t) {
             t.printStackTrace();

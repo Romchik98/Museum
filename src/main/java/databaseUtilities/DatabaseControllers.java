@@ -34,19 +34,17 @@ public class DatabaseControllers {
         ResultSet rs = statement.executeQuery(query);
         String userName = "null";
         String userSurname = "null";
-        String userPosition = "null";
-        String email = "null";
+        String userType = "null";
         int id = 0;
         while (rs.next()) {
             id = rs.getInt(1);
             userName = rs.getString("person_name");
             userSurname = rs.getString("person_surname");
-            userPosition = rs.getString("person_position");
-            email = rs.getString("person_email");
+            userType = rs.getString("person_type");
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
 
-        User user = new User(id, userName, userSurname, email, userPosition);
+        User user = new User(id, userName, userSurname, userType);
         return user;
     }
 
@@ -67,7 +65,7 @@ public class DatabaseControllers {
         }
     }
 
-    public static void editUser(String loginName, String password, String name, String surname, String email, int id) {
+    public static void editUser(String loginName, String password, String name, String surname, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "UPDATE user SET login = '" + loginName + "', password = '" + password + "', person_name = '" + name + "', person_surname = '" + surname + "' where id = '" + id + "'";
@@ -87,7 +85,7 @@ public class DatabaseControllers {
         String query1 = "SELECT * FROM user";
         ResultSet rs1 = statement.executeQuery(query1);
         while (rs1.next()) {
-            users.add(new User(rs1.getString("login"), rs1.getInt(1), rs1.getString("person_name"), rs1.getString("person_surname"), rs1.getString("person_email")));
+            users.add(new User(rs1.getString("login"), rs1.getInt(1), rs1.getString("person_name"), rs1.getString("person_surname")));
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
         return users;
@@ -100,19 +98,17 @@ public class DatabaseControllers {
         ResultSet rs = statement.executeQuery(query);
         String userName = "null";
         String userSurname = "null";
-        String userPosition = "null";
-        String email = "null";
+        String userType = "null";
         int id = 0;
         while (rs.next()) {
             id = rs.getInt(1);
             userName = rs.getString("person_name");
             userSurname = rs.getString("person_surname");
-            userPosition = rs.getString("person_position");
-            email = rs.getString("person_email");
+            userType = rs.getString("person_position");
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
 
-        User user = new User(id, userName, userSurname, email, userPosition);
+        User user = new User(id, userName, userSurname, userType);
         return user;
     }
 
