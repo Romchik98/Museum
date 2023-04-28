@@ -15,6 +15,13 @@ public class DatabaseConnection {
             String USER = "root";
             String PASS = "admin";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            /*if(!conn.isClosed()) {
+                System.out.println("DB connected.");
+            }
+            conn.close();
+            if (conn.isClosed()) {
+                System.out.println("DB disconnected.");
+            }*/
         } catch (SQLException | ClassNotFoundException t) {
             t.printStackTrace();
         }

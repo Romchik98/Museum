@@ -1,5 +1,6 @@
 package com.museum.museum;
 
+import databaseUtilities.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +11,7 @@ import java.io.IOException;
 public class MuseumManagementApp extends Application {
 
     public static void main(String[] args) {
-        launch(args);
+        DatabaseConnection.connectToDb();
     }
 
     @Override

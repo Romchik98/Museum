@@ -23,6 +23,9 @@ public class User {
     public User(int id, String userName, String userSurname, String userType) {
     }
 
+    public User(String loginName, String password, String name, String surname) {
+    }
+
     // Getters and Setters
     public int getId() {
         return id;
