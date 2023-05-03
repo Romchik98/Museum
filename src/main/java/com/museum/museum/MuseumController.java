@@ -1,3 +1,4 @@
+/*
 package com.museum.museum;
 
 import javafx.fxml.FXML;
@@ -11,4 +12,4 @@ public class MuseumController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
-}
+}*/

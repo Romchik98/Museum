@@ -112,7 +112,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.museum.museum/com.museum.museum.MuseumManagementApp</mainClass>
+                            <mainClass>com.museum.museum/com.museum.museum.Start</mainClass>
                         </configuration>
                     </execution>
                 </executions>

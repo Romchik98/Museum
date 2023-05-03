@@ -1,8 +1,8 @@
-package databaseUtilities;
+package com.museum.museum.databaseUtilities;
 
-import controllers.LoginControl;
-import ds.Exhibit;
-import ds.User;
+import com.museum.museum.controllers.LoginControl;
+import com.museum.museum.ds.Collection;
+import com.museum.museum.ds.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class DatabaseControllers {
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getName());
-            preparedStatement.setString(4, user.getSurname());
+            preparedStatement.setString(4, user.getUserSurname());
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("User created");
@@ -104,7 +104,7 @@ public class DatabaseControllers {
             id = rs.getInt(1);
             userName = rs.getString("person_name");
             userSurname = rs.getString("person_surname");
-            userType = rs.getString("person_position");
+            userType = rs.getString("person_type");
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
 
@@ -119,7 +119,7 @@ public class DatabaseControllers {
 
 
     // Add a new exhibit to the database
-    public void addExhibitToDatabase(Exhibit exhibit) {
+    /*public void addExhibitToDatabase(Exhibit exhibit) {
         try {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO exhibits (name, description, year) VALUES (?, ?, ?)"
@@ -138,7 +138,7 @@ public class DatabaseControllers {
     public void updateExhibitInDatabase(Exhibit exhibit) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE exhibits SET name = ?, description = ?, year = ? WHERE id = ?"
+                    "UPDATE exhibit SET name = ?, description = ?, year = ? WHERE id = ?"
             );
             statement.setString(1, exhibit.getName());
             statement.setString(2, exhibit.getDescription());
@@ -155,7 +155,7 @@ public class DatabaseControllers {
     public void deleteExhibitFromDatabase(Exhibit exhibit) {
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM exhibits WHERE id = ?"
+                    "DELETE FROM exhibit WHERE id = ?"
             );
             statement.setInt(1, exhibit.getId());
             statement.executeUpdate();
@@ -170,15 +170,15 @@ public class DatabaseControllers {
         ArrayList<Exhibit> exhibits = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM exhibits"
+                    "SELECT * FROM exhibit"
             );
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
-                int year = resultSet.getInt("year");
-                Exhibit exhibit = new Exhibit(id, name, description, year);
+                Date dateOfCreation = resultSet.getDate("dateOfCreation");
+                Exhibit exhibit = new Exhibit(id, name, description, dateOfCreation, );
                 exhibits.add(exhibit);
             }
         } catch (SQLException e) {
@@ -210,6 +210,36 @@ public class DatabaseControllers {
             e.printStackTrace();
         }
         return exhibits;
+    }*/
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Collections//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static ArrayList<Collection> getCollections(int userId) throws SQLException {
+        ArrayList<Collection> collections = new ArrayList<>();
+        ArrayList<Integer> collectionId = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query1 = "SELECT collection_id user FROM collection WHERE user_id = '" + userId + "'";
+        ResultSet rs = statement.executeQuery(query1);
+        while (rs.next()) {
+            collectionId.add(rs.getInt(1));
+        }
+        for (int i = 0; i < collectionId.size(); i++)
+        {
+            String query = "SELECT * FROM course WHERE id = '" + collectionId.get(i) + "'";
+            ResultSet rs1 = statement.executeQuery(query);
+            while (rs1.next()) {
+                collections.add(new Collection(rs1.getInt(1), rs1.getString("course_name"), rs1.getString("description")));
+            }
+
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return collections;
     }
 
 }

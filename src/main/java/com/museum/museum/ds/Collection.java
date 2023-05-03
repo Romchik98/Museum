@@ -1,16 +1,19 @@
-package ds;
+package com.museum.museum.ds;
 
-public class Exhibit {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Collection {
     private int id;
     private String name;
     private String description;
-    private int year;
+    private List<Exhibit> exhibits;
 
-    public Exhibit(int id, String name, String description, int year) {
+    public Collection(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.year = year;
+        this.exhibits = new ArrayList<>();
     }
 
     // Getters and Setters
@@ -38,21 +41,30 @@ public class Exhibit {
         this.description = description;
     }
 
-    public int getYear() {
-        return year;
+    public List<Exhibit> getExhibits() {
+        return exhibits;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setExhibits(List<Exhibit> exhibits) {
+        this.exhibits = exhibits;
+    }
+
+    // Add and remove Exhibit from the Collection
+    public void addExhibit(Exhibit exhibit) {
+        exhibits.add(exhibit);
+    }
+
+    public void removeExhibit(Exhibit exhibit) {
+        exhibits.remove(exhibit);
     }
 
     @Override
     public String toString() {
-        return "Exhibit{" +
+        return "Collection{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", year=" + year +
+                ", exhibits=" + exhibits +
                 '}';
     }
 }

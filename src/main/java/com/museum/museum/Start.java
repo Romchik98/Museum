@@ -1,25 +1,23 @@
 package com.museum.museum;
 
-import databaseUtilities.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 
-public class MuseumManagementApp extends Application {
-
-    public static void main(String[] args) {
-        DatabaseConnection.connectToDb();
-    }
+public class Start extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(MuseumManagementApp.class.getResource("login-window.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Museum collection management system");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch();
     }
 }

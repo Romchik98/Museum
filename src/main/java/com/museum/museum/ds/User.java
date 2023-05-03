@@ -1,4 +1,4 @@
-package ds;
+package com.museum.museum.ds;
 
 public class User {
     private int id;
@@ -17,14 +17,23 @@ public class User {
         this.userSurname = userSurname;
     }
 
+    public User(String login, String password, String userName, String userSurname) {
+        this.login = login;
+        this.password = password;
+        this.userName = userName;
+        this.userSurname = userSurname;
+    }
+
     public User(String login, int anInt, String person_name, String person_surname) {
     }
 
     public User(int id, String userName, String userSurname, String userType) {
+        this.id = id;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.userType = userType;
     }
 
-    public User(String loginName, String password, String name, String surname) {
-    }
 
     // Getters and Setters
     public int getId() {
@@ -61,7 +70,7 @@ public class User {
         this.userName = userName;
     }
 
-    public String getSurname() {
+    public String getUserSurname() {
         return userSurname;
     }
 

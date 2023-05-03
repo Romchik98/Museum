@@ -1,4 +1,4 @@
-package databaseUtilities;
+package com.museum.museum.databaseUtilities;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

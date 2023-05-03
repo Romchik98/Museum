@@ -1,10 +1,10 @@
-package controllers;
+package com.museum.museum.controllers;
 
-import ds.User;
-import databaseUtilities.DatabaseConnection;
-import databaseUtilities.DatabaseControllers;
+import com.museum.museum.ds.User;
+import com.museum.museum.databaseUtilities.DatabaseControllers;
+import com.museum.museum.Start;
 
-import com.museum.museum.MuseumManagementApp;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -39,13 +38,13 @@ public class LoginControl {
         alert.showAndWait();
     }
 
-/*    public void ValidateLogin(ActionEvent actionEvent) throws SQLException, IOException{
+    public void ValidateLogin(ActionEvent actionEvent) throws SQLException, IOException{
         User user = DatabaseControllers.validateLogin(loginName.getText(), password.getText());
 
         if (user.getUserType().equals("User") && user != null)
         {
             alertMessage("Logged in as User");
-            FXMLLoader fxmlLoader = new FXMLLoader(MuseumManagementApp.class.getResource("main-user-window.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
             Parent root = fxmlLoader.load();
             MainUserWindowControl mainUserWindowControl = fxmlLoader.getController();
             mainUserWindowControl.setLoggedInUser(user);
@@ -57,7 +56,7 @@ public class LoginControl {
         else if (user.getUserType().equals("Admin") && user != null)
         {
             alertMessage("Logged in as Admin");
-            FXMLLoader fxmlLoader = new FXMLLoader(MuseumManagementApp.class.getResource("main-window.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
             Parent root = fxmlLoader.load();
             MainWindowControl mainWindowControl = fxmlLoader.getController();
             mainWindowControl.setLoggedInUser(user);
@@ -69,10 +68,11 @@ public class LoginControl {
         }
         else
             alertMessage("Bad credentials");
-    }*/
+
+    }
 
     public void startSignUp(ActionEvent actionEvent) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader((MuseumManagementApp.class.getResource("sign-up-form.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader((Start.class.getResource("sign-up-form.fxml")));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) loginName.getScene().getWindow();

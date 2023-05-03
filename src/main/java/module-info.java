@@ -12,5 +12,7 @@ module com.museum.museum {
     requires java.sql;
 
     opens com.museum.museum to javafx.fxml;
+    opens com.museum.museum.controllers to javafx.fxml;
     exports com.museum.museum;
+    exports com.museum.museum.controllers;
 }

@@ -1,8 +1,8 @@
-package controllers;
+package com.museum.museum.controllers;
 
-import com.museum.museum.MuseumManagementApp;
-import databaseUtilities.DatabaseControllers;
-import ds.User;
+import com.museum.museum.Start;
+import com.museum.museum.databaseUtilities.DatabaseControllers;
+import com.museum.museum.ds.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,14 +30,24 @@ public class SignUpControl {
     private PreparedStatement preparedStatement;
 
     public void startSignUp(ActionEvent actionEvent) throws IOException {
-        if (this.isValidInput(this.getLoginName()) && this.isValidInput(this.getPassword()) && this.isValidInput(this.getName()) && this.isValidInput(this.getSurname())) {
-            DatabaseControllers.createUser(new User(this.getLoginName(), this.getPassword(), this.getName(), this.getSurname()));
+        if (this.isValidInput(this.getLoginName()) && this.isValidInput(this.getPassword()) && this.isValidInput(this.getName()) && this.isValidInput(this.getUserSurname())) {
+            DatabaseControllers.createUser(new User(this.getLoginName(), this.getPassword(), this.getName(), this.getUserSurname()));
             this.returnToPrevious();
         }
     }
 
     private void returnToPrevious() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MuseumManagementApp.class.getResource("login-window.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) loginName.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void returnToLoginPage() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) loginName.getScene().getWindow();
@@ -47,9 +57,11 @@ public class SignUpControl {
 
     public String getLoginName() {
         String loginName = this.loginName.getText();
-        if (loginName.length() > 0)
+        if (loginName.length() > 0) {
             return loginName;
-        LoginControl.alertMessage("You must enter login name");
+        } else {
+            LoginControl.alertMessage("You must enter login name");
+        };
         return "";
     }
 
@@ -69,7 +81,7 @@ public class SignUpControl {
         return "";
     }
 
-    public String getSurname() {
+    public String getUserSurname() {
         String surname = this.surname.getText();
         if (surname.length() > 0)
             return surname;
