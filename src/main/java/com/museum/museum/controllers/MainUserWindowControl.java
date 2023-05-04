@@ -1,13 +1,19 @@
 package com.museum.museum.controllers;
 
+import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -181,7 +187,7 @@ public class MainUserWindowControl {
         this.setCollectionsList();
     }
 
-    public void updateUser(ActionEvent actionEvent) {
+    public void updateUser(ActionEvent actionEvent) throws IOException {
         if(     loginName.getText() != "" &&
                 password.getText() != "" &&
                 name.getText() != "" &&
@@ -189,8 +195,9 @@ public class MainUserWindowControl {
 
             DatabaseControllers.editUser(loginName.getText(), password.getText(), name.getText(), surname.getText(), loggedInUser.getId());
         }
-        else
+        else {
             LoginControl.alertMessage("Please fill all fields");
+        }
     }
 }
 

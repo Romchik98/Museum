@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Exhibit {
     private int id;
+    private int collectionId;
     private String name;
     private String description;
     private Date dateOfCreation;
     private Date dateOfDiscovery;
     private int quantity;
     private String condition;
-    private int collectionId;
     private String placeOfCreation;
     private String placeOfDiscovery;
     private String dimensions;

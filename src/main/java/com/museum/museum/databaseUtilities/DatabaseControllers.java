@@ -68,7 +68,7 @@ public class DatabaseControllers {
     public static void editUser(String loginName, String password, String name, String surname, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
-            String insertString = "UPDATE user SET login = '" + loginName + "', password = '" + password + "', person_name = '" + name + "', person_surname = '" + surname + "' where id = '" + id + "'";
+            String insertString = "UPDATE user SET login = '" + loginName + "', password = '" + password + "', person_name = '" + name + "', person_surname = '" + surname + "' where person_id = '" + id + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
