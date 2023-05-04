@@ -15,7 +15,7 @@ public class MainWindowControl{
 
     //coursesTab
     @FXML
-    public ListView coursesList;
+    public ListView collectionsList;
 
     @FXML
     public ListView filesList;
@@ -75,7 +75,7 @@ public class MainWindowControl{
 
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
-        this.setCoursesList(loggedInUser.getId());
+        this.setCollectionsList(loggedInUser.getId());
         this.setAllUsersList();
     }
 
@@ -85,22 +85,22 @@ public class MainWindowControl{
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Courses//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setCoursesList(int userIdLike) throws SQLException{
-        this.coursesList.getItems().clear();
+    public void setCollectionsList(int userIdLike) throws SQLException{
+        this.collectionsList.getItems().clear();
         for (Collection collection : this.getCollections(userIdLike)) {
-            this.coursesList.getItems().add(collection.getName());
+            this.collectionsList.getItems().add(collection.getName());
         }
     }
 
     private ArrayList<Collection> getCollections(int userIdLike) throws SQLException {
-        ArrayList<Collection> collections = DatabaseControllers.getCollections(userIdLike);
+        ArrayList<Collection> collections = DatabaseControllers.getAllCollections();
         this.collections = collections;
         return collections;
     }
 
     /*public void selectCourse(MouseEvent mouseEvent) throws SQLException{
-        if (this.coursesList.getSelectionModel().getSelectedItem() != null) {
-            String courseName = this.coursesList.getSelectionModel().getSelectedItem().toString();
+        if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
+            String courseName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
             for (Course course : this.courses) {
                 if(course.getName().equals(courseName))
                     selectedCourse = course;
@@ -125,14 +125,14 @@ public class MainWindowControl{
     public void deleteCourse() throws SQLException, IOException {
         if(selectedCourse != null) {
             DbQuerys.deleteCourse(selectedCourse.getId());
-            setCoursesList(loggedInUser.getId());
+            setCollectionsList(loggedInUser.getId());
 
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             MainWindowControl mainCoursesWindow = fxmlLoader.getController();
             mainCoursesWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.coursesList.getScene().getWindow();
+            Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
@@ -255,7 +255,7 @@ public class MainWindowControl{
             Scene scene = new Scene(root);
             MainWindowControl mainCoursesWindow = fxmlLoader.getController();
             mainCoursesWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.coursesList.getScene().getWindow();
+            Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
@@ -341,7 +341,7 @@ public class MainWindowControl{
             Scene scene = new Scene(root);
             MainWindowControl mainCoursesWindow = fxmlLoader.getController();
             mainCoursesWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.coursesList.getScene().getWindow();
+            Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }

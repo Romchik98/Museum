@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainUserWindowControl">
+   <children>
+      <ListView fx:id="collectionsList" layoutX="49.0" layoutY="52.0" prefHeight="296.0" prefWidth="227.0">
+         <effect>
+            <DropShadow />
+         </effect>
+      </ListView>
+      <Label layoutX="142.0" layoutY="22.0" text="Collections" />
+   </children>
+</AnchorPane>

@@ -3,8 +3,10 @@ package com.museum.museum.controllers;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,7 +17,7 @@ public class MainUserWindowControl {
 
     //coursesTab
     @FXML
-    public ListView coursesList;
+    public ListView<String> collectionsList;
     @FXML
     public ListView filesList;
     @FXML
@@ -72,36 +74,36 @@ public class MainUserWindowControl {
         this.mainTab.getSelectionModel().select(courseTab);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Courses//
+    //Collections//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setCoursesList(int userIdLike) throws SQLException{
-        this.coursesList.getItems().clear();
-        for (Collection collection : this.getCollections(userIdLike)) {
-            this.coursesList.getItems().add(collection.getName());
+    public void setCollectionsList() throws SQLException{
+        this.collectionsList.getItems().clear();
+        for (Collection collection : this.getCollections()) {
+            this.collectionsList.getItems().add(collection.getName());
         }
     }
 
-    private ArrayList<Collection> getCollections(int userIdLike) throws SQLException {
-        ArrayList<Collection> collections = DatabaseControllers.getCollections(userIdLike);
+    private ArrayList<Collection> getCollections() throws SQLException {
+        ArrayList<Collection> collections = DatabaseControllers.getAllCollections();
         this.collections = collections;
         return collections;
     }
 
     /*public void selectCourse(MouseEvent mouseEvent) throws SQLException{
-        if (this.coursesList.getSelectionModel().getSelectedItem() != null) {
-            String courseName = this.coursesList.getSelectionModel().getSelectedItem().toString();
-            for (Course course : this.courses) {
+        if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
+            String courseName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
+            for (Collection course : this.collections) {
                 if(course.getName().equals(courseName))
                     selectedCourse = course;
             }
             this.setFoldersTree();
         }
-    }
+    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //FOLDERS//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    private ArrayList<Folder> getFolders(int courseIdlike) throws SQLException {
+    /*private ArrayList<Folder> getFolders(int courseIdlike) throws SQLException {
         ArrayList<Folder> folders = DatabaseControllers.getFolders(courseIdlike);
         this.folders = folders;
         return folders;
@@ -176,10 +178,10 @@ public class MainUserWindowControl {
 
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
-        this.setCoursesList(loggedInUser.getId());
+        this.setCollectionsList();
     }
 
-    /*public void updateUser(ActionEvent actionEvent) {
+    public void updateUser(ActionEvent actionEvent) {
         if(     loginName.getText() != "" &&
                 password.getText() != "" &&
                 name.getText() != "" &&
@@ -189,6 +191,6 @@ public class MainUserWindowControl {
         }
         else
             LoginControl.alertMessage("Please fill all fields");
-    }*/
+    }
 }
 

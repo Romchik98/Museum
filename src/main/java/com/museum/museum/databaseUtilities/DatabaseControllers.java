@@ -217,21 +217,21 @@ public class DatabaseControllers {
     //Collections//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static ArrayList<Collection> getCollections(int userId) throws SQLException {
+    /*public static ArrayList<Collection> getCollections(int userId) throws SQLException {
         ArrayList<Collection> collections = new ArrayList<>();
         ArrayList<Integer> collectionId = new ArrayList<>();
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
 
-        String query1 = "SELECT collection_id user FROM collection WHERE user_id = '" + userId + "'";
+        String query1 = "SELECT collection_id user FROM collection WHERE person_id = '" + userId + "'";
         ResultSet rs = statement.executeQuery(query1);
         while (rs.next()) {
             collectionId.add(rs.getInt(1));
         }
         for (int i = 0; i < collectionId.size(); i++)
         {
-            String query = "SELECT * FROM course WHERE id = '" + collectionId.get(i) + "'";
+            String query = "SELECT * FROM collection WHERE id = '" + collectionId.get(i) + "'";
             ResultSet rs1 = statement.executeQuery(query);
             while (rs1.next()) {
                 collections.add(new Collection(rs1.getInt(1), rs1.getString("course_name"), rs1.getString("description")));
@@ -240,6 +240,22 @@ public class DatabaseControllers {
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
         return collections;
+    }*/
+
+    public static ArrayList<Collection> getAllCollections() throws SQLException {
+        ArrayList<Collection> courses = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query = "SELECT * FROM collection";
+        ResultSet rs1 = statement.executeQuery(query);
+        while (rs1.next()) {
+            courses.add(new Collection(rs1.getInt(1), rs1.getString("name"), rs1.getString("description")));
+        }
+
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return courses;
     }
 
 }
