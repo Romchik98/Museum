@@ -2,6 +2,7 @@ package com.museum.museum.databaseUtilities;
 
 import com.museum.museum.controllers.LoginControl;
 import com.museum.museum.ds.Collection;
+import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 
 import java.sql.*;
@@ -117,6 +118,26 @@ public class DatabaseControllers {
     //Exhibit//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    public static ArrayList<Exhibit> getExhibits(int collectionId) throws SQLException {
+        ArrayList<Exhibit> exhibits = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query1 = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "'";
+        ResultSet rs1 = statement.executeQuery(query1);
+        while (rs1.next()) {
+            exhibits.add(new Exhibit(rs1.getInt(1), rs1.getString("name"), rs1.getString("description"),
+                    rs1.getDate("date_of_creation"), rs1.getDate("date_of_discovery"),
+                    rs1.getInt("quantity"), rs1.getString("condition"), rs1.getInt("collection_id"),
+                    rs1.getString("place_of_creation"), rs1.getString("place_of_discovery"), rs1.getString("dimensions"),
+                    rs1.getString("materials"), rs1.getString("type"), rs1.getString("object"),
+                    rs1.getString("licence")));
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return exhibits;
+    }
 
     // Add a new exhibit to the database
     /*public void addExhibitToDatabase(Exhibit exhibit) {

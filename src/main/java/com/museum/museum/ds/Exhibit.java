@@ -139,7 +139,9 @@ public class Exhibit {
         this.licence = licence;
     }
 
-    public Exhibit(int id, String name, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, int collectionId, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String object, String licence) {
+    public Exhibit(int id, String name, String description, Date dateOfCreation, Date dateOfDiscovery,
+                   int quantity, String condition, int collectionId, String placeOfCreation, String placeOfDiscovery,
+                   String dimensions, String materials, String type, String object, String licence) {
         this.id = id;
         this.name = name;
         this.description = description;

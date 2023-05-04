@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -71,8 +72,8 @@ public class MainWindowControl{
     private ArrayList<User> accessedUsers;
 
     private User loggedInUser;
-    /*private Course selectedCourse;
-    private Folder selectedFolder;
+    private Connection selectedCollection;
+    /*private Folder selectedFolder;
     private File selectedFile;*/
     private User selectedAllUser;
     private User selectedAccessUser;
@@ -104,19 +105,19 @@ public class MainWindowControl{
         return collections;
     }
 
-    /*public void selectCourse(MouseEvent mouseEvent) throws SQLException{
+    /*public void selectCollection(MouseEvent mouseEvent) throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
             String courseName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
-            for (Course course : this.courses) {
-                if(course.getName().equals(courseName))
-                    selectedCourse = course;
+            for (Collection collection : this.collections) {
+                if(collection.getName().equals(courseName))
+                    selectedCollection = collection;
             }
             this.setFoldersTree();
             this.setAccesedUsersList();
         }
-    }
+    }*/
 
-    public void createCourse() throws SQLException, IOException {
+    /*public void createCourse() throws SQLException, IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-course.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);

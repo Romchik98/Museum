@@ -1,17 +1,13 @@
 package com.museum.museum.controllers;
 
-import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
+import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -25,7 +21,7 @@ public class MainUserWindowControl {
     @FXML
     public ListView<String> collectionsList;
     @FXML
-    public ListView filesList;
+    public ListView exhibitsList;
     @FXML
     public TreeView<String> foldersTree;
     @FXML
@@ -66,15 +62,15 @@ public class MainUserWindowControl {
     private Statement statement;
 
     private ArrayList<Collection> collections;
-    /*private ArrayList<Folder> folders;
-    private ArrayList<File> files;*/
+    //private ArrayList<Folder> folders;
+    private ArrayList<Exhibit> exhibits;
     private ArrayList<User> users;
     private ArrayList<User> accessedUsers;
 
     private User loggedInUser;
-    /*private Course selectedCourse;
-    private Folder selectedFolder;
-    private File selectedFile;*/
+    private Collection selectedCollection;
+    //private Folder selectedFolder;
+    private Exhibit selectedExhibit;
 
     public void switchTab() {
         this.mainTab.getSelectionModel().select(courseTab);
@@ -95,16 +91,16 @@ public class MainUserWindowControl {
         return collections;
     }
 
-    /*public void selectCourse(MouseEvent mouseEvent) throws SQLException{
+    public void selectCollection(MouseEvent mouseEvent) throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
-            String courseName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
+            String collectionName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
             for (Collection course : this.collections) {
-                if(course.getName().equals(courseName))
-                    selectedCourse = course;
+                if(course.getName().equals(collectionName))
+                    selectedCollection = course;
             }
-            this.setFoldersTree();
+            this.setExhibitsList(selectedCollection.getId());
         }
-    }*/
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //FOLDERS//
@@ -113,9 +109,9 @@ public class MainUserWindowControl {
         ArrayList<Folder> folders = DatabaseControllers.getFolders(courseIdlike);
         this.folders = folders;
         return folders;
-    }
+    }*/
 
-    public void setFoldersTree() throws  SQLException {
+    /*public void setFoldersTree() throws  SQLException {
         TreeItem<String> rootItem = new TreeItem<>(selectedCourse.getName());
         this.foldersTree.setRoot(rootItem);
         getFolders(selectedCourse.getId());
@@ -129,8 +125,8 @@ public class MainUserWindowControl {
             }
 
         }
-    }
-    private void isThereChildren(int folderId, TreeItem<String> item) {
+    }*/
+    /*private void isThereChildren(int folderId, TreeItem<String> item) {
         for (Folder folder : this.folders) {
             if(folder.getParentId() == folderId) {
                 TreeItem<String> childItem = new TreeItem<>(folder.getName());
@@ -150,33 +146,33 @@ public class MainUserWindowControl {
             }
             setFilesList(selectedFolder.getId());
         }
-    }
+    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Files//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    private ArrayList<File> getFiles(int folderIdLike) throws SQLException {
-        ArrayList<File> files = DatabaseControllers.getFiles(folderIdLike);
-        this.files = files;
-        return files;
+    private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
+        ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike);
+        this.exhibits = exhibits;
+        return exhibits;
     }
 
-    public void setFilesList(int folderIdLike) throws SQLException{
-        this.filesList.getItems().clear();
-        for (File file : this.getFiles(folderIdLike)) {
-            this.filesList.getItems().add(file.getName());
+    public void setExhibitsList(int collectionIdLike) throws SQLException{
+        this.exhibitsList.getItems().clear();
+        for (Exhibit exhibit : this.getExhibits(collectionIdLike)) {
+            this.exhibitsList.getItems().add(exhibit.getName());
         }
     }
 
-    public void selectFile(MouseEvent mouseEvent) throws SQLException{
-        if (this.filesList.getSelectionModel().getSelectedItem() != null) {
-            String fileName = this.filesList.getSelectionModel().getSelectedItem().toString();
-            for (File file : this.files) {
-                if(file.getName().equals(fileName))
-                    selectedFile = file;
+    public void selectExhibit(MouseEvent mouseEvent) throws SQLException{
+        if (this.exhibitsList.getSelectionModel().getSelectedItem() != null) {
+            String exhibitName = this.exhibitsList.getSelectionModel().getSelectedItem().toString();
+            for (Exhibit exhibit : this.exhibits) {
+                if(exhibit.getName().equals(exhibitName))
+                    selectedExhibit = exhibit;
             }
         }
-    }*/
+    }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     //User//
