@@ -1,13 +1,18 @@
 package com.museum.museum.controllers;
 
+import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -17,7 +22,7 @@ import java.util.ArrayList;
 
 public class MainWindowControl{
 
-    //coursesTab
+    //Collections tab
     @FXML
     public ListView<String> collectionsList;
     @FXML
@@ -25,13 +30,9 @@ public class MainWindowControl{
     @FXML
     public TreeView<String> foldersTree;
     @FXML
-    public Button createCourseButton;
+    public Button createCollectionButton;
     @FXML
-    public Button editCourseButton;
-    @FXML
-    public Button createFolderButton;
-    @FXML
-    public Button editFolderButton;
+    public Button editCollectionButton;
     @FXML
     public Button createFileButton;
     @FXML
@@ -39,7 +40,7 @@ public class MainWindowControl{
     @FXML
     public TabPane mainTab;
     @FXML
-    public Tab courseTab;
+    public Tab collectionTab;
 
     //accessibility tab
     @FXML
@@ -64,22 +65,15 @@ public class MainWindowControl{
     private ArrayList<Collection> collections;
     private ArrayList<Exhibit> exhibits;
     private ArrayList<User> users;
-    private ArrayList<User> accessedUsers;
 
+    private User selectedAdminUser;
     private User loggedInUser;
     private Collection selectedCollection;
     private Exhibit selectedExhibit;
 
 
-
-    /*public void setLoggedInUser(User user) throws SQLException {
-        this.loggedInUser = user;
-        this.setCollectionsList(loggedInUser.getId());
-        this.setAllUsersList();
-    }*/
-
     public void switchTab() {
-        this.mainTab.getSelectionModel().select(courseTab);
+        this.mainTab.getSelectionModel().select(collectionTab);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Collection//
@@ -100,62 +94,61 @@ public class MainWindowControl{
     public void selectCollection(MouseEvent mouseEvent) throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
             String collectionName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
-            for (Collection course : this.collections) {
-                if(course.getName().equals(collectionName))
-                    selectedCollection = course;
+            for (Collection collection : this.collections) {
+                if(collection.getName().equals(collectionName))
+                    selectedCollection = collection;
             }
             this.setExhibitsList(selectedCollection.getId());
         }
     }
 
-    /*public void createCourse() throws SQLException, IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-course.fxml"));
+    public void createCollection() throws SQLException, IOException {
+        /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-collection.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
-        CreateCourseControl createCourseControl = fxmlLoader.getController();
-        createCourseControl.setLoggedInUser(loggedInUser);
-        Stage stage = (Stage) this.createCourseButton.getScene().getWindow();
+        CreateCollectionControl createCollectionControl = fxmlLoader.getController();
+        createCollectionControl.setLoggedInUser(loggedInUser);
+        Stage stage = (Stage) this.createCollectionButton.getScene().getWindow();
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
-    public void deleteCourse() throws SQLException, IOException {
-        if(selectedCourse != null) {
-            DbQuerys.deleteCourse(selectedCourse.getId());
-            setCollectionsList(loggedInUser.getId());
+    public void deleteCollection() throws SQLException, IOException {
+        if(selectedCollection != null) {
+            DatabaseControllers.deleteCollection(selectedCollection.getId());
+            setCollectionsList();
 
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            MainWindowControl mainCoursesWindow = fxmlLoader.getController();
-            mainCoursesWindow.setLoggedInUser(this.loggedInUser);
+            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
             Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select course");
+            LoginControl.alertMessage("Please select collection");
     }
 
-    public void editCourse() throws SQLException, IOException {
-        if(selectedCourse != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-course.fxml"));
+    public void editCollection() throws SQLException, IOException {
+        /*if(selectedCollection != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-collection.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
 
-            EditCourseControl editCourseControl = fxmlLoader.getController();
-            editCourseControl.setLoggedInUser(loggedInUser);
-            editCourseControl.setSelectedCourse(selectedCourse);
+            EditCollectionControl editCollectionControl = fxmlLoader.getController();
+            editCollectionControl.setLoggedInUser(loggedInUser);
+            editCollectionControl.setSelectedCollection(selectedCollection);
 
-            Stage stage = (Stage) this.editCourseButton.getScene().getWindow();
+            Stage stage = (Stage) this.editCollectionButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select course");
-    }*/
-
+            LoginControl.alertMessage("Please select collection");*/
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Exhibits//
@@ -181,6 +174,18 @@ public class MainWindowControl{
                     selectedExhibit = exhibit;
             }
         }
+    }
+
+    public void createExhibit() throws SQLException, IOException {
+
+    }
+
+    public void deleteExhibit() throws SQLException, IOException {
+
+    }
+
+    public void editExhibit() throws SQLException, IOException {
+
     }
 
     /*public void createFile() throws SQLException, IOException {
@@ -243,6 +248,7 @@ public class MainWindowControl{
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
         this.setCollectionsList();
+        //this.setAllUsersList();
     }
 
     public void updateUser(ActionEvent actionEvent) throws IOException {
@@ -256,6 +262,34 @@ public class MainWindowControl{
         else {
             LoginControl.alertMessage("Please fill all fields");
         }
+    }
+
+    public void setAllUsersList() throws SQLException {
+        this.userList.getItems().clear();
+        for (User user : this.getUsers())
+            this.userList.getItems().add(user.getLogin());
+    }
+
+    private ArrayList<User> getUsers() throws SQLException {
+        ArrayList<User> users = DatabaseControllers.getAllUsers();
+        this.users = users;
+        return users;
+    }
+
+    public void selectAdminUser(MouseEvent mouseEvent) throws SQLException {
+        /*if (this.userList.getSelectionModel().getSelectedItem() != null) {
+            String userName = this.userList.getSelectionModel().getSelectedItem().toString();
+            for (User user : this.users) {
+                if(user.getName().equals(userName))
+                    selectedAdminUser = user;
+            }
+        }*/
+    }
+
+    public void resetUser(ActionEvent actionEvent) {
+    }
+
+    public void deleteUser(ActionEvent actionEvent) {
     }
 }
 

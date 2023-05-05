@@ -12,9 +12,16 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
                             <children>
-                                <Label layoutX="23.0" layoutY="14.0" text="Collections" />
-                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="52.0" onMouseClicked="#selectCollection" prefHeight="296.0" prefWidth="227.0" />
-                                <ListView fx:id="exhibitsList" layoutX="498.0" layoutY="31.0" onMouseClicked="#selectExhibit" prefHeight="321.0" prefWidth="157.0" />
+                                <Label layoutX="134.0" layoutY="14.0" text="Collections" />
+                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="52.0" onMouseClicked="#selectCollection" prefHeight="280.0" prefWidth="227.0" />
+                                <ListView fx:id="exhibitsList" layoutX="399.0" layoutY="47.0" onMouseClicked="#selectExhibit" prefHeight="287.0" prefWidth="256.0" />
+                                <Label layoutX="498.0" layoutY="14.0" text="Exhibits" />
+                                <Button fx:id="editCourseButton" layoutX="76.0" layoutY="362.0" mnemonicParsing="false" onAction="#editCollection" text="Edit" />
+                                <Button layoutX="113.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Delete" />
+                                <Button fx:id="editFileButton" layoutX="552.0" layoutY="362.0" mnemonicParsing="false" onAction="#editExhibit" text="Edit" />
+                                <Button layoutX="589.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Delete" />
+                                <Button fx:id="createCourseButton" layoutX="39.0" layoutY="362.0" mnemonicParsing="false" onAction="#createCollection" text="Add" />
+                                <Button fx:id="createFileButton" layoutX="514.0" layoutY="362.0" mnemonicParsing="false" onAction="#createExhibit" text="Add" />
                             </children>
                         </AnchorPane>
                     </content>
@@ -41,6 +48,26 @@
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Users">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <ListView fx:id="userListAdmin" layoutX="40.0" layoutY="40.0" onMouseClicked="#selectAdminUser" prefHeight="324.0" prefWidth="200.0" />
+                                <Button fx:id="resetUserButton" layoutX="356.0" layoutY="249.0" mnemonicParsing="false" onAction="#resetUser" prefHeight="43.0" prefWidth="158.0" text="Reset">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Button>
+                                <Label layoutX="118.0" layoutY="23.0" text="All users" />
+                                <Button fx:id="deleteUserButton" layoutX="356.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="43.0" prefWidth="158.0" text="Delete" textFill="RED">
+                                    <font>
+                                        <Font size="21.0" />
+                                    </font>
+                                </Button>
                             </children>
                         </AnchorPane>
                     </content>

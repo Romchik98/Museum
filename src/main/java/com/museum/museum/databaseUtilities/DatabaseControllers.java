@@ -13,7 +13,7 @@ public class DatabaseControllers {
     private static Statement statement;
     private static PreparedStatement preparedStatement;
 
-    public DatabaseControllers(String dbUrl, String username, String password) {
+    /*public DatabaseControllers(String dbUrl, String username, String password) {
         try {
             // Establish a database connection
             connection = DriverManager.getConnection(dbUrl, username, password);
@@ -21,8 +21,20 @@ public class DatabaseControllers {
             // Handle any exceptions that may occur during connection setup
             e.printStackTrace();
         }
-    }
+    }*/
 
+    public static int getLatestCreationId(String tableName) throws SQLException {
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+        String query = "SELECT * FROM " + tableName + " WHERE id=(SELECT max(id) FROM " + tableName + ")";
+        ResultSet rs = statement.executeQuery(query);
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt(1);
+        }
+        return id;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Users//
@@ -79,7 +91,7 @@ public class DatabaseControllers {
         }
     }
 
-    public static ArrayList<User> getUsers() throws SQLException {//////not done
+    public static ArrayList<User> getAllUsers() throws SQLException {//////not done
         ArrayList<User> users = new ArrayList<>();
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
@@ -92,7 +104,7 @@ public class DatabaseControllers {
         return users;
     }
 
-    public static User getUser(int userId) throws SQLException{//webui
+    /*public static User getUser(int userId) throws SQLException{//webui
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
         String query = "SELECT * FROM user WHERE id = '" + userId + "'";
@@ -111,7 +123,7 @@ public class DatabaseControllers {
 
         User user = new User(id, userName, userSurname, userType);
         return user;
-    }
+    }*/
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,7 +276,7 @@ public class DatabaseControllers {
     }*/
 
     public static ArrayList<Collection> getAllCollections() throws SQLException {
-        ArrayList<Collection> courses = new ArrayList<>();
+        ArrayList<Collection> collections = new ArrayList<>();
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
@@ -272,11 +284,60 @@ public class DatabaseControllers {
         String query = "SELECT * FROM collection";
         ResultSet rs1 = statement.executeQuery(query);
         while (rs1.next()) {
-            courses.add(new Collection(rs1.getInt(1), rs1.getString("name"), rs1.getString("description")));
+            collections.add(new Collection(rs1.getInt(1), rs1.getString("name"), rs1.getString("description")));
         }
 
         DatabaseConnection.disconnectFromDb(connection, statement);
-        return courses;
+        return collections;
+    }
+
+    public static void editCollection(Collection collection, int id) throws SQLException {
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "UPDATE collection SET name = '" + collection.getName() + "', description = '" + collection.getDescription() + "' where id = '" + id + "'";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.execute();
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Collection updated");
+        } catch (Exception e) {
+            LoginControl.alertMessage("Error updating Collection" + e);
+        }
+    }
+
+    public static void createCollection(Collection collection, User user) throws SQLException{
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "INSERT INTO collection(`name`, `description`) VALUES (?,?)";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.setString(1, collection.getName());
+            preparedStatement.setString(2, collection.getDescription());
+            preparedStatement.execute();
+
+            int id = DatabaseControllers.getLatestCreationId("collection");
+            collection.setId(id);
+
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            //LoginControl.alertMessage("Collection created");
+        } catch (Exception e) {
+            System.out.println(e);
+            //LoginControl.alertMessage("Error creating Collection" + e);
+        }
+    }
+
+    public static void deleteCollection(int id) throws SQLException{
+
+        //delete exhibits of collection
+        connection = DatabaseConnection.connectToDb();
+        String query1 = "DELETE FROM exhibit WHERE collection_id = '" + id + "'";
+        preparedStatement = connection.prepareStatement(query1);
+        preparedStatement.execute();
+
+        //delete folder
+        String query3 = "DELETE FROM collection WHERE collection_id = '" + id + "'";
+        preparedStatement = connection.prepareStatement(query3);
+        preparedStatement.execute();
+
+        DatabaseConnection.disconnectFromDb(connection, preparedStatement);
     }
 
 }
