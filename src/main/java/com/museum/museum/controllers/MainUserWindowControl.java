@@ -62,19 +62,18 @@ public class MainUserWindowControl {
     private Statement statement;
 
     private ArrayList<Collection> collections;
-    //private ArrayList<Folder> folders;
     private ArrayList<Exhibit> exhibits;
     private ArrayList<User> users;
     private ArrayList<User> accessedUsers;
 
     private User loggedInUser;
     private Collection selectedCollection;
-    //private Folder selectedFolder;
     private Exhibit selectedExhibit;
 
-    public void switchTab() {
+    /*public void switchTab() {
         this.mainTab.getSelectionModel().select(courseTab);
-    }
+    }*/
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Collections//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,53 +102,7 @@ public class MainUserWindowControl {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //FOLDERS//
-////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*private ArrayList<Folder> getFolders(int courseIdlike) throws SQLException {
-        ArrayList<Folder> folders = DatabaseControllers.getFolders(courseIdlike);
-        this.folders = folders;
-        return folders;
-    }*/
-
-    /*public void setFoldersTree() throws  SQLException {
-        TreeItem<String> rootItem = new TreeItem<>(selectedCourse.getName());
-        this.foldersTree.setRoot(rootItem);
-        getFolders(selectedCourse.getId());
-
-        for (Folder folder : getFolders(selectedCourse.getId())) {
-            if(folder.getParentId() == 0)
-            {
-                TreeItem<String> item = new TreeItem<>(folder.getName());
-                rootItem.getChildren().add(item);
-                isThereChildren(folder.getId(), item);
-            }
-
-        }
-    }*/
-    /*private void isThereChildren(int folderId, TreeItem<String> item) {
-        for (Folder folder : this.folders) {
-            if(folder.getParentId() == folderId) {
-                TreeItem<String> childItem = new TreeItem<>(folder.getName());
-                item.getChildren().add(childItem);
-
-                isThereChildren(folder.getId(), childItem);
-            }
-        }
-    }
-
-    public void selectFolder(MouseEvent mouseEvent) throws SQLException{
-        if (this.foldersTree.getSelectionModel().getSelectedItem() != null && this.foldersTree.getSelectionModel().getSelectedItem().getValue().toString() != selectedCourse.getName().toString()) {
-            String folderName = this.foldersTree.getSelectionModel().getSelectedItem().getValue().toString();
-            for (Folder folder : this.folders) {
-                if(folder.getName().equals(folderName))
-                    selectedFolder = folder;
-            }
-            setFilesList(selectedFolder.getId());
-        }
-    }*/
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Files//
+    //Exhibits//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
         ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike);
