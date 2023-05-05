@@ -14,7 +14,7 @@
    <children>
       <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
-            <Tab fx:id="courseTab" text="Collections">
+            <Tab fx:id="collectionTab" text="Collections">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
                      <children>

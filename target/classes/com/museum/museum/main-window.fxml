@@ -8,7 +8,7 @@
     <children>
         <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab fx:id="courseTab" text="Collections">
+                <Tab fx:id="collectionTab" text="Collections">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
                             <children>
@@ -16,12 +16,12 @@
                                 <ListView fx:id="collectionsList" layoutX="49.0" layoutY="52.0" onMouseClicked="#selectCollection" prefHeight="280.0" prefWidth="227.0" />
                                 <ListView fx:id="exhibitsList" layoutX="399.0" layoutY="47.0" onMouseClicked="#selectExhibit" prefHeight="287.0" prefWidth="256.0" />
                                 <Label layoutX="498.0" layoutY="14.0" text="Exhibits" />
-                                <Button fx:id="editCourseButton" layoutX="76.0" layoutY="362.0" mnemonicParsing="false" onAction="#editCollection" text="Edit" />
+                                <Button fx:id="editCollectionButton" layoutX="76.0" layoutY="362.0" mnemonicParsing="false" onAction="#editCollection" text="Edit" />
                                 <Button layoutX="113.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Delete" />
-                                <Button fx:id="editFileButton" layoutX="552.0" layoutY="362.0" mnemonicParsing="false" onAction="#editExhibit" text="Edit" />
+                                <Button fx:id="editExhibitButton" layoutX="552.0" layoutY="362.0" mnemonicParsing="false" onAction="#editExhibit" text="Edit" />
                                 <Button layoutX="589.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Delete" />
-                                <Button fx:id="createCourseButton" layoutX="39.0" layoutY="362.0" mnemonicParsing="false" onAction="#createCollection" text="Add" />
-                                <Button fx:id="createFileButton" layoutX="514.0" layoutY="362.0" mnemonicParsing="false" onAction="#createExhibit" text="Add" />
+                                <Button fx:id="createCollectionButton" layoutX="39.0" layoutY="362.0" mnemonicParsing="false" onAction="#createCollection" text="Add" />
+                                <Button fx:id="createExhibitButton" layoutX="514.0" layoutY="362.0" mnemonicParsing="false" onAction="#createExhibit" text="Add" />
                             </children>
                         </AnchorPane>
                     </content>

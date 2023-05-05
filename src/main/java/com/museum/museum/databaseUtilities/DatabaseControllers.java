@@ -6,6 +6,7 @@ import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DatabaseControllers {
@@ -151,6 +152,63 @@ public class DatabaseControllers {
         return exhibits;
     }
 
+    public static void createExhibit(Exhibit exhibit) {
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "INSERT INTO exhibit(`name`, `collection_id`, `description`, `date_of_creation`, `date_of_discovery`," +
+                    "`quantity`, `condition`, `place_of_creation`, `place_of_discovery`, `dimensions`, `materials`, `type`, `object`," +
+                    "`licence`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.setString(1, exhibit.getName());
+            preparedStatement.setInt(2, exhibit.getCollectionId());
+            preparedStatement.setString(3, exhibit.getDescription());
+            preparedStatement.setDate(4, exhibit.getDateOfCreation());
+            preparedStatement.setDate(5, exhibit.getDateOfDiscovery());
+            preparedStatement.setInt(6, exhibit.getQuantity());
+            preparedStatement.setString(7, exhibit.getCondition());
+            preparedStatement.setString(8, exhibit.getPlaceOfCreation());
+            preparedStatement.setString(9, exhibit.getPlaceOfDiscovery());
+            preparedStatement.setString(10, exhibit.getDimensions());
+            preparedStatement.setString(11, exhibit.getMaterials());
+            preparedStatement.setString(12, exhibit.getType());
+            preparedStatement.setString(13, exhibit.getObject());
+            preparedStatement.execute();
+
+            int id = DatabaseControllers.getLatestCreationId("exhibit");
+            exhibit.setId(id);
+
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Exhibit created");
+        } catch (Exception e) {
+            System.out.println(e);
+            LoginControl.alertMessage("Error creating exhibit" + e);
+        }
+    }
+
+    public static void editExhibit(Exhibit exhibit) {
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "UPDATE exhibit SET name = '" + exhibit.getName() + "', description = '" + exhibit.getDescription() + "', date_of_creation = '" + exhibit.getDateOfCreation() + "'," +
+                    " date_of_discovery = '" + exhibit.getDateOfDiscovery() + "', quantity = '" + exhibit.getQuantity() + "', condition = '" + exhibit.getCondition() + "', place_of_creation = '" + exhibit.getPlaceOfCreation() + "'," +
+                    " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "', type = '" + exhibit.getType() + "'," +
+                    " object = '" + exhibit.getObject() + "', licence = '" + exhibit.getLicence() + "' where id = '" + exhibit.getId() + "'";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.execute();
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Exhibit updated");
+        } catch (Exception e) {
+            LoginControl.alertMessage("Error updating exhibit" + e);
+        }
+    }
+
+    public static void deleteExhibit(int id) throws SQLException{
+        connection = DatabaseConnection.connectToDb();
+        String query1 = "DELETE FROM exhibit WHERE exhibit_id = '" + id + "'";
+        preparedStatement = connection.prepareStatement(query1);
+        preparedStatement.execute();
+        DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+    }
+
     // Add a new exhibit to the database
     /*public void addExhibitToDatabase(Exhibit exhibit) {
         try {
@@ -294,7 +352,7 @@ public class DatabaseControllers {
     public static void editCollection(Collection collection, int id) throws SQLException {
         try {
             connection = DatabaseConnection.connectToDb();
-            String insertString = "UPDATE collection SET name = '" + collection.getName() + "', description = '" + collection.getDescription() + "' where id = '" + id + "'";
+            String insertString = "UPDATE collection SET name = '" + collection.getName() + "', description = '" + collection.getDescription() + "' where collection_id = '" + id + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
@@ -332,7 +390,7 @@ public class DatabaseControllers {
         preparedStatement = connection.prepareStatement(query1);
         preparedStatement.execute();
 
-        //delete folder
+        //delete collection
         String query3 = "DELETE FROM collection WHERE collection_id = '" + id + "'";
         preparedStatement = connection.prepareStatement(query3);
         preparedStatement.execute();

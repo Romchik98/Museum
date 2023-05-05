@@ -28,8 +28,6 @@ public class MainWindowControl{
     @FXML
     public ListView exhibitsList;
     @FXML
-    public TreeView<String> foldersTree;
-    @FXML
     public Button createCollectionButton;
     @FXML
     public Button editCollectionButton;
@@ -103,7 +101,7 @@ public class MainWindowControl{
     }
 
     public void createCollection() throws SQLException, IOException {
-        /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-collection.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-collection.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
 
@@ -111,7 +109,7 @@ public class MainWindowControl{
         createCollectionControl.setLoggedInUser(loggedInUser);
         Stage stage = (Stage) this.createCollectionButton.getScene().getWindow();
         stage.setScene(scene);
-        stage.show();*/
+        stage.show();
     }
 
     public void deleteCollection() throws SQLException, IOException {
@@ -133,7 +131,7 @@ public class MainWindowControl{
     }
 
     public void editCollection() throws SQLException, IOException {
-        /*if(selectedCollection != null) {
+        if(selectedCollection != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-collection.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -147,7 +145,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select collection");*/
+            LoginControl.alertMessage("Please select collection");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,69 +175,58 @@ public class MainWindowControl{
     }
 
     public void createExhibit() throws SQLException, IOException {
+        if (selectedCollection != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-exhibit.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
 
+            CreateExhibitControl createExhibitControl = fxmlLoader.getController();
+            createExhibitControl.setLoggedInUser(loggedInUser);
+            createExhibitControl.setSelectedCollectionId(selectedCollection.getId());
+
+            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        else
+            LoginControl.alertMessage("Please select collection");
     }
 
     public void deleteExhibit() throws SQLException, IOException {
-
-    }
-
-    public void editExhibit() throws SQLException, IOException {
-
-    }
-
-    /*public void createFile() throws SQLException, IOException {
-        if (selectedFolder != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-file.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-
-            CreateFileControl createFileControl = fxmlLoader.getController();
-            createFileControl.setLoggedInUser(loggedInUser);
-            createFileControl.setSelectedFolderId(selectedFolder.getId());
-
-            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
-        else
-            LoginControl.alertMessage("Please select folder");
-    }
-
-    public void editFile() throws SQLException, IOException {
-        if (selectedFolder != null) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-file.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-
-            EditFileControl editFileControl = fxmlLoader.getController();
-            editFileControl.setLoggedInUser(loggedInUser);
-            editFileControl.setSelectedFileId(selectedFile.getId());
-
-            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
-        else
-            LoginControl.alertMessage("Please select file");
-    }
-
-    public void deleteFile() throws SQLException, IOException {
-        if(selectedFile != null) {
-            DbQuerys.deleteFile(selectedFile.getId());
+        if(selectedExhibit != null) {
+            DatabaseControllers.deleteExhibit(selectedExhibit.getId());
 
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
-            MainWindowControl mainCoursesWindow = fxmlLoader.getController();
-            mainCoursesWindow.setLoggedInUser(this.loggedInUser);
+            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
             Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
         else
             LoginControl.alertMessage("Please select file");
-    }*/
+    }
+
+    public void editExhibit() throws SQLException, IOException {
+        if (selectedCollection != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-exhibit.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            EditExhibitControl editExhibitControl = fxmlLoader.getController();
+            editExhibitControl.setLoggedInUser(loggedInUser);
+            editExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
+
+            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        else
+            LoginControl.alertMessage("Please select file");
+    }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     //User//

@@ -17,29 +17,23 @@ import java.util.ArrayList;
 
 public class MainUserWindowControl {
 
-    //coursesTab
+    //collectionsTab
     @FXML
     public ListView<String> collectionsList;
     @FXML
     public ListView exhibitsList;
     @FXML
-    public TreeView<String> foldersTree;
+    public Button createCollectionButton;
     @FXML
-    public Button createCourseButton;
+    public Button editCollectionButton;
     @FXML
-    public Button editCourseButton;
+    public Button createExhibitButton;
     @FXML
-    public Button createFolderButton;
-    @FXML
-    public Button editFolderButton;
-    @FXML
-    public Button createFileButton;
-    @FXML
-    public Button editFileButton;
+    public Button editExhibitButton;
     @FXML
     public TabPane mainTab;
     @FXML
-    public Tab courseTab;
+    public Tab collectionTab;
 
     //accessibility tab
     @FXML
@@ -71,7 +65,7 @@ public class MainUserWindowControl {
     private Exhibit selectedExhibit;
 
     /*public void switchTab() {
-        this.mainTab.getSelectionModel().select(courseTab);
+        this.mainTab.getSelectionModel().select(collectionTab);
     }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,9 +87,9 @@ public class MainUserWindowControl {
     public void selectCollection(MouseEvent mouseEvent) throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
             String collectionName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
-            for (Collection course : this.collections) {
-                if(course.getName().equals(collectionName))
-                    selectedCollection = course;
+            for (Collection collection : this.collections) {
+                if(collection.getName().equals(collectionName))
+                    selectedCollection = collection;
             }
             this.setExhibitsList(selectedCollection.getId());
         }

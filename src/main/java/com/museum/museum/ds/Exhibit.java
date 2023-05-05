@@ -1,6 +1,7 @@
 package com.museum.museum.ds;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class Exhibit {
     private int id;
@@ -18,6 +19,29 @@ public class Exhibit {
     private String type;
     private String object;
     private String licence;
+
+    public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, LocalDate exhibitDateOfCreationValue, LocalDate value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
+        this.collectionId = collectionId;
+        this.name = name;
+    }
+
+    public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String object, String licence) {
+        this.collectionId = collectionId;
+        this.name = name;
+        this.description = description;
+        this.dateOfCreation = dateOfCreation;
+        this.dateOfDiscovery = dateOfDiscovery;
+        this.quantity = quantity;
+        this.condition = condition;
+        this.placeOfCreation = placeOfCreation;
+        this.placeOfDiscovery = placeOfDiscovery;
+        this.dimensions = dimensions;
+        this.materials = materials;
+        this.type = type;
+        this.object = object;
+        this.licence = licence;
+    }
+
 
     public int getId() {
         return id;

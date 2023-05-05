@@ -16,6 +16,11 @@ public class Collection {
         this.exhibits = new ArrayList<>();
     }
 
+    public Collection(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     // Getters and Setters
     public int getId() {
         return id;
