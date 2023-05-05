@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="182.0" prefWidth="277.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.EditExhibitControl">
+   <children>
+      <Label layoutX="83.0" layoutY="28.0" text="Enter exhibit details">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="26.0" layoutY="60.0" text="Name:" />
+      <TextField fx:id="exhibitName" layoutX="26.0" layoutY="77.0" prefHeight="25.0" prefWidth="223.0" />
+      <Button fx:id="editExhibitButton" layoutX="87.0" layoutY="123.0" mnemonicParsing="false" onAction="#editExhibit" prefHeight="25.0" prefWidth="104.0" text="Update" />
+   </children>
+</AnchorPane>
