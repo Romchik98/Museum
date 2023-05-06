@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="UtBotSettings">
+    <option name="mockStrategy" value="No mocks" />
+    <option name="sourceRootHistory">
+      <list>
+        <option value="E:\uni\Museum\src\test\java" />
+      </list>
+    </option>
+    <option name="staticsMocking" value="No static mocking" />
+  </component>
+</project>

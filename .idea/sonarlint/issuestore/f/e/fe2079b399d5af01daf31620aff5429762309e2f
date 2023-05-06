@@ -1,0 +1,20 @@
+
+n
+java:S1192)"LDefine a constant instead of duplicating this literal "person_name" 3 times.(šèÑüÿÿÿÿ8ßüêş0
+l
+java:S1192*"ODefine a constant instead of duplicating this literal "person_surname" 3 times.(¢êÑ8ßüêş0
+’
+java:S1319Q"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(íÒÑÜüÿÿÿÿ8àüêş0
+“
+java:S1319õ"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(§ı‡óûÿÿÿÿ8Ğƒ÷¹ş0
+~
+java:S1488/"\Immediately return this expression instead of assigning it to the temporary variable "user".(É‰”üÿÿÿÿ8áüêş0
+~
+java:S1488o"\Immediately return this expression instead of assigning it to the temporary variable "user".(É‰”üÿÿÿÿ8áüêş0
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ï¶à¿øÿÿÿÿ8ãüêş0
+:
+java:S1118"Hide this public constructor.(É¦éÃ8·ıêş0
+I
+java:S3010"'Remove this assignment of "connection".(ßé¡üÿÿÿÿ8¹ıêş0
+]	java:S125z"<This block of commented-out lines of code should be removed.(ŒÅƒ®øÿÿÿÿ8ğıêş0
+Y	java:S125Ü"<This block of commented-out lines of code should be removed.(½†‘Û8ˆØ÷¹ş0

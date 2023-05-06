@@ -1,0 +1,39 @@
+
+J
+java:S3740"/Provide the parametrized type for this generic.(¡ôÉÖýÿÿÿÿ
+E
+java:S3740"/Provide the parametrized type for this generic.(µÅáž
+E
+java:S3740+"/Provide the parametrized type for this generic.(½©Ç–
+J
+java:S3740-"/Provide the parametrized type for this generic.(œÓúøÿÿÿÿ
+u
+java:S1450="ZRemove the "collections" field and declare it as a local variable in the relevant methods.(¸¾ÒÔþÿÿÿÿ
+q
+java:S1450C"[Remove the "loggedInUser" field and declare it as a local variable in the relevant methods.(è–í¼
+o
+java:S1450@"TRemove the "users" field and declare it as a local variable in the relevant methods.(ÂÞµÿûÿÿÿÿ
+V	java:S125>"<This block of commented-out lines of code should be removed.(í¹ÄÍüÿÿÿÿ
+V	java:S125D"<This block of commented-out lines of code should be removed.(Û‚áªüÿÿÿÿ
+N
+java:S1172_"1Remove this unused method parameter "userIdLike".(Þ¥Â„8Ñõ‰ºþ0
+Z
+java:S1117`"?Rename "collections" which hides the field declared at line 61.(¶‡§¡ýÿÿÿÿ
+V	java:S125e"<This block of commented-out lines of code should be removed.(È„œ•þÿÿÿÿ
+P
+java:S1117š"9Rename "users" which hides the field declared at line 64.(ƒ’„«
+R	java:S125Ÿ"<This block of commented-out lines of code should be removed.(²¡ì‹
+D
+java:S1068:".Remove this unused "connection" private field.(ÿ›ÅÒ
+H
+java:S1068;"-Remove this unused "statement" private field.(„£„÷øÿÿÿÿ
+J
+java:S1068="/Remove this unused "collections" private field.(¸¾ÒÔþÿÿÿÿ
+D
+java:S1068@")Remove this unused "users" private field.(ÂÞµÿûÿÿÿÿ
+G
+java:S1068A"1Remove this unused "accessedUsers" private field.(Óãñ
+I
+java:S1068G"3Remove this unused "selectedAllUser" private field.(©…Þ 
+L
+java:S1068H"6Remove this unused "selectedAccessUser" private field.(È£æö

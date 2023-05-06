@@ -29,16 +29,20 @@ public class CreateCollectionControl {
     }
 
     public void createCollection(ActionEvent actionEvent) throws IOException, SQLException {
+        boolean doesExist = false;
         for(Collection collection : DatabaseControllers.getAllCollections()) {
             if (collection.getName().equals(this.collectionName.getText())) {
                 LoginControl.alertMessage("Collection already exists");
+                doesExist = true;
                 break;
             } else if (this.collectionName.getText().length() < 1) {
                 LoginControl.alertMessage("You must enter Collection name");
+                doesExist = true;
                 break;
-            } else {
-                DatabaseControllers.createCollection(new Collection(this.collectionName.getText(), this.collectionDescription.getText()), this.loggedInUser);
             }
+        }
+        if(doesExist == false) {
+            DatabaseControllers.createCollection(new Collection(this.collectionName.getText(), this.collectionDescription.getText()), this.loggedInUser);
         }
         this.goBack();
     }

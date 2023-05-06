@@ -8,17 +8,17 @@ import java.sql.Statement;
 public class DatabaseConnection {
 
     public static Connection connectToDb() {
-        Connection conn = null;
+        Connection connection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String DB_URL = "jdbc:mysql://localhost/museum";
             String USER = "root";
             String PASS = "admin";
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException | ClassNotFoundException t) {
             t.printStackTrace();
         }
-        return conn;
+        return connection;
     }
 
     public static void disconnectFromDb(Connection connection, Statement statement) {

@@ -29,7 +29,7 @@ public class EditExhibitControl {
     @FXML
     public DatePicker exhibitDateOfDiscovery;
     @FXML
-    public IntegerField exhibitQuantity;
+    public TextField exhibitQuantity;
     @FXML
     public TextField exhibitCondition;
     @FXML
@@ -64,7 +64,7 @@ public class EditExhibitControl {
             LoginControl.alertMessage("You must enter all mandatory fields");
         } else {
             DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),
-                    this.exhibitQuantity.getValue(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
+                    Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
                     this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitObject.getText(), this.exhibitLicence.getText()));
             this.goBack();
         }

@@ -1,0 +1,21 @@
+
+{
+java:S41441"`Update this method so that its implementation is not identical to "returnToPrevious" on line 39.(ü ëıÿÿÿÿ
+H
+java:S1172 "2Remove this unused method parameter "actionEvent".(¥êË
+S
+java:S1117;"=Rename "loginName" which hides the field declared at line 20.(Ê»Øí
+7
+java:S1116@"Remove this empty statement.(ôŸìúÿÿÿÿ
+W
+java:S1117E"<Rename "password" which hides the field declared at line 22.(š³ÿóüÿÿÿÿ
+S
+java:S1117M"8Rename "name" which hides the field declared at line 24.(£âè¼ûÿÿÿÿ
+V
+java:S1117U";Rename "surname" which hides the field declared at line 26.(àÁÆøÿÿÿÿ
+W
+java:S1126]"AReplace this if-then-else statement by a single return statement.(íé×™
+D
+java:S1068".Remove this unused "connection" private field.(ÿ›ÅÒ
+P
+java:S1068"5Remove this unused "preparedStatement" private field.(¿ä Óşÿÿÿÿ

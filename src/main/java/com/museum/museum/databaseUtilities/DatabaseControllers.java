@@ -172,6 +172,7 @@ public class DatabaseControllers {
             preparedStatement.setString(11, exhibit.getMaterials());
             preparedStatement.setString(12, exhibit.getType());
             preparedStatement.setString(13, exhibit.getObject());
+            preparedStatement.setString(14, exhibit.getLicence());
             preparedStatement.execute();
 
             int id = DatabaseControllers.getLatestCreationId("exhibit");
@@ -191,7 +192,7 @@ public class DatabaseControllers {
             String insertString = "UPDATE exhibit SET name = '" + exhibit.getName() + "', description = '" + exhibit.getDescription() + "', date_of_creation = '" + exhibit.getDateOfCreation() + "'," +
                     " date_of_discovery = '" + exhibit.getDateOfDiscovery() + "', quantity = '" + exhibit.getQuantity() + "', condition = '" + exhibit.getCondition() + "', place_of_creation = '" + exhibit.getPlaceOfCreation() + "'," +
                     " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "', type = '" + exhibit.getType() + "'," +
-                    " object = '" + exhibit.getObject() + "', licence = '" + exhibit.getLicence() + "' where id = '" + exhibit.getId() + "'";
+                    " object = '" + exhibit.getObject() + "', licence = '" + exhibit.getLicence() + "' where exhibit_id = '" + exhibit.getId() + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
@@ -208,101 +209,6 @@ public class DatabaseControllers {
         preparedStatement.execute();
         DatabaseConnection.disconnectFromDb(connection, preparedStatement);
     }
-
-    // Add a new exhibit to the database
-    /*public void addExhibitToDatabase(Exhibit exhibit) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO exhibits (name, description, year) VALUES (?, ?, ?)"
-            );
-            statement.setString(1, exhibit.getName());
-            statement.setString(2, exhibit.getDescription());
-            statement.setInt(3, exhibit.getYear());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during database operation
-            e.printStackTrace();
-        }
-    }
-
-    // Update an existing exhibit in the database
-    public void updateExhibitInDatabase(Exhibit exhibit) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE exhibit SET name = ?, description = ?, year = ? WHERE id = ?"
-            );
-            statement.setString(1, exhibit.getName());
-            statement.setString(2, exhibit.getDescription());
-            statement.setInt(3, exhibit.getYear());
-            statement.setInt(4, exhibit.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during database operation
-            e.printStackTrace();
-        }
-    }
-
-    // Delete an exhibit from the database
-    public void deleteExhibitFromDatabase(Exhibit exhibit) {
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "DELETE FROM exhibit WHERE id = ?"
-            );
-            statement.setInt(1, exhibit.getId());
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during database operation
-            e.printStackTrace();
-        }
-    }
-
-    // Retrieve all exhibits from the database
-    public ArrayList<Exhibit> getAllExhibitsFromDatabase() {
-        ArrayList<Exhibit> exhibits = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM exhibit"
-            );
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                Date dateOfCreation = resultSet.getDate("dateOfCreation");
-                Exhibit exhibit = new Exhibit(id, name, description, dateOfCreation, );
-                exhibits.add(exhibit);
-            }
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during database operation
-            e.printStackTrace();
-        }
-        return exhibits;
-    }
-
-    // Search for exhibits in the database by name
-    public ArrayList<Exhibit> searchExhibitsByNameInDatabase(String name) {
-        ArrayList<Exhibit> exhibits = new ArrayList<>();
-        try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM exhibits WHERE name LIKE ?"
-            );
-            statement.setString(1, "%" + name + "%");
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String exhibitName = resultSet.getString("name");
-                String description = resultSet.getString("description");
-                int year = resultSet.getInt("year");
-                Exhibit exhibit = new Exhibit(id, exhibitName, description, year);
-                exhibits.add(exhibit);
-            }
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during database operation
-            e.printStackTrace();
-        }
-        return exhibits;
-    }*/
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Collections//

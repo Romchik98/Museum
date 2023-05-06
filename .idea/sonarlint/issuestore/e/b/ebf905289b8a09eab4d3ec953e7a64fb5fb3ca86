@@ -1,0 +1,37 @@
+
+E
+java:S3740"/Provide the parametrized type for this generic.(µÅá
+E
+java:S3740,"/Provide the parametrized type for this generic.(½©Ç–
+J
+java:S3740."/Provide the parametrized type for this generic.(œÓúøÿÿÿÿ
+X
+java:S4973¹"<Strings and Boxed types should be compared using "equals()".(Ã™¾Ÿùÿÿÿÿ
+S
+java:S4973º"<Strings and Boxed types should be compared using "equals()".(”£Ş¨
+X
+java:S4973»"<Strings and Boxed types should be compared using "equals()".(¶ç¿©ûÿÿÿÿ
+R
+java:S4973¼"<Strings and Boxed types should be compared using "equals()".(Ü 7
+|
+java:S1450>"ZRemove the "collections" field and declare it as a local variable in the relevant methods.(¸¾ÒÔşÿÿÿÿ8ª³™¾ş0
+V	java:S125?"<This block of commented-out lines of code should be removed.(í¹ÄÍüÿÿÿÿ
+V	java:S125E"<This block of commented-out lines of code should be removed.(Û‚áªüÿÿÿÿ
+a
+java:S1117W"?Rename "collections" which hides the field declared at line 62.(¶‡§¡ıÿÿÿÿ8•æ«¹ş0
+]	java:S125\"<This block of commented-out lines of code should be removed.(È„œ•şÿÿÿÿ8¯³™¾ş0
+Q	java:S125j"<This block of commented-out lines of code should be removed.(¬ç´š
+I
+java:S1172¸"2Remove this unused method parameter "actionEvent".(£¸¦ë
+\
+java:S1128	":Remove this unused import 'javafx.scene.input.MouseEvent'.(˜¬‹æÿÿÿÿÿ8±³™¾ş0
+D
+java:S1068;".Remove this unused "connection" private field.(ÿ›ÅÒ
+H
+java:S1068<"-Remove this unused "statement" private field.(„£„÷øÿÿÿÿ
+Q
+java:S1068>"/Remove this unused "collections" private field.(¸¾ÒÔşÿÿÿÿ8±³™¾ş0
+D
+java:S1068A")Remove this unused "users" private field.(ÂŞµÿûÿÿÿÿ
+G
+java:S1068B"1Remove this unused "accessedUsers" private field.(Óãñ

@@ -32,9 +32,9 @@ public class MainWindowControl{
     @FXML
     public Button editCollectionButton;
     @FXML
-    public Button createFileButton;
+    public Button createExhibitButton;
     @FXML
-    public Button editFileButton;
+    public Button editExhibitButton;
     @FXML
     public TabPane mainTab;
     @FXML
@@ -184,7 +184,7 @@ public class MainWindowControl{
             createExhibitControl.setLoggedInUser(loggedInUser);
             createExhibitControl.setSelectedCollectionId(selectedCollection.getId());
 
-            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
+            Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
@@ -206,7 +206,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select file");
+            LoginControl.alertMessage("Please select exhibit");
     }
 
     public void editExhibit() throws SQLException, IOException {
@@ -219,12 +219,12 @@ public class MainWindowControl{
             editExhibitControl.setLoggedInUser(loggedInUser);
             editExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
 
-            Stage stage = (Stage) this.createFileButton.getScene().getWindow();
+            Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select file");
+            LoginControl.alertMessage("Please select exhibit");
     }
 
 
