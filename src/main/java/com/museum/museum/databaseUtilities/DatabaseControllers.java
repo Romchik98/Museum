@@ -24,11 +24,24 @@ public class DatabaseControllers {
         }
     }*/
 
-    public static int getLatestCreationId(String tableName) throws SQLException {
+    public static int getLatestCollectionCreationId() throws SQLException {
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
-        String query = "SELECT * FROM " + tableName + " WHERE id=(SELECT max(id) FROM " + tableName + ")";
+        String query = "SELECT * FROM collection WHERE collection_id=(SELECT max(collection_id) FROM collection)";
+        ResultSet rs = statement.executeQuery(query);
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt(1);
+        }
+        return id;
+    }
+
+    public static int getLatestExhibitCreationId() throws SQLException {
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+        String query = "SELECT * FROM exhibit WHERE exhibit_id=(SELECT max(exhibit_id) FROM exhibit)";
         ResultSet rs = statement.executeQuery(query);
         int id = 0;
         while (rs.next()) {
@@ -74,9 +87,9 @@ public class DatabaseControllers {
             preparedStatement.setString(4, user.getUserSurname());
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            //LoginControl.alertMessage("User created");
+            LoginControl.alertMessage("Vartotojas sukurtas");
         } catch (Exception e) {
-            LoginControl.alertMessage("User not created" + e);
+            LoginControl.alertMessage("Vartotojas nesukurtas" + e);
         }
     }
 
@@ -87,9 +100,9 @@ public class DatabaseControllers {
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            LoginControl.alertMessage("User details updated");
+            LoginControl.alertMessage("Vartotojo duomenys atnaujinti");
         } catch (Exception e) {
-            LoginControl.alertMessage("Error updating user" + e);
+            LoginControl.alertMessage("Klaida vartotojo redagavimo metu" + e);
         }
     }
 
@@ -191,14 +204,14 @@ public class DatabaseControllers {
             preparedStatement.setString(14, exhibit.getLicence());
             preparedStatement.execute();
 
-            int id = DatabaseControllers.getLatestCreationId("exhibit");
+            int id = DatabaseControllers.getLatestExhibitCreationId();
             exhibit.setId(id);
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            //LoginControl.alertMessage("Exhibit created");
+            LoginControl.alertMessage("Eksponatas sukurtas");
         } catch (Exception e) {
             System.out.println(e);
-            //LoginControl.alertMessage("Error creating exhibit" + e);
+            LoginControl.alertMessage("Klaida eksponato kūrimo metu" + e);
         }
     }
 
@@ -212,9 +225,9 @@ public class DatabaseControllers {
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            LoginControl.alertMessage("Exhibit updated");
+            LoginControl.alertMessage("Eksponatas atnaujintas");
         } catch (Exception e) {
-            LoginControl.alertMessage("Error updating exhibit" + e);
+            LoginControl.alertMessage("Klaida eksponato atnaujinimo metu" + e);
         }
     }
 
@@ -224,6 +237,7 @@ public class DatabaseControllers {
         preparedStatement = connection.prepareStatement(query1);
         preparedStatement.execute();
         DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+        LoginControl.alertMessage("Eksponatas ištrintas");
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -278,9 +292,9 @@ public class DatabaseControllers {
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            LoginControl.alertMessage("Collection updated");
+            LoginControl.alertMessage("Kolekcija atnaujinta");
         } catch (Exception e) {
-            LoginControl.alertMessage("Error updating Collection" + e);
+            LoginControl.alertMessage("Klaida kolekcijos atnaujinimo metu" + e);
         }
     }
 
@@ -293,14 +307,14 @@ public class DatabaseControllers {
             preparedStatement.setString(2, collection.getDescription());
             preparedStatement.execute();
 
-            int id = DatabaseControllers.getLatestCreationId("collection");
+            int id = DatabaseControllers.getLatestCollectionCreationId();
             collection.setId(id);
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            //LoginControl.alertMessage("Collection created");
+            LoginControl.alertMessage("Kolekcija sukurta");
         } catch (Exception e) {
             System.out.println(e);
-            //LoginControl.alertMessage("Error creating Collection" + e);
+            LoginControl.alertMessage("Klaida kolekcijos kūrimo metu" + e);
         }
     }
 
@@ -318,6 +332,7 @@ public class DatabaseControllers {
         preparedStatement.execute();
 
         DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+        LoginControl.alertMessage("Kolekcija ištrinta");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

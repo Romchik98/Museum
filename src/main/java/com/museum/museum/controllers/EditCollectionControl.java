@@ -35,7 +35,7 @@ public class EditCollectionControl {
 
     public void updateCollection(ActionEvent actionEvent) throws IOException, SQLException {
         if (this.collectionName.getText().length() < 1) {
-            LoginControl.alertMessage("You must enter Collection name");
+            LoginControl.alertMessage("Įveskite kolekcijos pavadinimą");
         } else {
             DatabaseControllers.editCollection(new Collection(this.collectionName.getText(), this.collectionDescription.getText()), selectedCollection.getId());
             this.goBack();

@@ -43,7 +43,7 @@ public class LoginControl {
 
         if (user.getUserType().equals("User") && user != null)
         {
-            alertMessage("Logged in as User");
+            alertMessage("Prisijungta kaip vartotojas");
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
             Parent root = fxmlLoader.load();
             MainUserWindowControl mainUserWindowControl = fxmlLoader.getController();
@@ -55,7 +55,7 @@ public class LoginControl {
         }
         else if (user.getUserType().equals("Admin") && user != null)
         {
-            alertMessage("Logged in as Admin");
+            alertMessage("Prisijungta kaip administratorius");
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
             Parent root = fxmlLoader.load();
             MainWindowControl mainWindowControl = fxmlLoader.getController();
@@ -67,7 +67,7 @@ public class LoginControl {
 
         }
         else
-            alertMessage("Bad credentials");
+            alertMessage("Neteisingi prisijungimo duomenys");
 
     }
 

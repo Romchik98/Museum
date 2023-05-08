@@ -139,7 +139,7 @@ public class MainUserWindowControl {
             DatabaseControllers.editUser(loginName.getText(), password.getText(), name.getText(), surname.getText(), loggedInUser.getId());
         }
         else {
-            LoginControl.alertMessage("Please fill all fields");
+            LoginControl.alertMessage("Įveskite visus laukelius");
         }
     }
 }

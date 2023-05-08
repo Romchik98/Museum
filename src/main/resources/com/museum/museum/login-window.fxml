@@ -4,21 +4,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="322.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.LoginControl">
+<AnchorPane prefHeight="322.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.LoginControl">
     <children>
-        <Label layoutX="31.0" layoutY="28.0" text="Welcome to MCmanager" textFill="#ff0101">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="28.0" prefHeight="32.0" prefWidth="245.0" text="Prisijungimas" textAlignment="CENTER" textFill="#2703ff">
             <font>
                 <Font size="22.0" />
             </font>
         </Label>
-        <Label layoutX="28.0" layoutY="96.0" text="Login:" />
+        <Label layoutX="28.0" layoutY="96.0" text="Vartotojo vardas:" />
         <TextField fx:id="loginName" layoutX="28.0" layoutY="113.0" prefHeight="25.0" prefWidth="245.0" />
-        <Label layoutX="28.0" layoutY="157.0" text="Password:" />
+        <Label layoutX="28.0" layoutY="157.0" text="Slaptažodis:" />
         <PasswordField fx:id="password" layoutX="28.0" layoutY="174.0" prefHeight="25.0" prefWidth="245.0" />
-        <Button layoutX="88.0" layoutY="225.0" mnemonicParsing="false" onAction="#ValidateLogin" prefHeight="25.0" prefWidth="126.0" text="Log in">
+        <Button alignment="CENTER" layoutX="88.0" layoutY="225.0" mnemonicParsing="false" onAction="#ValidateLogin" prefHeight="25.0" prefWidth="126.0" text="Prisijungti">
             <font>
                 <Font size="14.0" />
             </font></Button>
-        <Button layoutX="124.0" layoutY="268.0" mnemonicParsing="false" onAction="#startSignUp" text="Sign up" />
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="112.0" layoutY="268.0" mnemonicParsing="false" onAction="#startSignUp" text="Registracija" textAlignment="CENTER" />
     </children>
 </AnchorPane>

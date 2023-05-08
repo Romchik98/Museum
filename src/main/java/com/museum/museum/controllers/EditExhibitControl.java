@@ -61,7 +61,7 @@ public class EditExhibitControl {
 
     public void editExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
         if (this.exhibitName.getText().length() < 1) {
-            LoginControl.alertMessage("You must enter all mandatory fields");
+            LoginControl.alertMessage("Įveskite privalomus laukelius");
         } else {
             DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),
                     Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),

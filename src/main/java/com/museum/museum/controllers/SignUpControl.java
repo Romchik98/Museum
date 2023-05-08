@@ -77,7 +77,7 @@ public class SignUpControl {
         if (loginName.length() > 0) {
             return loginName;
         } else {
-            LoginControl.alertMessage("You must enter login name");
+            LoginControl.alertMessage("Įveskite vartotojo vardą");
         };
         return "";
     }
@@ -86,7 +86,7 @@ public class SignUpControl {
         String password = this.password.getText();
         if (password.length() > 0)
             return password;
-        LoginControl.alertMessage("You must enter password");
+        LoginControl.alertMessage("Įveskite slaptažodį");
         return "";
     }
 
@@ -94,7 +94,7 @@ public class SignUpControl {
         String name = this.name.getText();
         if (name.length() > 0)
             return name;
-        LoginControl.alertMessage("You must enter name");
+        LoginControl.alertMessage("Įveskite varda");
         return "";
     }
 
@@ -102,7 +102,7 @@ public class SignUpControl {
         String surname = this.surname.getText();
         if (surname.length() > 0)
             return surname;
-        LoginControl.alertMessage("You must enter last name");
+        LoginControl.alertMessage("Įveskite pavardę");
         return "";
     }
 

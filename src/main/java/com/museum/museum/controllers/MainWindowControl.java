@@ -127,7 +127,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select collection");
+            LoginControl.alertMessage("Pasirinkite kolekciją");
     }
 
     public void editCollection() throws SQLException, IOException {
@@ -145,7 +145,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select collection");
+            LoginControl.alertMessage("Pasirinkite kolekciją");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -189,7 +189,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select collection");
+            LoginControl.alertMessage("Pasirinkite kolekciją");
     }
 
     public void deleteExhibit() throws SQLException, IOException {
@@ -206,7 +206,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select exhibit");
+            LoginControl.alertMessage("Pasirinkite eksponatą");
     }
 
     public void editExhibit() throws SQLException, IOException {
@@ -224,7 +224,7 @@ public class MainWindowControl{
             stage.show();
         }
         else
-            LoginControl.alertMessage("Please select exhibit");
+            LoginControl.alertMessage("Pasirinkite eksponatą");
     }
 
 
@@ -247,7 +247,7 @@ public class MainWindowControl{
             DatabaseControllers.editUser(loginName.getText(), password.getText(), name.getText(), surname.getText(), loggedInUser.getId());
         }
         else {
-            LoginControl.alertMessage("Please fill all fields");
+            LoginControl.alertMessage("Įveskite visus laukelius");
         }
     }
 

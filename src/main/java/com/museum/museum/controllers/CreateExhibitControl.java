@@ -59,10 +59,10 @@ public class CreateExhibitControl {
     public void createExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
         for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId)) {
             if (exhibit.getName().equals(this.exhibitName.getText())) {
-                LoginControl.alertMessage("Exhibit already exists");
+                LoginControl.alertMessage("Eksponatas jau egzistuoja");
                 break;
             } else if (this.exhibitName.getText().length() < 1) {
-                LoginControl.alertMessage("You must enter Exhibit name");
+                LoginControl.alertMessage("Įveskite eksponato pavadinimą");
                 break;
             } else {
                 DatabaseControllers.createExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),

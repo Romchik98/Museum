@@ -32,11 +32,11 @@ public class CreateCollectionControl {
         boolean doesExist = false;
         for(Collection collection : DatabaseControllers.getAllCollections()) {
             if (collection.getName().equals(this.collectionName.getText())) {
-                LoginControl.alertMessage("Collection already exists");
+                LoginControl.alertMessage("Kolekcija jau egzistuoja");
                 doesExist = true;
                 break;
             } else if (this.collectionName.getText().length() < 1) {
-                LoginControl.alertMessage("You must enter Collection name");
+                LoginControl.alertMessage("Įveskite kolekcijos pavadinimą");
                 doesExist = true;
                 break;
             }
