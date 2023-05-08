@@ -25,6 +25,11 @@ public class Exhibit {
         this.name = name;
     }
 
+    public Exhibit(String name, int selectedCollectionId) {
+        this.collectionId = collectionId;
+        this.name = name;
+    }
+
     public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String object, String licence) {
         this.collectionId = collectionId;
         this.name = name;
@@ -40,6 +45,12 @@ public class Exhibit {
         this.type = type;
         this.object = object;
         this.licence = licence;
+    }
+
+    public Exhibit(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
 

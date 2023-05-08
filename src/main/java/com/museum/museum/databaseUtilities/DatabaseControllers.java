@@ -40,6 +40,7 @@ public class DatabaseControllers {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Users//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public static User validateLogin(String login, String password) throws SQLException{
 
         connection = DatabaseConnection.connectToDb();
@@ -73,7 +74,7 @@ public class DatabaseControllers {
             preparedStatement.setString(4, user.getUserSurname());
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            LoginControl.alertMessage("User created");
+            //LoginControl.alertMessage("User created");
         } catch (Exception e) {
             LoginControl.alertMessage("User not created" + e);
         }
@@ -131,6 +132,21 @@ public class DatabaseControllers {
     //Exhibit//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public static ArrayList<Exhibit> getAllExhibits() throws SQLException {
+        ArrayList<Exhibit> exhibits = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query = "SELECT * FROM exhibit";
+        ResultSet rs1 = statement.executeQuery(query);
+        while (rs1.next()) {
+            exhibits.add(new Exhibit(rs1.getInt(1), rs1.getString("name"), rs1.getString("description")));
+        }
+
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return exhibits;
+    }
 
     public static ArrayList<Exhibit> getExhibits(int collectionId) throws SQLException {
         ArrayList<Exhibit> exhibits = new ArrayList<>();
@@ -179,10 +195,10 @@ public class DatabaseControllers {
             exhibit.setId(id);
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
-            LoginControl.alertMessage("Exhibit created");
+            //LoginControl.alertMessage("Exhibit created");
         } catch (Exception e) {
             System.out.println(e);
-            LoginControl.alertMessage("Error creating exhibit" + e);
+            //LoginControl.alertMessage("Error creating exhibit" + e);
         }
     }
 
@@ -304,4 +320,55 @@ public class DatabaseControllers {
         DatabaseConnection.disconnectFromDb(connection, preparedStatement);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //TESTS
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static boolean doesUserNameExist (String name) throws SQLException {//testing
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+        String query = "SELECT login FROM user";
+        ResultSet rs = statement.executeQuery(query);
+
+        while (rs.next()) {
+            if(name.equals(rs.getString("login")))
+                return true;
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return false;
+    }
+
+    public static void deleteLogin(String login) throws SQLException{
+        connection = DatabaseConnection.connectToDb();
+        String query1 = "DELETE FROM user WHERE login = '" + login + "'";
+        preparedStatement = connection.prepareStatement(query1);
+        preparedStatement.execute();
+        DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+    }
+
+    public static void deleteCollections(String name) throws SQLException{//testing
+        deleteCollection(getCollectionId(name));
+    }
+
+    public static int getCollectionId(String name) throws SQLException{//testing
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+        String query = "SELECT collection_id FROM collection WHERE name = '" + name + "'";
+        ResultSet rs = statement.executeQuery(query);
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt("collection_id");
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+
+        return id;
+    }
+
+    public static void deleteExhibits(String name) throws SQLException{
+        connection = DatabaseConnection.connectToDb();
+        String query1 = "DELETE FROM exhibit WHERE name = '" + name + "'";
+        preparedStatement = connection.prepareStatement(query1);
+        preparedStatement.execute();
+        DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+    }
 }

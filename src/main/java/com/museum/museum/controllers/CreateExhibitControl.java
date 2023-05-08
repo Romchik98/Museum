@@ -1,7 +1,5 @@
 package com.museum.museum.controllers;
 
-import com.dlsc.formsfx.model.structure.DateField;
-import com.dlsc.formsfx.model.structure.IntegerField;
 import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Exhibit;
@@ -70,9 +68,9 @@ public class CreateExhibitControl {
                 DatabaseControllers.createExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),
                         Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
                         this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitObject.getText(), this.exhibitLicence.getText()));
-                this.goBack();
             }
         }
+        this.goBack();
     }
 
     public void goBack() throws IOException, SQLException {
@@ -97,4 +95,35 @@ public class CreateExhibitControl {
             stage.show();
         }
     }
+
+    public String newExhibit(int selectedCollectionId, String name) throws SQLException {
+        boolean doesExist = false;
+        for(Exhibit exhibit : DatabaseControllers.getAllExhibits()) {
+            if (exhibit.getName().equals(name)) {
+                doesExist = true;
+                return("Exhibit already exists");
+            }
+        }
+        if(isValidInput(name) == false) {
+            return ("Please fill name field");
+        }
+        if(doesExist == false)
+        {
+            try {
+                DatabaseControllers.createExhibit(new Exhibit(name, selectedCollectionId));
+                return("Exhibit created");
+            } catch (Exception e) {
+                System.out.println(e);
+                return("Error creating exhibit" + e);
+            }
+        }
+        return ("Failed");
+    }
+
+    private boolean isValidInput(String input) {
+        if (input.length() == 0)
+            return false;
+        return true;
+    }
+
 }

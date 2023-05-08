@@ -69,4 +69,38 @@ public class CreateCollectionControl {
             stage.show();
         }
     }
+
+    public String newCollection(String name, String description, User loggedInUser) throws IOException, SQLException {
+        boolean doesExist = false;
+        for(Collection collection : DatabaseControllers.getAllCollections()) {
+            if (collection.getName().equals(name)) {
+                doesExist = true;
+                return ("Course already exists");
+            }
+        }
+        if(isValidInput(name) == false) {
+            return ("Please fill name field");
+        }
+        if(isValidInput(description) == false) {
+            return ("Please fill description field");
+        }
+        if(doesExist == false)
+        {
+            try {
+                DatabaseControllers.createCollection(new Collection(name, description), loggedInUser);
+                return ("Collection created");
+            } catch (Exception e) {
+                System.out.println(e);
+                return ("Error creating Collection" + e);
+            }
+        }
+        return ("Failed");
+    }
+
+    private boolean isValidInput(String input) {
+        if (input.length() == 0)
+            return false;
+        return true;
+    }
+
 }

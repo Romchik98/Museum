@@ -36,6 +36,23 @@ public class SignUpControl {
         }
     }
 
+    public String signUp(String login, String password, String userName, String userSurname) throws IOException {
+        try {
+            if(DatabaseControllers.doesUserNameExist(login) == true)
+                return("User already exists");
+            if (    this.isValidInput(login) &&
+                    this.isValidInput(password) &&
+                    this.isValidInput(userName) &&
+                    this.isValidInput(userSurname)) {
+                DatabaseControllers.createUser(new User(login, password, userName, userSurname));
+                return("User created");
+            }
+        }  catch (Exception e) {
+            return("User not created" + e);
+        }
+        return ("Failed");
+    }
+
     private void returnToPrevious() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
         Parent root = fxmlLoader.load();
