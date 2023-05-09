@@ -4,29 +4,35 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
         <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab fx:id="collectionTab" text="Collections">
+                <Tab fx:id="collectionTab" text="Kolekcijos">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
                             <children>
-                                <Label layoutX="134.0" layoutY="14.0" text="Collections" />
-                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="52.0" onMouseClicked="#selectCollection" prefHeight="280.0" prefWidth="227.0" />
-                                <ListView fx:id="exhibitsList" layoutX="399.0" layoutY="47.0" onMouseClicked="#selectExhibit" prefHeight="287.0" prefWidth="256.0" />
-                                <Label layoutX="498.0" layoutY="14.0" text="Exhibits" />
-                                <Button fx:id="editCollectionButton" layoutX="76.0" layoutY="362.0" mnemonicParsing="false" onAction="#editCollection" text="Edit" />
-                                <Button layoutX="113.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Delete" />
-                                <Button fx:id="editExhibitButton" layoutX="552.0" layoutY="362.0" mnemonicParsing="false" onAction="#editExhibit" text="Edit" />
-                                <Button layoutX="589.0" layoutY="362.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Delete" />
-                                <Button fx:id="createCollectionButton" layoutX="39.0" layoutY="362.0" mnemonicParsing="false" onAction="#createCollection" text="Add" />
-                                <Button fx:id="createExhibitButton" layoutX="514.0" layoutY="362.0" mnemonicParsing="false" onAction="#createExhibit" text="Add" />
+                                <Label layoutX="140.0" layoutY="23.0" text="Kolekcijos">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="50.0" onMouseClicked="#selectCollection" prefHeight="285.0" prefWidth="256.0" />
+                                <ListView fx:id="exhibitsList" layoutX="374.0" layoutY="50.0" onMouseClicked="#selectExhibit" prefHeight="285.0" prefWidth="256.0" />
+                                <Label layoutX="461.0" layoutY="23.0" text="Eksponatai">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                                <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
+                                <Button layoutX="214.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
+                                <Button fx:id="editExhibitButton" layoutX="467.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
+                                <Button layoutX="548.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
+                                <Button fx:id="createCollectionButton" layoutX="82.0" layoutY="350.0" mnemonicParsing="false" onAction="#createCollection" text="Pridėti" />
+                                <Button fx:id="createExhibitButton" layoutX="416.0" layoutY="350.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Account settings">
+                <Tab text="Vartotojo paskyra">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -34,16 +40,16 @@
                                 <PasswordField fx:id="password" layoutX="35.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
                                 <TextField fx:id="name" layoutX="35.0" layoutY="198.0" prefHeight="25.0" prefWidth="250.0" />
                                 <TextField fx:id="surname" layoutX="35.0" layoutY="250.0" prefHeight="25.0" prefWidth="250.0" />
-                                <Label layoutX="35.0" layoutY="181.0" text="Name:" />
-                                <Label layoutX="35.0" layoutY="129.0" text="Password:" />
-                                <Label layoutX="35.0" layoutY="77.0" text="Login name:" />
-                                <Label layoutX="35.0" layoutY="233.0" text="Surname:" />
-                                <Button layoutX="508.0" layoutY="278.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="44.0" prefWidth="129.0" text="Update" textFill="RED">
+                                <Label layoutX="35.0" layoutY="181.0" text="Vardas:" />
+                                <Label layoutX="35.0" layoutY="129.0" text="Slaptažodis:" />
+                                <Label layoutX="35.0" layoutY="77.0" text="Vartotojo vardas:" />
+                                <Label layoutX="35.0" layoutY="233.0" text="Pavardė:" />
+                                <Button layoutX="423.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="51.0" prefWidth="146.0" text="Atnaujinti" textFill="RED">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Button>
-                                <Label layoutX="373.0" layoutY="154.0" text="Enter account new details">
+                                <Label layoutX="349.0" layoutY="154.0" text="Įveskite vartotojo duomenis">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -52,18 +58,13 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="Users">
+                <Tab text="Vartotojai">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
                                 <ListView fx:id="userListAdmin" layoutX="40.0" layoutY="40.0" onMouseClicked="#selectAdminUser" prefHeight="324.0" prefWidth="200.0" />
-                                <Button fx:id="resetUserButton" layoutX="356.0" layoutY="249.0" mnemonicParsing="false" onAction="#resetUser" prefHeight="43.0" prefWidth="158.0" text="Reset">
-                                    <font>
-                                        <Font size="18.0" />
-                                    </font>
-                                </Button>
-                                <Label layoutX="118.0" layoutY="23.0" text="All users" />
-                                <Button fx:id="deleteUserButton" layoutX="356.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="43.0" prefWidth="158.0" text="Delete" textFill="RED">
+                                <Label layoutX="104.0" layoutY="23.0" text="Visi vartotojai" />
+                                <Button fx:id="deleteUserButton" layoutX="410.0" layoutY="307.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="43.0" prefWidth="158.0" text="Panaikinti" textFill="RED">
                                     <font>
                                         <Font size="21.0" />
                                     </font>
