@@ -1,6 +1,7 @@
 package com.museum.museum.databaseUtilities;
 
 import com.museum.museum.controllers.LoginControl;
+import com.museum.museum.controllers.SignUpControl;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
@@ -54,26 +55,27 @@ public class DatabaseControllers {
     //Users//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static User validateLogin(String login, String password) throws SQLException{
+    public static User validateLogin(String login, String password) throws Exception {
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
-        String query = "SELECT * FROM user WHERE login = '" + login + "' AND password = '" + password + "'";
-        ResultSet rs = statement.executeQuery(query);
-        String userName = "null";
-        String userSurname = "null";
-        String userType = "null";
-        int id = 0;
-        while (rs.next()) {
-            id = rs.getInt(1);
-            userName = rs.getString("person_name");
-            userSurname = rs.getString("person_surname");
-            userType = rs.getString("person_type");
-        }
-        DatabaseConnection.disconnectFromDb(connection, statement);
+        LoginControl loginControl = new LoginControl();
+        String query = "SELECT * FROM user WHERE login = '" + login + "' AND password = '" + loginControl.encrypt(password) + "'";
+            ResultSet rs = statement.executeQuery(query);
+            String userName = "null";
+            String userSurname = "null";
+            String userType = "null";
+            int id = 0;
+            while (rs.next()) {
+                id = rs.getInt(1);
+                userName = rs.getString("person_name");
+                userSurname = rs.getString("person_surname");
+                userType = rs.getString("person_type");
+            }
+            DatabaseConnection.disconnectFromDb(connection, statement);
 
-        User user = new User(id, userName, userSurname, userType);
-        return user;
+            User user = new User(id, userName, userSurname, userType);
+            return user;
     }
 
     public static void createUser(User user) {
@@ -314,7 +316,7 @@ public class DatabaseControllers {
             LoginControl.alertMessage("Kolekcija sukurta");
         } catch (Exception e) {
             System.out.println(e);
-            LoginControl.alertMessage("Klaida kolekcijos kūrimo metu" + e);
+            LoginControl.alertMessage("Klaida kolekcijos kūrimo metu: " + e);
         }
     }
 

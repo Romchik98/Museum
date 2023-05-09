@@ -1,5 +1,6 @@
 package com.museum.museum;
 
+import com.museum.museum.controllers.LoginControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

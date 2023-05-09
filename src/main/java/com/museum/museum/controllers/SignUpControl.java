@@ -11,6 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+import java.util.Base64;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,7 +36,7 @@ public class SignUpControl {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
-    public void startSignUp(ActionEvent actionEvent) throws IOException {
+    public void startSignUp(ActionEvent actionEvent) throws Exception {
         if (this.isValidInput(this.getLoginName()) && this.isValidInput(this.getPassword()) && this.isValidInput(this.getName()) && this.isValidInput(this.getUserSurname())) {
             DatabaseControllers.createUser(new User(this.getLoginName(), this.getPassword(), this.getName(), this.getUserSurname()));
             this.returnToPrevious();
@@ -82,8 +89,9 @@ public class SignUpControl {
         return "";
     }
 
-    public String getPassword() {
-        String password = this.password.getText();
+    public String getPassword() throws Exception {
+        LoginControl loginControl = new LoginControl();
+        String password = loginControl.encrypt(this.password.getText());
         if (password.length() > 0)
             return password;
         LoginControl.alertMessage("Įveskite slaptažodį");
@@ -111,4 +119,28 @@ public class SignUpControl {
             return false;
         return true;
     }
+
+    public static String hashPassword(String password) {
+        String generatedHash = null;
+        int iterations = 10000;
+        int saltLength = 64;
+        int desiredKeyLength = 256;
+
+        try {
+            SecureRandom secureRandom = new SecureRandom();
+            byte[] salt = new byte[saltLength];
+            secureRandom.nextBytes(salt);
+
+            KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, iterations, desiredKeyLength);
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            byte[] hashedBytes = keyFactory.generateSecret(keySpec).getEncoded();
+
+            generatedHash = Base64.getEncoder().encodeToString(hashedBytes);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
+
+        return generatedHash;
+    }
+
 }

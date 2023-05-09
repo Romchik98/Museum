@@ -25,6 +25,7 @@ public class User {
     }
 
     public User(String login, int anInt, String person_name, String person_surname) {
+
     }
 
     public User(int id, String userName, String userSurname, String userType) {
