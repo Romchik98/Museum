@@ -6,35 +6,54 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
-        <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="1010.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="collectionTab" text="Kolekcijos">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="979.0">
                             <children>
-                                <Label layoutX="140.0" layoutY="23.0" text="Kolekcijos">
+                                <Label layoutX="140.0" layoutY="10.0" text="Kolekcijos">
                            <font>
                               <Font size="17.0" />
                            </font></Label>
-                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="50.0" onMouseClicked="#selectCollection" prefHeight="285.0" prefWidth="256.0" />
-                                <ListView fx:id="exhibitsList" layoutX="374.0" layoutY="50.0" onMouseClicked="#selectExhibit" prefHeight="285.0" prefWidth="256.0" />
-                                <Label layoutX="461.0" layoutY="23.0" text="Eksponatai">
+                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="36.0" onMouseClicked="#selectCollection" prefHeight="299.0" prefWidth="256.0" />
+                                <ListView fx:id="exhibitsList" layoutX="374.0" layoutY="37.0" onMouseClicked="#selectExhibit" prefHeight="299.0" prefWidth="256.0" />
+                                <Label layoutX="461.0" layoutY="10.0" text="Eksponatai">
                            <font>
                               <Font size="17.0" />
                            </font></Label>
+                                <ListView fx:id="exhibitDataList" layoutX="762.0" layoutY="37.0" prefHeight="299.0" prefWidth="200.0" />
+                                <Label layoutX="685.0" layoutY="40.0" text="Pavadinimas:" />
+                                <Label layoutX="694.0" layoutY="63.0" text="Aprašymas:" />
+                                <Label layoutX="719.0" layoutY="110.0" text="Rastas:" />
+                                <Label layoutX="724.0" layoutY="133.0" text="Tipas:" />
+                                <Label layoutX="723.0" layoutY="156.0" text="Būklė:" />
+                                <Label layoutX="691.0" layoutY="247.0" text="Išmatavimai:" />
+                                <Label layoutX="723.0" layoutY="202.0" text="Kiekis:" />
+                                <Label layoutX="706.0" layoutY="269.0" text="Licencija:" />
+                                <Label layoutX="705.0" layoutY="292.0" text="Nuoroda:" />
+                                <Label layoutX="706.0" layoutY="87.0" text="Sukurtas:" />
+                                <Label layoutX="657.0" layoutY="315.0" text="Šiuo metu randasi:" />
+                                <Label layoutX="705.0" layoutY="179.0" text="Objektas:" />
+                                <Label layoutX="700.0" layoutY="225.0" text="Materialai:" />
                                 <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
                                 <Button layoutX="214.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
                                 <Button fx:id="editExhibitButton" layoutX="467.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
                                 <Button layoutX="548.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
                                 <Button fx:id="createCollectionButton" layoutX="82.0" layoutY="350.0" mnemonicParsing="false" onAction="#createCollection" text="Pridėti" />
                                 <Button fx:id="createExhibitButton" layoutX="416.0" layoutY="350.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
+                        <Label layoutX="783.0" layoutY="10.0" text="Ekponato duomenys:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Vartotojo paskyra">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="649.0">
                             <children>
                                 <TextField fx:id="loginName" layoutX="35.0" layoutY="94.0" prefHeight="25.0" prefWidth="250.0" />
                                 <PasswordField fx:id="password" layoutX="35.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />

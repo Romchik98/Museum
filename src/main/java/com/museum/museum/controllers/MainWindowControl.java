@@ -280,13 +280,13 @@ public class MainWindowControl{
         //this.setAllUsersList();
     }
 
-    public void updateUser(ActionEvent actionEvent) throws IOException {
+    public void updateUser(ActionEvent actionEvent) throws Exception {
         if(     loginName.getText() != "" &&
                 password.getText() != "" &&
                 name.getText() != "" &&
                 surname.getText() != "") {
-
-            DatabaseControllers.editUser(loginName.getText(), password.getText(), name.getText(), surname.getText(), loggedInUser.getId());
+            LoginControl loginControl = new LoginControl();
+            DatabaseControllers.editUser(loginName.getText(), loginControl.encrypt(password.getText()), name.getText(), surname.getText(), loggedInUser.getId());
         }
         else {
             LoginControl.alertMessage("Įveskite visus laukelius");
