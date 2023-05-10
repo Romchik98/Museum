@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -44,6 +45,12 @@ public class CreateExhibitControl {
     public TextField exhibitObject;
     @FXML
     public TextField exhibitLicence;
+    @FXML
+    public TextField exhibitCurrentPlace;
+    @FXML
+    public TextField exhibitLink;
+    @FXML
+    private RadioButton rButton1, rButton2;
 
     private User loggedInUser;
     private int selectedCollectionId;
@@ -56,8 +63,46 @@ public class CreateExhibitControl {
         this.selectedCollectionId = collectionId;
     }
 
+    public void chooseExhibitType(ActionEvent event) {
+        if(rButton1.isSelected()) {
+            exhibitDescription.setDisable(false);
+            exhibitDateOfCreation.setDisable(false);
+            exhibitPlaceOfCreation.setDisable(false);
+            exhibitCondition.setDisable(false);
+            exhibitName.setDisable(false);
+            exhibitDimensions.setDisable(false);
+            exhibitLicence.setDisable(false);
+            exhibitMaterials.setDisable(false);
+            exhibitObject.setDisable(false);
+            exhibitPlaceOfDiscovery.setDisable(false);
+            exhibitQuantity.setDisable(false);
+            exhibitType.setDisable(false);
+            exhibitDateOfDiscovery.setDisable(false);
+            exhibitCurrentPlace.setDisable(false);
+            exhibitLink.setDisable(true);
+        } else if (rButton2.isSelected()) {
+            exhibitDescription.setDisable(false);
+            exhibitDateOfCreation.setDisable(false);
+            exhibitPlaceOfCreation.setDisable(true);
+            exhibitCondition.setDisable(true);
+            exhibitName.setDisable(false);
+            exhibitDimensions.setDisable(true);
+            exhibitLicence.setDisable(false);
+            exhibitMaterials.setDisable(true);
+            exhibitObject.setDisable(true);
+            exhibitPlaceOfDiscovery.setDisable(true);
+            exhibitQuantity.setDisable(true);
+            exhibitType.setDisable(false);
+            exhibitDateOfDiscovery.setDisable(true);
+            exhibitCurrentPlace.setDisable(true);
+            exhibitLink.setDisable(false);
+        }
+    }
+
     public void createExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
+        exhibitDescription.setDisable(true);
         for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId)) {
+            exhibitDescription.setDisable(true);
             if (exhibit.getName().equals(this.exhibitName.getText())) {
                 LoginControl.alertMessage("Eksponatas jau egzistuoja");
                 break;

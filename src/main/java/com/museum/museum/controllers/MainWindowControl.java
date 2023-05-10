@@ -187,6 +187,21 @@ public class MainWindowControl{
             Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            createExhibitControl.exhibitDescription.setDisable(true);
+            createExhibitControl.exhibitDateOfCreation.setDisable(true);
+            createExhibitControl.exhibitPlaceOfCreation.setDisable(true);
+            createExhibitControl.exhibitCondition.setDisable(true);
+            createExhibitControl.exhibitName.setDisable(true);
+            createExhibitControl.exhibitDimensions.setDisable(true);
+            createExhibitControl.exhibitLicence.setDisable(true);
+            createExhibitControl.exhibitMaterials.setDisable(true);
+            createExhibitControl.exhibitObject.setDisable(true);
+            createExhibitControl.exhibitPlaceOfDiscovery.setDisable(true);
+            createExhibitControl.exhibitQuantity.setDisable(true);
+            createExhibitControl.exhibitType.setDisable(true);
+            createExhibitControl.exhibitDateOfDiscovery.setDisable(true);
+            createExhibitControl.exhibitCurrentPlace.setDisable(true);
+            createExhibitControl.exhibitLink.setDisable(true);
         }
         else
             LoginControl.alertMessage("Pasirinkite kolekciją");
