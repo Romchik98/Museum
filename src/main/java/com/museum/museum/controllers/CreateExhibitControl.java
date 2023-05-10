@@ -111,8 +111,8 @@ public class CreateExhibitControl {
                 break;
             } else {
                 DatabaseControllers.createExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),
-                        Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
-                        this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitObject.getText(), this.exhibitLicence.getText()));
+                        Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitCurrentPlace.getText(), this.exhibitDimensions.getText(),
+                        this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitObject.getText(), this.exhibitLicence.getText(), this.exhibitLink.getText()));
             }
         }
         this.goBack();

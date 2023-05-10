@@ -183,6 +183,26 @@ public class DatabaseControllers {
         return exhibits;
     }
 
+    public static ArrayList<Exhibit> getExhibitData(int exhibitId) throws SQLException {
+        ArrayList<Exhibit> exhibits = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query2 = "SELECT * FROM exhibit WHERE exhibit_id = '" + exhibitId + "'";
+        ResultSet rs2 = statement.executeQuery(query2);
+        while (rs2.next()) {
+            exhibits.add(new Exhibit(rs2.getInt(1), rs2.getString("name"), rs2.getString("description"),
+                    rs2.getDate("date_of_creation"), rs2.getDate("date_of_discovery"),
+                    rs2.getInt("quantity"), rs2.getString("condition"), rs2.getInt("collection_id"),
+                    rs2.getString("place_of_creation"), rs2.getString("place_of_discovery"), rs2.getString("dimensions"),
+                    rs2.getString("materials"), rs2.getString("type"), rs2.getString("object"),
+                    rs2.getString("licence")));
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return exhibits;
+    }
+
     public static void createExhibit(Exhibit exhibit) {
         try {
             connection = DatabaseConnection.connectToDb();

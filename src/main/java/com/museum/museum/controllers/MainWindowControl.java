@@ -28,6 +28,8 @@ public class MainWindowControl{
     @FXML
     public ListView exhibitsList;
     @FXML
+    public ListView exhibitDataList;
+    @FXML
     public Button createCollectionButton;
     @FXML
     public Button editCollectionButton;
@@ -62,6 +64,8 @@ public class MainWindowControl{
 
     private ArrayList<Collection> collections;
     private ArrayList<Exhibit> exhibits;
+    @FXML
+    private ArrayList<Exhibit> exhibitData;
     private ArrayList<User> users;
 
     private User selectedAdminUser;
@@ -164,6 +168,28 @@ public class MainWindowControl{
         }
     }
 
+    private ArrayList<Exhibit> getExhibitData(int exhibitIdLike) throws SQLException {
+        ArrayList<Exhibit> exhibitData = DatabaseControllers.getExhibitData(exhibitIdLike);
+        this.exhibitData = exhibitData;
+        return exhibitData;
+    }
+    public void setExhibitData(int exhibitIdLike) throws SQLException{
+        this.exhibitDataList.getItems().clear();
+        for (Exhibit exhibit : this.getExhibitData(exhibitIdLike)) {
+            this.exhibitDataList.getItems().add(exhibit.getName());
+            this.exhibitDataList.getItems().add(exhibit.getDescription());
+            this.exhibitDataList.getItems().add(exhibit.getDateOfCreation());
+            this.exhibitDataList.getItems().add(exhibit.getDateOfDiscovery());
+            this.exhibitDataList.getItems().add(exhibit.getType());
+            this.exhibitDataList.getItems().add(exhibit.getObject());
+            this.exhibitDataList.getItems().add(exhibit.getCondition());
+            this.exhibitDataList.getItems().add(exhibit.getQuantity());
+            this.exhibitDataList.getItems().add(exhibit.getMaterials());
+            this.exhibitDataList.getItems().add(exhibit.getDimensions());
+            this.exhibitDataList.getItems().add(exhibit.getLicence());
+        }
+    }
+
     public void selectExhibit(MouseEvent mouseEvent) throws SQLException{
         if (this.exhibitsList.getSelectionModel().getSelectedItem() != null) {
             String exhibitName = this.exhibitsList.getSelectionModel().getSelectedItem().toString();
@@ -171,6 +197,7 @@ public class MainWindowControl{
                 if(exhibit.getName().equals(exhibitName))
                     selectedExhibit = exhibit;
             }
+            this.setExhibitData(selectedExhibit.getId());
         }
     }
 

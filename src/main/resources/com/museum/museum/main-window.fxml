@@ -6,11 +6,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
-        <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="675.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="980.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="collectionTab" text="Kolekcijos">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="376.0" prefWidth="675.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="979.0">
                             <children>
                                 <Label layoutX="140.0" layoutY="23.0" text="Kolekcijos">
                            <font>
@@ -22,6 +22,7 @@
                            <font>
                               <Font size="17.0" />
                            </font></Label>
+                                <ListView fx:id="exhibitDataList" layoutX="700.0" layoutY="49.0" prefHeight="285.0" prefWidth="200.0" />
                                 <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
                                 <Button layoutX="214.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
                                 <Button fx:id="editExhibitButton" layoutX="467.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />

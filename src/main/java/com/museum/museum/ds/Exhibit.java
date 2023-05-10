@@ -14,11 +14,13 @@ public class Exhibit {
     private String condition;
     private String placeOfCreation;
     private String placeOfDiscovery;
+    private String currentPlace;
     private String dimensions;
     private String materials;
     private String type;
     private String object;
     private String licence;
+    private String link;
 
     public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, LocalDate exhibitDateOfCreationValue, LocalDate value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
         this.collectionId = collectionId;
@@ -30,7 +32,7 @@ public class Exhibit {
         this.name = name;
     }
 
-    public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String object, String licence) {
+    public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String currentPlace, String dimensions, String materials, String type, String object, String licence, String link) {
         this.collectionId = collectionId;
         this.name = name;
         this.description = description;
@@ -40,17 +42,22 @@ public class Exhibit {
         this.condition = condition;
         this.placeOfCreation = placeOfCreation;
         this.placeOfDiscovery = placeOfDiscovery;
+        this.currentPlace = currentPlace;
         this.dimensions = dimensions;
         this.materials = materials;
         this.type = type;
         this.object = object;
         this.licence = licence;
+        this.link = link;
     }
 
     public Exhibit(int id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Exhibit(String text, int selectedCollectionId, String text1, LocalDate value, LocalDate value1, int quantity, String text2, String text3, String text4, String text5, String text6, String text7, String text8, String text9, String text10, String text11) {
     }
 
 
@@ -213,5 +220,21 @@ public class Exhibit {
                 ", object='" + object + '\'' +
                 ", licence='" + licence + '\'' +
                 '}';
+    }
+
+    public String getCurrentPlace() {
+        return currentPlace;
+    }
+
+    public void setCurrentPlace(String currentPlace) {
+        this.currentPlace = currentPlace;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }
