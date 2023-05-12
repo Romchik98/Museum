@@ -23,6 +23,8 @@ public class MainUserWindowControl {
     @FXML
     public ListView exhibitsList;
     @FXML
+    public ListView<String> museumsList;
+    @FXML
     public Button createCollectionButton;
     @FXML
     public Button editCollectionButton;

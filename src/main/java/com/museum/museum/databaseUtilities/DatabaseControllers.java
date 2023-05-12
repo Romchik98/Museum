@@ -4,6 +4,7 @@ import com.museum.museum.controllers.LoginControl;
 import com.museum.museum.controllers.SignUpControl;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
+import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
 
 import java.sql.*;
@@ -253,6 +254,19 @@ public class DatabaseControllers {
         }
     }
 
+    public static void forwardExhibit(Exhibit exhibit) {
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "UPDATE exhibit SET current_place = '" + exhibit.getCurrentPlace() + "'";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.execute();
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Eksponatas perkeltas");
+        } catch (Exception e) {
+            LoginControl.alertMessage("Klaida eksponato perkelimo metu" + e);
+        }
+    }
+
     public static void deleteExhibit(int id) throws SQLException{
         connection = DatabaseConnection.connectToDb();
         String query1 = "DELETE FROM exhibit WHERE exhibit_id = '" + id + "'";
@@ -356,6 +370,27 @@ public class DatabaseControllers {
         DatabaseConnection.disconnectFromDb(connection, preparedStatement);
         LoginControl.alertMessage("Kolekcija ištrinta");
     }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+    //Museums
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public static ArrayList<Museum> getAllMuseums() throws SQLException {
+        ArrayList<Museum> museums = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query = "SELECT * FROM museum";
+        ResultSet rs1 = statement.executeQuery(query);
+        while (rs1.next()) {
+            museums.add(new Museum(rs1.getInt(1), rs1.getString("name")));
+        }
+
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return museums;
+    }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //TESTS

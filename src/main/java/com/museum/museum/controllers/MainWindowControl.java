@@ -4,7 +4,10 @@ import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
+import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class MainWindowControl{
@@ -30,6 +31,10 @@ public class MainWindowControl{
     @FXML
     public ListView exhibitDataList;
     @FXML
+    public ListView<String> museumsList;
+    @FXML
+    public ListView forwardExhibitsList;
+    @FXML
     public Button createCollectionButton;
     @FXML
     public Button editCollectionButton;
@@ -37,6 +42,8 @@ public class MainWindowControl{
     public Button createExhibitButton;
     @FXML
     public Button editExhibitButton;
+    @FXML
+    public Button forwardExhibitButton;
     @FXML
     public TabPane mainTab;
     @FXML
@@ -64,6 +71,7 @@ public class MainWindowControl{
 
     private ArrayList<Collection> collections;
     private ArrayList<Exhibit> exhibits;
+    private ArrayList<Museum> museums;
     @FXML
     private ArrayList<Exhibit> exhibitData;
     private ArrayList<User> users;
@@ -72,6 +80,7 @@ public class MainWindowControl{
     private User loggedInUser;
     private Collection selectedCollection;
     private Exhibit selectedExhibit;
+    private Museum selectedMuseum;
 
 
     public void switchTab() {
@@ -278,6 +287,7 @@ public class MainWindowControl{
         this.loggedInUser = user;
         this.setCollectionsList();
         //this.setAllUsersList();
+        this.setMuseumsList();
     }
 
     public void updateUser(ActionEvent actionEvent) throws Exception {
@@ -320,5 +330,93 @@ public class MainWindowControl{
 
     public void deleteUser(ActionEvent actionEvent) {
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Museums//
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void setMuseumsList() throws SQLException{
+        this.museumsList.getItems().clear();
+        for (Museum museum : this.getMuseums()) {
+            this.museumsList.getItems().add(museum.getName());
+        }
+    }
+
+    private ArrayList<Museum> getMuseums() throws SQLException {
+        ArrayList<Museum> museums = DatabaseControllers.getAllMuseums();
+        this.museums = museums;
+        return museums;
+    }
+
+    public void selectMuseum(MouseEvent mouseEvent) throws SQLException{
+        if (this.museumsList.getSelectionModel().getSelectedItem() != null) {
+            String museumName = this.museumsList.getSelectionModel().getSelectedItem().toString();
+            for (Museum museum : this.museums) {
+                if(museum.getName().equals(museumName))
+                    selectedMuseum = museum;
+            }
+            this.setForwardExhibitsList(selectedMuseum.getId());
+        }
+    }
+
+    public void setForwardExhibitsList(int museumIdLike) throws SQLException{
+        this.exhibitsList.getItems().clear();
+        for (Exhibit exhibit : this.getExhibits(museumIdLike)) {
+            this.exhibitsList.getItems().add(exhibit.getName());
+        }
+    }
+
+    public void selectForwardExhibit(MouseEvent mouseEvent) throws SQLException{
+        if (this.forwardExhibitsList.getSelectionModel().getSelectedItem() != null) {
+            String exhibitName = this.forwardExhibitsList.getSelectionModel().getSelectedItem().toString();
+            for (Exhibit exhibit : this.exhibits) {
+                if(exhibit.getName().equals(exhibitName))
+                    selectedExhibit = exhibit;
+            }
+            this.setExhibitData(selectedExhibit.getId());
+        }
+    }
+
+    public void forwardExhibit() throws SQLException, IOException, ClassNotFoundException {
+        if (selectedExhibit != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("forward-exhibit.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            ForwardExhibitControl forwardExhibitControl = fxmlLoader.getController();
+            forwardExhibitControl.setLoggedInUser(loggedInUser);
+            forwardExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
+            forwardExhibitControl.loadComboBox();
+
+            Stage stage = (Stage) this.forwardExhibitButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        else
+            LoginControl.alertMessage("Pasirinkite eksponatą");
+    }
+
+    public void loadComboBox(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
+        //DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getAccessibleText()));
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String DB_URL = "jdbc:mysql://localhost/museum";
+            String USER = "root";
+            String PASS = "admin";
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException | ClassNotFoundException t) {
+            t.printStackTrace();
+        }
+
+        ResultSet rs = connection.createStatement().executeQuery("select * from museum");
+        ObservableList data = FXCollections.observableArrayList();
+        while (rs.next()) {
+            data.add(new String(rs.getString(2)));
+        }
+        ForwardExhibitControl forwardExhibitControl = new ForwardExhibitControl();
+        forwardExhibitControl.comboMuseum.setItems(data);
+    }
+
 }
 

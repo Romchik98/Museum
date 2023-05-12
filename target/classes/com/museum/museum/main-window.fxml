@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
         <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="1010.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -27,30 +33,43 @@
                                 <Label layoutX="694.0" layoutY="63.0" text="Aprašymas:" />
                                 <Label layoutX="719.0" layoutY="110.0" text="Rastas:" />
                                 <Label layoutX="724.0" layoutY="133.0" text="Tipas:" />
-                                <Label layoutX="723.0" layoutY="156.0" text="Būklė:" />
+                                <Label layoutX="722.0" layoutY="180.0" text="Būklė:" />
                                 <Label layoutX="691.0" layoutY="247.0" text="Išmatavimai:" />
                                 <Label layoutX="723.0" layoutY="202.0" text="Kiekis:" />
                                 <Label layoutX="706.0" layoutY="269.0" text="Licencija:" />
                                 <Label layoutX="705.0" layoutY="292.0" text="Nuoroda:" />
                                 <Label layoutX="706.0" layoutY="87.0" text="Sukurtas:" />
                                 <Label layoutX="657.0" layoutY="315.0" text="Šiuo metu randasi:" />
-                                <Label layoutX="705.0" layoutY="179.0" text="Objektas:" />
+                                <Label layoutX="705.0" layoutY="157.0" text="Objektas:" />
                                 <Label layoutX="700.0" layoutY="225.0" text="Materialai:" />
                                 <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
                                 <Button layoutX="214.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
-                                <Button fx:id="editExhibitButton" layoutX="467.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
-                                <Button layoutX="548.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
+                                <Button fx:id="editExhibitButton" layoutX="493.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
+                                <Button layoutX="574.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
                                 <Button fx:id="createCollectionButton" layoutX="82.0" layoutY="350.0" mnemonicParsing="false" onAction="#createCollection" text="Pridėti" />
-                                <Button fx:id="createExhibitButton" layoutX="416.0" layoutY="350.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
+                                <Button fx:id="createExhibitButton" layoutX="442.0" layoutY="350.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
                         <Label layoutX="783.0" layoutY="10.0" text="Ekponato duomenys:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
+                        <Button fx:id="forwardExhibitButton" layoutX="380.0" layoutY="350.0" mnemonicParsing="false" onAction="#forwardExhibit" text="Perduoti" />
                             </children>
                         </AnchorPane>
                     </content>
                 </Tab>
+            <Tab fx:id="MuseumTab" text="Muziejai">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView fx:id="museumsList" layoutX="50.0" layoutY="60.0" onMouseClicked="#selectMuseum" prefHeight="299.0" prefWidth="256.0" />
+                        <ListView fx:id="forwardExhibitsList" layoutX="356.0" layoutY="60.0" onMouseClicked="#selectForwardExhibit" prefHeight="299.0" prefWidth="256.0" />
+                        <Label layoutX="154.0" layoutY="26.0" text="Muziejai:" />
+                        <Label layoutX="429.0" layoutY="26.0" text="Perduoti eksponatai:" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
                 <Tab text="Vartotojo paskyra">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="649.0">

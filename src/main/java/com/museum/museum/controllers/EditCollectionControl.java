@@ -54,7 +54,7 @@ public class EditCollectionControl {
             stage.show();
         }
         else {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-use-window.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
