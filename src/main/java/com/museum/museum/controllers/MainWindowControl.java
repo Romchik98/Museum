@@ -14,6 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -64,6 +66,10 @@ public class MainWindowControl{
     public TextField name;
     @FXML
     public TextField surname;
+
+    //images
+    @FXML
+    public ImageView exhibitImage;
 
 
     private Connection connection;
@@ -196,7 +202,9 @@ public class MainWindowControl{
             this.exhibitDataList.getItems().add(exhibit.getMaterials());
             this.exhibitDataList.getItems().add(exhibit.getDimensions());
             this.exhibitDataList.getItems().add(exhibit.getLicence());
+            displayImage(exhibit.getName());
         }
+        //displayImage();
     }
 
     public void selectExhibit(MouseEvent mouseEvent) throws SQLException{
@@ -416,6 +424,14 @@ public class MainWindowControl{
         }
         ForwardExhibitControl forwardExhibitControl = new ForwardExhibitControl();
         forwardExhibitControl.comboMuseum.setItems(data);
+    }
+
+    //////////////////////////////////////////////////////////
+    //IMAGE
+    //////////////////////////////////////////////////////////
+    public void displayImage(String exhibitName) {
+        Image myImage = new Image("E:\\uni\\Museum\\src\\main\\resources\\images\\" + exhibitName + ".jpg");
+        exhibitImage.setImage(myImage);
     }
 
 }

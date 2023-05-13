@@ -257,7 +257,7 @@ public class DatabaseControllers {
     public static void forwardExhibit(Exhibit exhibit) {
         try {
             connection = DatabaseConnection.connectToDb();
-            String insertString = "UPDATE exhibit SET current_place = '" + exhibit.getCurrentPlace() + "'";
+            String insertString = "UPDATE exhibit SET current_place = '" + exhibit.getCurrentPlace() + "', museum_id = '" + exhibit.getMuseumId() + "' where exhibit_id = '" + exhibit.getId() + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);

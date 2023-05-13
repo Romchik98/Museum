@@ -21,6 +21,7 @@ public class Exhibit {
     private String object;
     private String licence;
     private String link;
+    private int museumId;
 
     public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, LocalDate exhibitDateOfCreationValue, LocalDate value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
         this.collectionId = collectionId;
@@ -30,6 +31,10 @@ public class Exhibit {
     public Exhibit(String name, int selectedCollectionId) {
         this.collectionId = collectionId;
         this.name = name;
+    }
+
+    public Exhibit(String currentPlace) {
+        this.currentPlace = currentPlace;
     }
 
     public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String currentPlace, String dimensions, String materials, String type, String object, String licence, String link) {
@@ -236,5 +241,13 @@ public class Exhibit {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public int getMuseumId() {
+        return museumId;
+    }
+
+    public void setMuseumId(int museumId) {
+        this.museumId = museumId;
     }
 }

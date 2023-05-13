@@ -5,6 +5,7 @@ import com.dlsc.formsfx.model.structure.IntegerField;
 import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseConnection;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
+import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 import javafx.beans.Observable;
@@ -44,8 +45,10 @@ public class ForwardExhibitControl {
     }
 
     public void forwardExhibit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-            //DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getAccessibleText()));
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getSelectionModel().getSelectedItem().toString(), this.selectedMuseumId));
+        System.out.println(this.comboMuseum.getSelectionModel().getSelectedItem().toString());
+        this.goBack();
+        /*Class.forName("com.mysql.cj.jdbc.Driver");
         Connection con = DriverManager.getConnection("jdbc:mysql://localhost/museum");
 
         ResultSet rs = con.createStatement().executeQuery("select * from museum");
@@ -53,8 +56,7 @@ public class ForwardExhibitControl {
         while (rs.next()) {
             data.add(new String(rs.getString(1)));
         }
-        comboMuseum.setItems(data);
-        this.goBack();
+        comboMuseum.setItems(data);*/
     }
 
     public void loadComboBox() throws SQLException, IOException, ClassNotFoundException {

@@ -7,53 +7,60 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
-        <TabPane fx:id="mainTab" prefHeight="411.0" prefWidth="1010.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane fx:id="mainTab" prefHeight="558.0" prefWidth="1010.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab fx:id="collectionTab" text="Kolekcijos">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="979.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="1010.0">
                             <children>
-                                <Label layoutX="140.0" layoutY="10.0" text="Kolekcijos">
+                                <Label layoutX="140.0" layoutY="14.0" text="Kolekcijos">
                            <font>
                               <Font size="17.0" />
                            </font></Label>
-                                <ListView fx:id="collectionsList" layoutX="49.0" layoutY="36.0" onMouseClicked="#selectCollection" prefHeight="299.0" prefWidth="256.0" />
-                                <ListView fx:id="exhibitsList" layoutX="374.0" layoutY="37.0" onMouseClicked="#selectExhibit" prefHeight="299.0" prefWidth="256.0" />
-                                <Label layoutX="461.0" layoutY="10.0" text="Eksponatai">
+                                <ListView fx:id="collectionsList" layoutX="50.0" layoutY="45.0" onMouseClicked="#selectCollection" prefHeight="425.0" prefWidth="256.0" />
+                                <ListView fx:id="exhibitsList" layoutX="374.0" layoutY="45.0" onMouseClicked="#selectExhibit" prefHeight="425.0" prefWidth="256.0" />
+                                <Label layoutX="461.0" layoutY="14.0" text="Eksponatai">
                            <font>
                               <Font size="17.0" />
                            </font></Label>
-                                <ListView fx:id="exhibitDataList" layoutX="762.0" layoutY="37.0" prefHeight="299.0" prefWidth="200.0" />
-                                <Label layoutX="685.0" layoutY="40.0" text="Pavadinimas:" />
-                                <Label layoutX="694.0" layoutY="63.0" text="Aprašymas:" />
-                                <Label layoutX="719.0" layoutY="110.0" text="Rastas:" />
-                                <Label layoutX="724.0" layoutY="133.0" text="Tipas:" />
-                                <Label layoutX="722.0" layoutY="180.0" text="Būklė:" />
-                                <Label layoutX="691.0" layoutY="247.0" text="Išmatavimai:" />
-                                <Label layoutX="723.0" layoutY="202.0" text="Kiekis:" />
-                                <Label layoutX="706.0" layoutY="269.0" text="Licencija:" />
-                                <Label layoutX="705.0" layoutY="292.0" text="Nuoroda:" />
-                                <Label layoutX="706.0" layoutY="87.0" text="Sukurtas:" />
-                                <Label layoutX="657.0" layoutY="315.0" text="Šiuo metu randasi:" />
-                                <Label layoutX="705.0" layoutY="157.0" text="Objektas:" />
-                                <Label layoutX="700.0" layoutY="225.0" text="Materialai:" />
-                                <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="350.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
-                                <Button layoutX="214.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
-                                <Button fx:id="editExhibitButton" layoutX="493.0" layoutY="350.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
-                                <Button layoutX="574.0" layoutY="350.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
-                                <Button fx:id="createCollectionButton" layoutX="82.0" layoutY="350.0" mnemonicParsing="false" onAction="#createCollection" text="Pridėti" />
-                                <Button fx:id="createExhibitButton" layoutX="442.0" layoutY="350.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
-                        <Label layoutX="783.0" layoutY="10.0" text="Ekponato duomenys:">
+                                <ListView fx:id="exhibitDataList" layoutX="762.0" layoutY="171.0" prefHeight="299.0" prefWidth="200.0" />
+                                <Label layoutX="685.0" layoutY="174.0" text="Pavadinimas:" />
+                                <Label layoutX="694.0" layoutY="197.0" text="Aprašymas:" />
+                                <Label layoutX="719.0" layoutY="244.0" text="Rastas:" />
+                                <Label layoutX="724.0" layoutY="267.0" text="Tipas:" />
+                                <Label layoutX="722.0" layoutY="314.0" text="Būklė:" />
+                                <Label layoutX="691.0" layoutY="381.0" text="Išmatavimai:" />
+                                <Label layoutX="723.0" layoutY="336.0" text="Kiekis:" />
+                                <Label layoutX="706.0" layoutY="403.0" text="Licencija:" />
+                                <Label layoutX="705.0" layoutY="426.0" text="Nuoroda:" />
+                                <Label layoutX="706.0" layoutY="221.0" text="Sukurtas:" />
+                                <Label layoutX="657.0" layoutY="449.0" text="Šiuo metu randasi:" />
+                                <Label layoutX="705.0" layoutY="291.0" text="Objektas:" />
+                                <Label layoutX="700.0" layoutY="359.0" text="Materialai:" />
+                                <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="484.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
+                                <Button layoutX="214.0" layoutY="484.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
+                                <Button fx:id="editExhibitButton" layoutX="493.0" layoutY="484.0" mnemonicParsing="false" onAction="#editExhibit" text="Pakoreguoti" />
+                                <Button layoutX="574.0" layoutY="484.0" mnemonicParsing="false" onAction="#deleteExhibit" text="Ištrinti" textFill="#e11212" />
+                                <Button fx:id="createCollectionButton" layoutX="82.0" layoutY="484.0" mnemonicParsing="false" onAction="#createCollection" text="Pridėti" />
+                                <Button fx:id="createExhibitButton" layoutX="442.0" layoutY="484.0" mnemonicParsing="false" onAction="#createExhibit" text="Pridėti" />
+                        <Label layoutX="783.0" layoutY="14.0" text="Ekponato duomenys:">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Button fx:id="forwardExhibitButton" layoutX="380.0" layoutY="350.0" mnemonicParsing="false" onAction="#forwardExhibit" text="Perduoti" />
+                        <Button fx:id="forwardExhibitButton" layoutX="380.0" layoutY="484.0" mnemonicParsing="false" onAction="#forwardExhibit" text="Perduoti" />
+                        <ImageView fx:id="exhibitImage" fitHeight="124.0" fitWidth="124.0" layoutX="800.0" layoutY="45.0" nodeOrientation="INHERIT" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../images/Lagaminas.png" />
+                           </image>
+                        </ImageView>
                             </children>
                         </AnchorPane>
                     </content>
