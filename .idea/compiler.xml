@@ -9,8 +9,10 @@
         <module name="Museum" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Museum" target="17" />
-    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Museum" options="--add-exports java.datatransfer/java.awt=com.museum.museum" />
+    </option>
   </component>
 </project>

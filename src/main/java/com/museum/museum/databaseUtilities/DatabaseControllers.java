@@ -1,14 +1,12 @@
 package com.museum.museum.databaseUtilities;
 
 import com.museum.museum.controllers.LoginControl;
-import com.museum.museum.controllers.SignUpControl;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class DatabaseControllers {
@@ -174,10 +172,10 @@ public class DatabaseControllers {
         ResultSet rs1 = statement.executeQuery(query1);
         while (rs1.next()) {
             exhibits.add(new Exhibit(rs1.getInt(1), rs1.getString("name"), rs1.getString("description"),
-                    rs1.getDate("date_of_creation"), rs1.getDate("date_of_discovery"),
-                    rs1.getInt("quantity"), rs1.getString("condition"), rs1.getInt("collection_id"),
+                    rs1.getString("date_of_creation"), rs1.getString("date_of_discovery"),
+                    rs1.getString("quantity"), rs1.getString("condition"), rs1.getInt("collection_id"),
                     rs1.getString("place_of_creation"), rs1.getString("place_of_discovery"), rs1.getString("dimensions"),
-                    rs1.getString("materials"), rs1.getString("type"), rs1.getString("object"),
+                    rs1.getString("materials"), rs1.getString("type"), rs1.getString("status"),
                     rs1.getString("licence")));
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
@@ -194,10 +192,10 @@ public class DatabaseControllers {
         ResultSet rs2 = statement.executeQuery(query2);
         while (rs2.next()) {
             exhibits.add(new Exhibit(rs2.getInt(1), rs2.getString("name"), rs2.getString("description"),
-                    rs2.getDate("date_of_creation"), rs2.getDate("date_of_discovery"),
-                    rs2.getInt("quantity"), rs2.getString("condition"), rs2.getInt("collection_id"),
+                    rs2.getString("date_of_creation"), rs2.getString("date_of_discovery"),
+                    rs2.getString("quantity"), rs2.getString("condition"), rs2.getInt("collection_id"),
                     rs2.getString("place_of_creation"), rs2.getString("place_of_discovery"), rs2.getString("dimensions"),
-                    rs2.getString("materials"), rs2.getString("type"), rs2.getString("object"),
+                    rs2.getString("materials"), rs2.getString("type"), rs2.getString("status"),
                     rs2.getString("licence")));
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
@@ -208,22 +206,22 @@ public class DatabaseControllers {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "INSERT INTO exhibit(`name`, `collection_id`, `description`, `date_of_creation`, `date_of_discovery`," +
-                    "`quantity`, `condition`, `place_of_creation`, `place_of_discovery`, `dimensions`, `materials`, `type`, `object`," +
+                    "`quantity`, `condition`, `place_of_creation`, `place_of_discovery`, `dimensions`, `materials`, `type`, `status`," +
                     "`licence`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.setString(1, exhibit.getName());
             preparedStatement.setInt(2, exhibit.getCollectionId());
             preparedStatement.setString(3, exhibit.getDescription());
-            preparedStatement.setDate(4, exhibit.getDateOfCreation());
-            preparedStatement.setDate(5, exhibit.getDateOfDiscovery());
-            preparedStatement.setInt(6, exhibit.getQuantity());
+            preparedStatement.setString(4, exhibit.getDateOfCreation());
+            preparedStatement.setString(5, exhibit.getDateOfDiscovery());
+            preparedStatement.setString(6, exhibit.getQuantity());
             preparedStatement.setString(7, exhibit.getCondition());
             preparedStatement.setString(8, exhibit.getPlaceOfCreation());
             preparedStatement.setString(9, exhibit.getPlaceOfDiscovery());
             preparedStatement.setString(10, exhibit.getDimensions());
             preparedStatement.setString(11, exhibit.getMaterials());
             preparedStatement.setString(12, exhibit.getType());
-            preparedStatement.setString(13, exhibit.getObject());
+            preparedStatement.setString(13, exhibit.getStatus());
             preparedStatement.setString(14, exhibit.getLicence());
             preparedStatement.execute();
 
@@ -244,7 +242,7 @@ public class DatabaseControllers {
             String insertString = "UPDATE exhibit SET name = '" + exhibit.getName() + "', description = '" + exhibit.getDescription() + "', date_of_creation = '" + exhibit.getDateOfCreation() + "'," +
                     " date_of_discovery = '" + exhibit.getDateOfDiscovery() + "', quantity = '" + exhibit.getQuantity() + "', condition = '" + exhibit.getCondition() + "', place_of_creation = '" + exhibit.getPlaceOfCreation() + "'," +
                     " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "', type = '" + exhibit.getType() + "'," +
-                    " object = '" + exhibit.getObject() + "', licence = '" + exhibit.getLicence() + "' where exhibit_id = '" + exhibit.getId() + "'";
+                    " status = '" + exhibit.getStatus() + "', licence = '" + exhibit.getLicence() + "' where exhibit_id = '" + exhibit.getId() + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
@@ -391,6 +389,61 @@ public class DatabaseControllers {
         return museums;
     }
 
+    public static void createMuseum(Museum museum, User user) throws SQLException{
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "INSERT INTO museum(`name`) VALUES (?)";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.setString(1, museum.getName());
+            preparedStatement.execute();
+
+            int id = DatabaseControllers.getLatestMuseumCreationId();
+            museum.setId(id);
+
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Muziejus sukurtas");
+        } catch (Exception e) {
+            System.out.println(e);
+            LoginControl.alertMessage("Klaida muziejaus kūrimo metu: " + e);
+        }
+    }
+
+    public static int getLatestMuseumCreationId() throws SQLException {
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+        String query = "SELECT * FROM museum WHERE museum_id=(SELECT max(museum_id) FROM museum)";
+        ResultSet rs = statement.executeQuery(query);
+        int id = 0;
+        while (rs.next()) {
+            id = rs.getInt(1);
+        }
+        return id;
+    }
+
+    public static void deleteMuseum(int id) throws SQLException{
+
+        connection = DatabaseConnection.connectToDb();
+        String query1 = "DELETE FROM museum WHERE museum_id = '" + id + "'";
+        preparedStatement = connection.prepareStatement(query1);
+        preparedStatement.execute();
+
+        DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+        LoginControl.alertMessage("Muziejus ištrintas");
+    }
+
+    public static void editMuseum(Museum museum, int id) throws SQLException {
+        try {
+            connection = DatabaseConnection.connectToDb();
+            String insertString = "UPDATE museum SET name = '" + museum.getName() + "' where museum_id = '" + id + "'";
+            preparedStatement = connection.prepareStatement(insertString);
+            preparedStatement.execute();
+            DatabaseConnection.disconnectFromDb(connection, preparedStatement);
+            LoginControl.alertMessage("Muziejus atnaujintas");
+        } catch (Exception e) {
+            LoginControl.alertMessage("Klaida muziejaus atnaujinimo metu" + e);
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //TESTS

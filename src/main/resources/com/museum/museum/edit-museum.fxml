@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="271.0" prefWidth="277.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.EditMuseumControl">
+    <children>
+        <Label layoutX="38.0" layoutY="21.0" text="Įveskite muziejaus duomenis">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label layoutX="26.0" layoutY="60.0" text="Pavadinimas:" />
+        <TextField fx:id="museumName" layoutX="26.0" layoutY="77.0" prefHeight="25.0" prefWidth="223.0" />
+        <Button layoutX="86.0" layoutY="219.0" mnemonicParsing="false" onAction="#updateMuseum" prefHeight="25.0" prefWidth="104.0" text="Atnaujinti" />
+    </children>
+</AnchorPane>

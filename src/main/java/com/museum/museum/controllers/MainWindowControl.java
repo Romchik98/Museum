@@ -47,6 +47,10 @@ public class MainWindowControl{
     @FXML
     public Button forwardExhibitButton;
     @FXML
+    public Button createMuseumButton;
+    @FXML
+    public Button editMuseumButton;
+    @FXML
     public TabPane mainTab;
     @FXML
     public Tab collectionTab;
@@ -136,14 +140,14 @@ public class MainWindowControl{
             DatabaseControllers.deleteCollection(selectedCollection.getId());
             setCollectionsList();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
+            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
             mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
             Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
-            stage.show();
+            stage.show();*/
         }
         else
             LoginControl.alertMessage("Pasirinkite kolekciją");
@@ -196,7 +200,7 @@ public class MainWindowControl{
             this.exhibitDataList.getItems().add(exhibit.getDateOfCreation());
             this.exhibitDataList.getItems().add(exhibit.getDateOfDiscovery());
             this.exhibitDataList.getItems().add(exhibit.getType());
-            this.exhibitDataList.getItems().add(exhibit.getObject());
+            this.exhibitDataList.getItems().add(exhibit.getStatus());
             this.exhibitDataList.getItems().add(exhibit.getCondition());
             this.exhibitDataList.getItems().add(exhibit.getQuantity());
             this.exhibitDataList.getItems().add(exhibit.getMaterials());
@@ -228,6 +232,9 @@ public class MainWindowControl{
             createExhibitControl.setLoggedInUser(loggedInUser);
             createExhibitControl.setSelectedCollectionId(selectedCollection.getId());
 
+            ObservableList<String> list = FXCollections.observableArrayList("Atrestauruotas","Restauruojasi","Planuojama restauracija","Restauracijos nereikia");
+            createExhibitControl.exhibitStatus.setItems(list);
+
             Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
@@ -239,13 +246,13 @@ public class MainWindowControl{
             createExhibitControl.exhibitDimensions.setDisable(true);
             createExhibitControl.exhibitLicence.setDisable(true);
             createExhibitControl.exhibitMaterials.setDisable(true);
-            createExhibitControl.exhibitObject.setDisable(true);
             createExhibitControl.exhibitPlaceOfDiscovery.setDisable(true);
             createExhibitControl.exhibitQuantity.setDisable(true);
             createExhibitControl.exhibitType.setDisable(true);
             createExhibitControl.exhibitDateOfDiscovery.setDisable(true);
             createExhibitControl.exhibitCurrentPlace.setDisable(true);
             createExhibitControl.exhibitLink.setDisable(true);
+            createExhibitControl.exhibitStatus.setDisable(true);
         }
         else
             LoginControl.alertMessage("Pasirinkite kolekciją");
@@ -255,14 +262,14 @@ public class MainWindowControl{
         if(selectedExhibit != null) {
             DatabaseControllers.deleteExhibit(selectedExhibit.getId());
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
+            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
             mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
             Stage stage = (Stage) this.collectionsList.getScene().getWindow();
             stage.setScene(scene);
-            stage.show();
+            stage.show();*/
         }
         else
             LoginControl.alertMessage("Pasirinkite eksponatą");
@@ -404,26 +411,52 @@ public class MainWindowControl{
             LoginControl.alertMessage("Pasirinkite eksponatą");
     }
 
-    public void loadComboBox(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        //DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getAccessibleText()));
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String DB_URL = "jdbc:mysql://localhost/museum";
-            String USER = "root";
-            String PASS = "admin";
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        } catch (SQLException | ClassNotFoundException t) {
-            t.printStackTrace();
-        }
+    public void createMuseum() throws SQLException, IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-museum.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
 
-        ResultSet rs = connection.createStatement().executeQuery("select * from museum");
-        ObservableList data = FXCollections.observableArrayList();
-        while (rs.next()) {
-            data.add(new String(rs.getString(2)));
+        CreateMuseumControl createMuseumControl = fxmlLoader.getController();
+        createMuseumControl.setLoggedInUser(loggedInUser);
+        Stage stage = (Stage) this.createMuseumButton.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void deleteMuseum() throws SQLException, IOException {
+        if(selectedMuseum != null) {
+            DatabaseControllers.deleteMuseum(selectedMuseum.getId());
+            setMuseumsList();
+
+            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
+            Stage stage = (Stage) this.museumsList.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();*/
         }
-        ForwardExhibitControl forwardExhibitControl = new ForwardExhibitControl();
-        forwardExhibitControl.comboMuseum.setItems(data);
+        else
+            LoginControl.alertMessage("Pasirinkite muziejų");
+    }
+
+    public void editMuseum() throws SQLException, IOException {
+        if(selectedMuseum != null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("edit-museum.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+
+            EditMuseumControl editMuseumControl = fxmlLoader.getController();
+            editMuseumControl.setLoggedInUser(loggedInUser);
+            editMuseumControl.setSelectedMuseum(selectedMuseum);
+
+            Stage stage = (Stage) this.createMuseumButton.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
+        else
+            LoginControl.alertMessage("Pasirinkite kolekciją");
     }
 
     //////////////////////////////////////////////////////////

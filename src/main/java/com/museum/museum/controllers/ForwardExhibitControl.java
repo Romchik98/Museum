@@ -31,7 +31,6 @@ public class ForwardExhibitControl {
 
     @FXML
     public ComboBox comboMuseum;
-
     private User loggedInUser;
     private int selectedExhibitId;
     private int selectedMuseumId;
@@ -102,5 +101,7 @@ public class ForwardExhibitControl {
             stage.show();
         }
     }
+
+
 
 }

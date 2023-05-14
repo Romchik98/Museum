@@ -1,16 +1,13 @@
 package com.museum.museum.ds;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
 public class Exhibit {
     private int id;
     private int collectionId;
     private String name;
     private String description;
-    private Date dateOfCreation;
-    private Date dateOfDiscovery;
-    private int quantity;
+    private String dateOfCreation;
+    private String dateOfDiscovery;
+    private String quantity;
     private String condition;
     private String placeOfCreation;
     private String placeOfDiscovery;
@@ -18,15 +15,15 @@ public class Exhibit {
     private String dimensions;
     private String materials;
     private String type;
-    private String object;
+    private String status;
     private String licence;
     private String link;
     private int museumId;
 
-    public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, LocalDate exhibitDateOfCreationValue, LocalDate value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
+    /*public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, String exhibitDateOfCreationValue, String value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
         this.collectionId = collectionId;
         this.name = name;
-    }
+    }*/
 
     public Exhibit(String name, int selectedCollectionId) {
         this.collectionId = collectionId;
@@ -37,7 +34,7 @@ public class Exhibit {
         this.currentPlace = currentPlace;
     }
 
-    public Exhibit(String name, int collectionId, String description, Date dateOfCreation, Date dateOfDiscovery, int quantity, String condition, String placeOfCreation, String placeOfDiscovery, String currentPlace, String dimensions, String materials, String type, String object, String licence, String link) {
+    public Exhibit(String name, int collectionId, String description, String dateOfCreation, String dateOfDiscovery, String quantity, String condition, String placeOfCreation, String placeOfDiscovery, String currentPlace, String dimensions, String materials, String type, String status, String licence, String link) {
         this.collectionId = collectionId;
         this.name = name;
         this.description = description;
@@ -51,7 +48,7 @@ public class Exhibit {
         this.dimensions = dimensions;
         this.materials = materials;
         this.type = type;
-        this.object = object;
+        this.status = status;
         this.licence = licence;
         this.link = link;
     }
@@ -61,10 +58,6 @@ public class Exhibit {
         this.name = name;
         this.description = description;
     }
-
-    public Exhibit(String text, int selectedCollectionId, String text1, LocalDate value, LocalDate value1, int quantity, String text2, String text3, String text4, String text5, String text6, String text7, String text8, String text9, String text10, String text11) {
-    }
-
 
     public int getId() {
         return id;
@@ -90,27 +83,27 @@ public class Exhibit {
         this.description = description;
     }
 
-    public Date getDateOfCreation() {
+    public String getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(String dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 
-    public Date getDateOfDiscovery() {
+    public String getDateOfDiscovery() {
         return dateOfDiscovery;
     }
 
-    public void setDateOfDiscovery(Date dateOfDiscovery) {
+    public void setDateOfDiscovery(String dateOfDiscovery) {
         this.dateOfDiscovery = dateOfDiscovery;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 
@@ -170,12 +163,12 @@ public class Exhibit {
         this.type = type;
     }
 
-    public String getObject() {
-        return object;
+    public String getStatus() {
+        return status;
     }
 
-    public void setObject(String object) {
-        this.object = object;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getLicence() {
@@ -186,9 +179,9 @@ public class Exhibit {
         this.licence = licence;
     }
 
-    public Exhibit(int id, String name, String description, Date dateOfCreation, Date dateOfDiscovery,
-                   int quantity, String condition, int collectionId, String placeOfCreation, String placeOfDiscovery,
-                   String dimensions, String materials, String type, String object, String licence) {
+    public Exhibit(int id, String name, String description, String dateOfCreation, String dateOfDiscovery,
+                   String quantity, String condition, int collectionId, String placeOfCreation, String placeOfDiscovery,
+                   String dimensions, String materials, String type, String status, String licence) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -202,7 +195,7 @@ public class Exhibit {
         this.dimensions = dimensions;
         this.materials = materials;
         this.type = type;
-        this.object = object;
+        this.status = status;
         this.licence = licence;
     }
 
@@ -222,7 +215,7 @@ public class Exhibit {
                 ", dimensions='" + dimensions + '\'' +
                 ", materials='" + materials + '\'' +
                 ", type='" + type + '\'' +
-                ", object='" + object + '\'' +
+                ", status='" + status + '\'' +
                 ", licence='" + licence + '\'' +
                 '}';
     }

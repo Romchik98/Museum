@@ -14,6 +14,6 @@
             </font>
         </Label>
         <Button layoutX="86.0" layoutY="219.0" mnemonicParsing="false" onAction="#forwardExhibit" prefHeight="25.0" prefWidth="104.0" text="Patvirtinti" />
-      <ComboBox fx:id="comboMuseum" layoutX="26.0" layoutY="111.0" prefHeight="25.0" prefWidth="224.0" />
+      <ComboBox fx:id="comboMuseum" layoutX="26.0" layoutY="111.0" onAction="#selectMuseumFromComboBox" prefHeight="25.0" prefWidth="224.0" />
     </children>
 </AnchorPane>

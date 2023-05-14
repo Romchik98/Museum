@@ -42,7 +42,7 @@
                                 <Label layoutX="705.0" layoutY="426.0" text="Nuoroda:" />
                                 <Label layoutX="706.0" layoutY="221.0" text="Sukurtas:" />
                                 <Label layoutX="657.0" layoutY="449.0" text="Šiuo metu randasi:" />
-                                <Label layoutX="705.0" layoutY="291.0" text="Objektas:" />
+                                <Label layoutX="707.0" layoutY="291.0" text="Statusas:" />
                                 <Label layoutX="700.0" layoutY="359.0" text="Materialai:" />
                                 <Button fx:id="editCollectionButton" layoutX="133.0" layoutY="484.0" mnemonicParsing="false" onAction="#editCollection" text="Pakoreguoti" />
                                 <Button layoutX="214.0" layoutY="484.0" mnemonicParsing="false" onAction="#deleteCollection" onMouseClicked="#deleteCollection" text="Ištrinti" textFill="#e11212" />
@@ -58,7 +58,7 @@
                         <Button fx:id="forwardExhibitButton" layoutX="380.0" layoutY="484.0" mnemonicParsing="false" onAction="#forwardExhibit" text="Perduoti" />
                         <ImageView fx:id="exhibitImage" fitHeight="124.0" fitWidth="124.0" layoutX="800.0" layoutY="45.0" nodeOrientation="INHERIT" pickOnBounds="true">
                            <image>
-                              <Image url="@../../../images/Lagaminas.png" />
+                              <Image url="@../../../images/startImage.png" />
                            </image>
                         </ImageView>
                             </children>
@@ -73,6 +73,9 @@
                         <ListView fx:id="forwardExhibitsList" layoutX="356.0" layoutY="60.0" onMouseClicked="#selectForwardExhibit" prefHeight="299.0" prefWidth="256.0" />
                         <Label layoutX="154.0" layoutY="26.0" text="Muziejai:" />
                         <Label layoutX="429.0" layoutY="26.0" text="Perduoti eksponatai:" />
+                        <Button fx:id="createMuseumButton" layoutX="153.0" layoutY="415.0" mnemonicParsing="false" onAction="#createMuseum" text="Pridėti" />
+                        <Button layoutX="204.0" layoutY="415.0" mnemonicParsing="false" onAction="#deleteMuseum" text="Ištrinti" textFill="#e11212" />
+                        <Button layoutX="72.0" layoutY="415.0" mnemonicParsing="false" onAction="#editMuseum" text="Pakoreguoti" />
                      </children>
                   </AnchorPane>
               </content>

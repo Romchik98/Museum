@@ -10,6 +10,7 @@ module com.museum.museum {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires java.sql;
+    requires java.datatransfer;
 
     opens com.museum.museum to javafx.fxml;
     opens com.museum.museum.controllers to javafx.fxml;

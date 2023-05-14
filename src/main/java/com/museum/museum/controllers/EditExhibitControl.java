@@ -1,7 +1,5 @@
 package com.museum.museum.controllers;
 
-import com.dlsc.formsfx.model.structure.DateField;
-import com.dlsc.formsfx.model.structure.IntegerField;
 import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Exhibit;
@@ -12,9 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -25,9 +25,9 @@ public class EditExhibitControl {
     @FXML
     public TextField exhibitDescription;
     @FXML
-    public DatePicker exhibitDateOfCreation;
+    public TextField exhibitDateOfCreation;
     @FXML
-    public DatePicker exhibitDateOfDiscovery;
+    public TextField exhibitDateOfDiscovery;
     @FXML
     public TextField exhibitQuantity;
     @FXML
@@ -43,9 +43,15 @@ public class EditExhibitControl {
     @FXML
     public TextField exhibitType;
     @FXML
-    public TextField exhibitObject;
+    public TextField exhibitStatus;
     @FXML
     public TextField exhibitLicence;
+    @FXML
+    public TextField exhibitCurrentPlace;
+    @FXML
+    public TextField exhibitLink;
+    @FXML
+    private RadioButton rButton1, rButton2;
 
     private User loggedInUser;
     private int selectedCollectionId;
@@ -63,9 +69,9 @@ public class EditExhibitControl {
         if (this.exhibitName.getText().length() < 1) {
             LoginControl.alertMessage("Įveskite privalomus laukelius");
         } else {
-            DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getValue(), this.exhibitDateOfDiscovery.getValue(),
-                    Integer.parseInt(this.exhibitQuantity.getText()), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
-                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitObject.getText(), this.exhibitLicence.getText()));
+            DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(),
+                    this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitCurrentPlace.getText(), this.exhibitDimensions.getText(),
+                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getText(), this.exhibitLicence.getText(), this.exhibitLink.getText()));
             this.goBack();
         }
     }
@@ -90,6 +96,42 @@ public class EditExhibitControl {
             Stage stage = (Stage) this.exhibitName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+        }
+    }
+
+    public void chooseExhibitType(ActionEvent event) {
+        if(rButton1.isSelected()) {
+            exhibitDescription.setDisable(false);
+            exhibitDateOfCreation.setDisable(false);
+            exhibitPlaceOfCreation.setDisable(false);
+            exhibitCondition.setDisable(false);
+            exhibitName.setDisable(false);
+            exhibitDimensions.setDisable(false);
+            exhibitLicence.setDisable(false);
+            exhibitMaterials.setDisable(false);
+            exhibitStatus.setDisable(false);
+            exhibitPlaceOfDiscovery.setDisable(false);
+            exhibitQuantity.setDisable(false);
+            exhibitType.setDisable(false);
+            exhibitDateOfDiscovery.setDisable(false);
+            exhibitCurrentPlace.setDisable(false);
+            exhibitLink.setDisable(true);
+        } else if (rButton2.isSelected()) {
+            exhibitDescription.setDisable(false);
+            exhibitDateOfCreation.setDisable(false);
+            exhibitPlaceOfCreation.setDisable(true);
+            exhibitCondition.setDisable(true);
+            exhibitName.setDisable(false);
+            exhibitDimensions.setDisable(true);
+            exhibitLicence.setDisable(false);
+            exhibitMaterials.setDisable(true);
+            exhibitStatus.setDisable(true);
+            exhibitPlaceOfDiscovery.setDisable(true);
+            exhibitQuantity.setDisable(true);
+            exhibitType.setDisable(false);
+            exhibitDateOfDiscovery.setDisable(true);
+            exhibitCurrentPlace.setDisable(true);
+            exhibitLink.setDisable(false);
         }
     }
 }
