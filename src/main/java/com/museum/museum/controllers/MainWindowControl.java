@@ -81,6 +81,7 @@ public class MainWindowControl{
 
     private ArrayList<Collection> collections;
     private ArrayList<Exhibit> exhibits;
+    private ArrayList<Exhibit> forwardExhibits;
     private ArrayList<Museum> museums;
     @FXML
     private ArrayList<Exhibit> exhibitData;
@@ -375,16 +376,22 @@ public class MainWindowControl{
     }
 
     public void setForwardExhibitsList(int museumIdLike) throws SQLException{
-        this.exhibitsList.getItems().clear();
-        for (Exhibit exhibit : this.getExhibits(museumIdLike)) {
-            this.exhibitsList.getItems().add(exhibit.getName());
+        this.forwardExhibitsList.getItems().clear();
+        for (Exhibit exhibit : this.getForwardExhibits(museumIdLike)) {
+            this.forwardExhibitsList.getItems().add(exhibit.getName());
         }
+    }
+
+    private ArrayList<Exhibit> getForwardExhibits(int museumIdLike) throws SQLException {
+        ArrayList<Exhibit> forwardExhibits = DatabaseControllers.getForwardExhibits(museumIdLike);
+        this.forwardExhibits = forwardExhibits;
+        return forwardExhibits;
     }
 
     public void selectForwardExhibit(MouseEvent mouseEvent) throws SQLException{
         if (this.forwardExhibitsList.getSelectionModel().getSelectedItem() != null) {
             String exhibitName = this.forwardExhibitsList.getSelectionModel().getSelectedItem().toString();
-            for (Exhibit exhibit : this.exhibits) {
+            for (Exhibit exhibit : this.forwardExhibits) {
                 if(exhibit.getName().equals(exhibitName))
                     selectedExhibit = exhibit;
             }

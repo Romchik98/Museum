@@ -30,6 +30,11 @@ public class Exhibit {
         this.name = name;
     }
 
+    /*public Exhibit(String name, int selectedMuseumId) {
+        this.museumId = museumId;
+        this.name = name;
+    }*/
+
     public Exhibit(String currentPlace) {
         this.currentPlace = currentPlace;
     }

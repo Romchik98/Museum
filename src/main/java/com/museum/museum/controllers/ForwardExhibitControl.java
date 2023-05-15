@@ -103,5 +103,6 @@ public class ForwardExhibitControl {
     }
 
 
-
+    public void selectMuseumFromCombobox(ActionEvent event) {
+    }
 }

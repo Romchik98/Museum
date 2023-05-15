@@ -182,6 +182,21 @@ public class DatabaseControllers {
         return exhibits;
     }
 
+    public static ArrayList<Exhibit> getForwardExhibits(int museumId) throws SQLException {
+        ArrayList<Exhibit> forwardExhibits = new ArrayList<>();
+
+        connection = DatabaseConnection.connectToDb();
+        statement = connection.createStatement();
+
+        String query1 = "SELECT * FROM exhibit WHERE museum_id = '" + museumId + "'";
+        ResultSet rs1 = statement.executeQuery(query1);
+        while (rs1.next()) {
+            forwardExhibits.add(new Exhibit(rs1.getString("name"), rs1.getInt(1)));
+        }
+        DatabaseConnection.disconnectFromDb(connection, statement);
+        return forwardExhibits;
+    }
+
     public static ArrayList<Exhibit> getExhibitData(int exhibitId) throws SQLException {
         ArrayList<Exhibit> exhibits = new ArrayList<>();
 
