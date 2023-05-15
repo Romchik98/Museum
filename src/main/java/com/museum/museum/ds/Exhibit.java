@@ -39,7 +39,7 @@ public class Exhibit {
         this.currentPlace = currentPlace;
     }
 
-    public Exhibit(String name, int collectionId, String description, String dateOfCreation, String dateOfDiscovery, String quantity, String condition, String placeOfCreation, String placeOfDiscovery, String currentPlace, String dimensions, String materials, String type, String status, String licence, String link) {
+    public Exhibit(String name, int collectionId, String description, String dateOfCreation, String dateOfDiscovery, String quantity, String condition, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String status, String licence, String link, String currentPlace) {
         this.collectionId = collectionId;
         this.name = name;
         this.description = description;
@@ -49,13 +49,33 @@ public class Exhibit {
         this.condition = condition;
         this.placeOfCreation = placeOfCreation;
         this.placeOfDiscovery = placeOfDiscovery;
-        this.currentPlace = currentPlace;
         this.dimensions = dimensions;
         this.materials = materials;
         this.type = type;
         this.status = status;
         this.licence = licence;
         this.link = link;
+        this.currentPlace = currentPlace;
+    }
+
+    public Exhibit(int id, String name, String description, String dateOfCreation, String dateOfDiscovery, String quantity, String condition, int collectionId, String placeOfCreation, String placeOfDiscovery, String dimensions, String materials, String type, String status, String licence, String link, String currentPlace) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.dateOfCreation = dateOfCreation;
+        this.dateOfDiscovery = dateOfDiscovery;
+        this.quantity = quantity;
+        this.condition = condition;
+        this.collectionId = collectionId;
+        this.placeOfCreation = placeOfCreation;
+        this.placeOfDiscovery = placeOfDiscovery;
+        this.dimensions = dimensions;
+        this.materials = materials;
+        this.type = type;
+        this.status = status;
+        this.licence = licence;
+        this.link = link;
+        this.currentPlace = currentPlace;
     }
 
     public Exhibit(int id, String name, String description) {

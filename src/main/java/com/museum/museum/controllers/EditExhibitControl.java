@@ -70,8 +70,8 @@ public class EditExhibitControl {
             LoginControl.alertMessage("Įveskite privalomus laukelius");
         } else {
             DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(),
-                    this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitCurrentPlace.getText(), this.exhibitDimensions.getText(),
-                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getText(), this.exhibitLicence.getText(), this.exhibitLink.getText()));
+                    this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
+                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getText(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
             this.goBack();
         }
     }
@@ -112,7 +112,6 @@ public class EditExhibitControl {
             exhibitStatus.setDisable(false);
             exhibitPlaceOfDiscovery.setDisable(false);
             exhibitQuantity.setDisable(false);
-            exhibitType.setDisable(false);
             exhibitDateOfDiscovery.setDisable(false);
             exhibitCurrentPlace.setDisable(false);
             exhibitLink.setDisable(true);
@@ -128,7 +127,6 @@ public class EditExhibitControl {
             exhibitStatus.setDisable(true);
             exhibitPlaceOfDiscovery.setDisable(true);
             exhibitQuantity.setDisable(true);
-            exhibitType.setDisable(false);
             exhibitDateOfDiscovery.setDisable(true);
             exhibitCurrentPlace.setDisable(true);
             exhibitLink.setDisable(false);

@@ -211,7 +211,7 @@ public class DatabaseControllers {
                     rs2.getString("quantity"), rs2.getString("condition"), rs2.getInt("collection_id"),
                     rs2.getString("place_of_creation"), rs2.getString("place_of_discovery"), rs2.getString("dimensions"),
                     rs2.getString("materials"), rs2.getString("type"), rs2.getString("status"),
-                    rs2.getString("licence")));
+                    rs2.getString("licence"), rs2.getString("link"), rs2.getString("current_place")));
         }
         DatabaseConnection.disconnectFromDb(connection, statement);
         return exhibits;

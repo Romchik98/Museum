@@ -207,9 +207,10 @@ public class MainWindowControl{
             this.exhibitDataList.getItems().add(exhibit.getMaterials());
             this.exhibitDataList.getItems().add(exhibit.getDimensions());
             this.exhibitDataList.getItems().add(exhibit.getLicence());
+            this.exhibitDataList.getItems().add(exhibit.getLink());
+            this.exhibitDataList.getItems().add(exhibit.getCurrentPlace());
             displayImage(exhibit.getName());
         }
-        //displayImage();
     }
 
     public void selectExhibit(MouseEvent mouseEvent) throws SQLException{
@@ -233,7 +234,7 @@ public class MainWindowControl{
             createExhibitControl.setLoggedInUser(loggedInUser);
             createExhibitControl.setSelectedCollectionId(selectedCollection.getId());
 
-            ObservableList<String> list = FXCollections.observableArrayList("Atrestauruotas","Restauruojasi","Planuojama restauracija","Restauracijos nereikia");
+            ObservableList<String> list = FXCollections.observableArrayList("atrestauruotas","restauruojasi","planuojama restauracija","restauracijos nereikia");
             createExhibitControl.exhibitStatus.setItems(list);
 
             Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
@@ -249,7 +250,6 @@ public class MainWindowControl{
             createExhibitControl.exhibitMaterials.setDisable(true);
             createExhibitControl.exhibitPlaceOfDiscovery.setDisable(true);
             createExhibitControl.exhibitQuantity.setDisable(true);
-            createExhibitControl.exhibitType.setDisable(true);
             createExhibitControl.exhibitDateOfDiscovery.setDisable(true);
             createExhibitControl.exhibitCurrentPlace.setDisable(true);
             createExhibitControl.exhibitLink.setDisable(true);

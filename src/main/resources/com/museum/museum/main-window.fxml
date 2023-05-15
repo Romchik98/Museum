@@ -30,7 +30,7 @@
                            <font>
                               <Font size="17.0" />
                            </font></Label>
-                                <ListView fx:id="exhibitDataList" layoutX="762.0" layoutY="171.0" prefHeight="299.0" prefWidth="200.0" />
+                                <ListView fx:id="exhibitDataList" layoutX="762.0" layoutY="171.0" prefHeight="305.0" prefWidth="200.0" />
                                 <Label layoutX="685.0" layoutY="174.0" text="Pavadinimas:" />
                                 <Label layoutX="694.0" layoutY="197.0" text="Aprašymas:" />
                                 <Label layoutX="719.0" layoutY="244.0" text="Rastas:" />
@@ -69,13 +69,19 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView fx:id="museumsList" layoutX="50.0" layoutY="60.0" onMouseClicked="#selectMuseum" prefHeight="299.0" prefWidth="256.0" />
-                        <ListView fx:id="forwardExhibitsList" layoutX="356.0" layoutY="60.0" onMouseClicked="#selectForwardExhibit" prefHeight="299.0" prefWidth="256.0" />
-                        <Label layoutX="154.0" layoutY="26.0" text="Muziejai:" />
-                        <Label layoutX="429.0" layoutY="26.0" text="Perduoti eksponatai:" />
-                        <Button fx:id="createMuseumButton" layoutX="153.0" layoutY="415.0" mnemonicParsing="false" onAction="#createMuseum" text="Pridėti" />
-                        <Button layoutX="204.0" layoutY="415.0" mnemonicParsing="false" onAction="#deleteMuseum" text="Ištrinti" textFill="#e11212" />
-                        <Button layoutX="72.0" layoutY="415.0" mnemonicParsing="false" onAction="#editMuseum" text="Pakoreguoti" />
+                        <ListView fx:id="museumsList" layoutX="50.0" layoutY="45.0" onMouseClicked="#selectMuseum" prefHeight="425.0" prefWidth="256.0" />
+                        <ListView fx:id="forwardExhibitsList" layoutX="374.0" layoutY="45.0" onMouseClicked="#selectForwardExhibit" prefHeight="425.0" prefWidth="256.0" />
+                        <Label layoutX="140.0" layoutY="14.0" text="Muziejai">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <Label layoutX="430.0" layoutY="14.0" text="Perduoti eksponatai">
+                           <font>
+                              <Font size="17.0" />
+                           </font></Label>
+                        <Button fx:id="createMuseumButton" layoutX="81.0" layoutY="482.0" mnemonicParsing="false" onAction="#createMuseum" text="Pridėti" />
+                        <Button layoutX="213.0" layoutY="482.0" mnemonicParsing="false" onAction="#deleteMuseum" text="Ištrinti" textFill="#e11212" />
+                        <Button layoutX="132.0" layoutY="482.0" mnemonicParsing="false" onAction="#editMuseum" text="Pakoreguoti" />
                      </children>
                   </AnchorPane>
               </content>
