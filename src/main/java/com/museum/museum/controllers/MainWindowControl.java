@@ -124,7 +124,7 @@ public class MainWindowControl{
         }
     }
 
-    public void createCollection() throws SQLException, IOException {
+    public void createCollection() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-collection.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -286,9 +286,28 @@ public class MainWindowControl{
             editExhibitControl.setLoggedInUser(loggedInUser);
             editExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
 
+            ObservableList<String> list = FXCollections.observableArrayList("atrestauruotas","restauruojasi","planuojama restauracija","restauracijos nereikia");
+            editExhibitControl
+                    .exhibitStatus.setItems(list);
+
             Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+
+            editExhibitControl.exhibitDescription.setDisable(true);
+            editExhibitControl.exhibitDateOfCreation.setDisable(true);
+            editExhibitControl.exhibitPlaceOfCreation.setDisable(true);
+            editExhibitControl.exhibitCondition.setDisable(true);
+            editExhibitControl.exhibitName.setDisable(true);
+            editExhibitControl.exhibitDimensions.setDisable(true);
+            editExhibitControl.exhibitLicence.setDisable(true);
+            editExhibitControl.exhibitMaterials.setDisable(true);
+            editExhibitControl.exhibitPlaceOfDiscovery.setDisable(true);
+            editExhibitControl.exhibitQuantity.setDisable(true);
+            editExhibitControl.exhibitDateOfDiscovery.setDisable(true);
+            editExhibitControl.exhibitCurrentPlace.setDisable(true);
+            editExhibitControl.exhibitLink.setDisable(true);
+            editExhibitControl.exhibitStatus.setDisable(true);
         }
         else
             LoginControl.alertMessage("Pasirinkite eksponatą");

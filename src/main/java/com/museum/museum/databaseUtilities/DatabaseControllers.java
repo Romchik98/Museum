@@ -14,17 +14,8 @@ public class DatabaseControllers {
     private static Statement statement;
     private static PreparedStatement preparedStatement;
 
-    /*public DatabaseControllers(String dbUrl, String username, String password) {
-        try {
-            // Establish a database connection
-            connection = DriverManager.getConnection(dbUrl, username, password);
-        } catch (SQLException e) {
-            // Handle any exceptions that may occur during connection setup
-            e.printStackTrace();
-        }
-    }*/
 
-    public static int getLatestCollectionCreationId() throws SQLException {
+    /*public static int getLatestCollectionCreationId() throws SQLException {
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
@@ -35,9 +26,9 @@ public class DatabaseControllers {
             id = rs.getInt(1);
         }
         return id;
-    }
+    }*/
 
-    public static int getLatestExhibitCreationId() throws SQLException {
+    /*public static int getLatestExhibitCreationId() throws SQLException {
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
@@ -48,7 +39,7 @@ public class DatabaseControllers {
             id = rs.getInt(1);
         }
         return id;
-    }
+    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Users//
@@ -240,8 +231,8 @@ public class DatabaseControllers {
             preparedStatement.setString(14, exhibit.getLicence());
             preparedStatement.execute();
 
-            int id = DatabaseControllers.getLatestExhibitCreationId();
-            exhibit.setId(id);
+            /*int id = DatabaseControllers.getLatestExhibitCreationId();
+            exhibit.setId(id);*/
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("Eksponatas sukurtas");
@@ -347,7 +338,7 @@ public class DatabaseControllers {
         }
     }
 
-    public static void createCollection(Collection collection, User user) throws SQLException{
+    public static void createCollection(Collection collection) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "INSERT INTO collection(`name`, `description`) VALUES (?,?)";
@@ -356,13 +347,12 @@ public class DatabaseControllers {
             preparedStatement.setString(2, collection.getDescription());
             preparedStatement.execute();
 
-            int id = DatabaseControllers.getLatestCollectionCreationId();
-            collection.setId(id);
+            /*int id = DatabaseControllers.getLatestCollectionCreationId();
+            collection.setId(id);*/
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("Kolekcija sukurta");
         } catch (Exception e) {
-            System.out.println(e);
             LoginControl.alertMessage("Klaida kolekcijos kūrimo metu: " + e);
         }
     }

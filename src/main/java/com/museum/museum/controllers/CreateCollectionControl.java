@@ -28,7 +28,7 @@ public class CreateCollectionControl {
         this.loggedInUser = user;
     }
 
-    public void createCollection(ActionEvent actionEvent) throws IOException, SQLException {
+    public void createCollection() throws IOException, SQLException {
         boolean doesExist = false;
         for(Collection collection : DatabaseControllers.getAllCollections()) {
             if (collection.getName().equals(this.collectionName.getText())) {
@@ -41,8 +41,8 @@ public class CreateCollectionControl {
                 break;
             }
         }
-        if(doesExist == false) {
-            DatabaseControllers.createCollection(new Collection(this.collectionName.getText(), this.collectionDescription.getText()), this.loggedInUser);
+        if(!doesExist) {
+            DatabaseControllers.createCollection(new Collection(this.collectionName.getText(), this.collectionDescription.getText()));
         }
         this.goBack();
     }
@@ -87,7 +87,7 @@ public class CreateCollectionControl {
         if(doesExist == false)
         {
             try {
-                DatabaseControllers.createCollection(new Collection(name, description), loggedInUser);
+                DatabaseControllers.createCollection(new Collection(name, description));
                 return ("Collection created");
             } catch (Exception e) {
                 System.out.println(e);

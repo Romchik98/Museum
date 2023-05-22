@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -43,7 +44,7 @@ public class EditExhibitControl {
     @FXML
     public TextField exhibitType;
     @FXML
-    public TextField exhibitStatus;
+    public ComboBox exhibitStatus;
     @FXML
     public TextField exhibitLicence;
     @FXML
@@ -71,13 +72,13 @@ public class EditExhibitControl {
         } else {
             DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(),
                     this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
-                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getText(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
+                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getSelectionModel().getSelectedItem().toString(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
             this.goBack();
         }
     }
 
     public void goBack() throws IOException, SQLException {
-        if(loggedInUser.getUserType().equals("Admin")) {
+        //if(loggedInUser.getUserType().equals("Admin")) {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -86,7 +87,7 @@ public class EditExhibitControl {
             Stage stage = (Stage) this.exhibitName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
+        /*}
         else {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-use-window.fxml"));
             Parent root = fxmlLoader.load();
@@ -96,7 +97,7 @@ public class EditExhibitControl {
             Stage stage = (Stage) this.exhibitName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
+        }*/
     }
 
     public void chooseExhibitType(ActionEvent event) {

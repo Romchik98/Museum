@@ -104,9 +104,7 @@ public class CreateExhibitControl {
     }
 
     public void createExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
-        //exhibitDescription.setDisable(true);
         for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId)) {
-            //exhibitDescription.setDisable(true);
             if (exhibit.getName().equals(this.exhibitName.getText())) {
                 LoginControl.alertMessage("Eksponatas jau egzistuoja");
                 break;
@@ -123,7 +121,7 @@ public class CreateExhibitControl {
     }
 
     public void goBack() throws IOException, SQLException {
-        if(loggedInUser.getUserType().equals("Admin")) {
+        //if(loggedInUser.getUserType().equals("Admin")) {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -132,8 +130,8 @@ public class CreateExhibitControl {
             Stage stage = (Stage) this.exhibitName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
-        else {
+        //}
+        /*else {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-use-window.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -142,7 +140,7 @@ public class CreateExhibitControl {
             Stage stage = (Stage) this.exhibitName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
+        }*/
     }
 
     public String newExhibit(int selectedCollectionId, String name) throws SQLException {
