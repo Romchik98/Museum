@@ -14,7 +14,7 @@ public class Start extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Museum collection management system");
+        stage.setTitle("Muziejaus kolekcijų valdymo sistema");
 
         Image image = new Image("E:\\uni\\Museum\\src\\main\\resources\\images\\ApplicationLogo.jpeg");
         stage.getIcons().add(image);

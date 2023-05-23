@@ -163,8 +163,9 @@ public class MainWindowControl{
             EditCollectionControl editCollectionControl = fxmlLoader.getController();
             editCollectionControl.setLoggedInUser(loggedInUser);
             editCollectionControl.setSelectedCollection(selectedCollection);
+            editCollectionControl.loadCollectionData();
 
-            Stage stage = (Stage) this.editCollectionButton.getScene().getWindow();
+            Stage stage = /*new Stage()*/(Stage) this.editCollectionButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
@@ -284,7 +285,8 @@ public class MainWindowControl{
 
             EditExhibitControl editExhibitControl = fxmlLoader.getController();
             editExhibitControl.setLoggedInUser(loggedInUser);
-            editExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
+            editExhibitControl.setSelectedExhibit(selectedExhibit);
+            editExhibitControl.loadExhibitData();
 
             ObservableList<String> list = FXCollections.observableArrayList("atrestauruotas","restauruojasi","planuojama restauracija","restauracijos nereikia");
             editExhibitControl
@@ -476,6 +478,7 @@ public class MainWindowControl{
             EditMuseumControl editMuseumControl = fxmlLoader.getController();
             editMuseumControl.setLoggedInUser(loggedInUser);
             editMuseumControl.setSelectedMuseum(selectedMuseum);
+            editMuseumControl.loadMuseumData();
 
             Stage stage = (Stage) this.createMuseumButton.getScene().getWindow();
             stage.setScene(scene);

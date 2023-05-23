@@ -2,6 +2,7 @@ package com.museum.museum.controllers;
 
 import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
+import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
 import javafx.event.ActionEvent;
@@ -57,6 +58,7 @@ public class EditExhibitControl {
     private User loggedInUser;
     private int selectedCollectionId;
     private int selectedExhibitId;
+    private Exhibit selectedExhibit;
 
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
@@ -66,13 +68,17 @@ public class EditExhibitControl {
         this.selectedExhibitId = exhibitId;
     }
 
+    public void setSelectedExhibit(Exhibit exhibit) throws SQLException {
+        this.selectedExhibit = exhibit;
+    }
+
     public void editExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
         if (this.exhibitName.getText().length() < 1) {
             LoginControl.alertMessage("Įveskite privalomus laukelius");
         } else {
             DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(),
                     this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
-                    this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getSelectionModel().getSelectedItem().toString(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
+                    this.exhibitMaterials.getText(), this.exhibitStatus.getSelectionModel().getSelectedItem().toString(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
             this.goBack();
         }
     }
@@ -131,6 +137,24 @@ public class EditExhibitControl {
             exhibitDateOfDiscovery.setDisable(true);
             exhibitCurrentPlace.setDisable(true);
             exhibitLink.setDisable(false);
+        }
+    }
+
+    public void loadExhibitData() {
+        if (selectedExhibit != null) {
+            exhibitName.setText(selectedExhibit.getName());
+            exhibitDescription.setText(selectedExhibit.getDescription());
+            exhibitCondition.setText(selectedExhibit.getCondition());
+            exhibitDimensions.setText(selectedExhibit.getDimensions());
+            exhibitCurrentPlace.setText(selectedExhibit.getCurrentPlace());
+            exhibitDateOfCreation.setText(selectedExhibit.getDateOfCreation());
+            exhibitDateOfDiscovery.setText(selectedExhibit.getDateOfDiscovery());
+            exhibitLicence.setText(selectedExhibit.getLicence());
+            exhibitLink.setText(selectedExhibit.getLink());
+            exhibitMaterials.setText(selectedExhibit.getMaterials());
+            exhibitPlaceOfCreation.setText(selectedExhibit.getPlaceOfCreation());
+            exhibitPlaceOfDiscovery.setText(selectedExhibit.getPlaceOfDiscovery());
+            exhibitQuantity.setText(selectedExhibit.getQuantity());
         }
     }
 }

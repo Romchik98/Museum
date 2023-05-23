@@ -247,7 +247,7 @@ public class DatabaseControllers {
             connection = DatabaseConnection.connectToDb();
             String insertString = "UPDATE exhibit SET name = '" + exhibit.getName() + "', description = '" + exhibit.getDescription() + "', date_of_creation = '" + exhibit.getDateOfCreation() + "'," +
                     " date_of_discovery = '" + exhibit.getDateOfDiscovery() + "', quantity = '" + exhibit.getQuantity() + "', condition = '" + exhibit.getCondition() + "', place_of_creation = '" + exhibit.getPlaceOfCreation() + "'," +
-                    " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "', type = '" + exhibit.getType() + "'," +
+                    " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "'," +
                     " status = '" + exhibit.getStatus() + "', licence = '" + exhibit.getLicence() + "' where exhibit_id = '" + exhibit.getId() + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();

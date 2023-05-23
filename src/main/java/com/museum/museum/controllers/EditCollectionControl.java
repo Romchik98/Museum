@@ -64,4 +64,11 @@ public class EditCollectionControl {
             stage.show();
         }
     }
+
+    public void loadCollectionData() {
+        if (selectedCollection != null) {
+            collectionName.setText(selectedCollection.getName());
+            collectionDescription.setText(selectedCollection.getDescription());
+        }
+    }
 }

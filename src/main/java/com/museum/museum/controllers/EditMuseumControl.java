@@ -63,4 +63,10 @@ public class EditMuseumControl {
             stage.show();
         }
     }
+
+    public void loadMuseumData() {
+        if (selectedMuseum != null) {
+            museumName.setText(selectedMuseum.getName());
+        }
+    }
 }
