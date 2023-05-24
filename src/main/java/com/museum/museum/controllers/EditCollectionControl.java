@@ -53,7 +53,7 @@ public class EditCollectionControl {
             stage.setScene(scene);
             stage.show();
         }
-        else {
+        /*else {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -62,7 +62,7 @@ public class EditCollectionControl {
             Stage stage = (Stage) this.collectionName.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
-        }
+        }*/
     }
 
     public void loadCollectionData() {

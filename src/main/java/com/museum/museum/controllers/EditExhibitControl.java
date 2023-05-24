@@ -76,9 +76,11 @@ public class EditExhibitControl {
         if (this.exhibitName.getText().length() < 1) {
             LoginControl.alertMessage("Įveskite privalomus laukelius");
         } else {
-            DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), selectedCollectionId, this.exhibitDescription.getText(), this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(),
-                    this.exhibitQuantity.getText(), this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(), this.exhibitDimensions.getText(),
-                    this.exhibitMaterials.getText(), this.exhibitStatus.getSelectionModel().getSelectedItem().toString(), this.exhibitLicence.getText(), this.exhibitLink.getText(), this.exhibitCurrentPlace.getText()));
+            DatabaseControllers.editExhibit(new Exhibit(this.exhibitName.getText(), /*selectedCollectionId,*/ this.exhibitDescription.getText(),
+                    this.exhibitDateOfCreation.getText(), this.exhibitDateOfDiscovery.getText(), this.exhibitQuantity.getText(),
+                    this.exhibitCondition.getText(), this.exhibitPlaceOfCreation.getText(), this.exhibitPlaceOfDiscovery.getText(),
+                    this.exhibitDimensions.getText(), this.exhibitMaterials.getText(), /*this.exhibitStatus.getSelectionModel().getSelectedItem().toString(),*/
+                    this.exhibitLicence.getText(), this.exhibitLink.getText()), selectedExhibit.getId());
             this.goBack();
         }
     }

@@ -289,8 +289,7 @@ public class MainWindowControl{
             editExhibitControl.loadExhibitData();
 
             ObservableList<String> list = FXCollections.observableArrayList("atrestauruotas","restauruojasi","planuojama restauracija","restauracijos nereikia");
-            editExhibitControl
-                    .exhibitStatus.setItems(list);
+            editExhibitControl.exhibitStatus.setItems(list);
 
             Stage stage = (Stage) this.createExhibitButton.getScene().getWindow();
             stage.setScene(scene);
@@ -428,7 +427,7 @@ public class MainWindowControl{
 
             ForwardExhibitControl forwardExhibitControl = fxmlLoader.getController();
             forwardExhibitControl.setLoggedInUser(loggedInUser);
-            forwardExhibitControl.setSelectedExhibitId(selectedExhibit.getId());
+            forwardExhibitControl.setSelectedExhibit(selectedExhibit);
             forwardExhibitControl.loadComboBox();
 
             Stage stage = (Stage) this.forwardExhibitButton.getScene().getWindow();

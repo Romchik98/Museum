@@ -242,13 +242,13 @@ public class DatabaseControllers {
         }
     }
 
-    public static void editExhibit(Exhibit exhibit) {
+    public static void editExhibit(Exhibit exhibit, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "UPDATE exhibit SET name = '" + exhibit.getName() + "', description = '" + exhibit.getDescription() + "', date_of_creation = '" + exhibit.getDateOfCreation() + "'," +
                     " date_of_discovery = '" + exhibit.getDateOfDiscovery() + "', quantity = '" + exhibit.getQuantity() + "', condition = '" + exhibit.getCondition() + "', place_of_creation = '" + exhibit.getPlaceOfCreation() + "'," +
                     " place_of_discovery = '" + exhibit.getPlaceOfDiscovery() + "', dimensions = '" + exhibit.getDimensions() + "', materials = '" + exhibit.getMaterials() + "'," +
-                    " status = '" + exhibit.getStatus() + "', licence = '" + exhibit.getLicence() + "' where exhibit_id = '" + exhibit.getId() + "'";
+                    " status = '" + exhibit.getStatus() + "', licence = '" + exhibit.getLicence() + "', link = '" + exhibit.getLink() + "' where exhibit_id = '" + id + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
@@ -258,10 +258,10 @@ public class DatabaseControllers {
         }
     }
 
-    public static void forwardExhibit(Exhibit exhibit) {
+    public static void forwardExhibit(Exhibit exhibit, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
-            String insertString = "UPDATE exhibit SET current_place = '" + exhibit.getCurrentPlace() + "', museum_id = '" + exhibit.getMuseumId() + "' where exhibit_id = '" + exhibit.getId() + "'";
+            String insertString = "UPDATE exhibit SET current_place = '" + exhibit.getCurrentPlace() + "', museum_id = '" + exhibit.getMuseumId() + "' where exhibit_id = '" + id + "'";
             preparedStatement = connection.prepareStatement(insertString);
             preparedStatement.execute();
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);

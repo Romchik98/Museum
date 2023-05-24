@@ -34,6 +34,7 @@ public class ForwardExhibitControl {
     private User loggedInUser;
     private int selectedExhibitId;
     private int selectedMuseumId;
+    private Exhibit selectedExhibit;
 
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
@@ -43,8 +44,12 @@ public class ForwardExhibitControl {
         this.selectedExhibitId = exhibitId;
     }
 
+    public void setSelectedExhibit(Exhibit exhibit) throws SQLException {
+        this.selectedExhibit = exhibit;
+    }
+
     public void forwardExhibit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
-        DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getSelectionModel().getSelectedItem().toString(), this.selectedMuseumId));
+        DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getSelectionModel().getSelectedItem().toString()), selectedExhibit.getId());
         System.out.println(this.comboMuseum.getSelectionModel().getSelectedItem().toString());
         this.goBack();
         /*Class.forName("com.mysql.cj.jdbc.Driver");
