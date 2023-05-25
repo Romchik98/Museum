@@ -144,5 +144,12 @@ public class MainUserWindowControl {
             LoginControl.alertMessage("Įveskite visus laukelius");
         }
     }
+
+    public void loadUserdata() {
+        loginName.setText(loggedInUser.getName());
+        password.setText(loggedInUser.getPassword());
+        name.setText(loggedInUser.getName());
+        surname.setText(loggedInUser.getUserSurname());
+    }
 }
 

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.MainWindowControl">
     <children>
         <TabPane fx:id="mainTab" prefHeight="577.0" prefWidth="1010.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
@@ -83,39 +90,29 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="649.0">
                             <children>
-                                <TextField fx:id="loginName" layoutX="35.0" layoutY="94.0" prefHeight="25.0" prefWidth="250.0" />
-                                <PasswordField fx:id="password" layoutX="35.0" layoutY="146.0" prefHeight="25.0" prefWidth="250.0" />
-                                <TextField fx:id="name" layoutX="35.0" layoutY="198.0" prefHeight="25.0" prefWidth="250.0" />
-                                <TextField fx:id="surname" layoutX="35.0" layoutY="250.0" prefHeight="25.0" prefWidth="250.0" />
-                                <Label layoutX="35.0" layoutY="181.0" text="Vardas:" />
-                                <Label layoutX="35.0" layoutY="129.0" text="Slaptažodis:" />
-                                <Label layoutX="35.0" layoutY="77.0" text="Vartotojo vardas:" />
-                                <Label layoutX="35.0" layoutY="233.0" text="Pavardė:" />
-                                <Button layoutX="423.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="51.0" prefWidth="146.0" text="Atnaujinti" textFill="RED">
+                                <TextField fx:id="loginName" layoutX="380.0" layoutY="145.0" prefHeight="25.0" prefWidth="250.0" />
+                                <PasswordField fx:id="password" layoutX="380.0" layoutY="197.0" prefHeight="25.0" prefWidth="250.0" />
+                                <TextField fx:id="name" layoutX="380.0" layoutY="249.0" prefHeight="25.0" prefWidth="250.0" />
+                                <TextField fx:id="surname" layoutX="380.0" layoutY="301.0" prefHeight="25.0" prefWidth="250.0" />
+                                <Label layoutX="380.0" layoutY="232.0" text="Vardas:" />
+                                <Label layoutX="380.0" layoutY="180.0" text="Slaptažodis:" />
+                                <Label layoutX="380.0" layoutY="128.0" text="Vartotojo vardas:" />
+                                <Label layoutX="380.0" layoutY="284.0" text="Pavardė:" />
+                                <Button layoutX="432.0" layoutY="365.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="51.0" prefWidth="146.0" text="Redaguoti" textFill="#3f46c6">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Button>
-                                <Label layoutX="349.0" layoutY="154.0" text="Įveskite vartotojo duomenis">
+                                <Label layoutX="349.0" layoutY="29.0" text="Įveskite vartotojo duomenis">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
                                 </Label>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Vartotojai">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                            <children>
-                                <ListView fx:id="userListAdmin" layoutX="40.0" layoutY="40.0" onMouseClicked="#selectAdminUser" prefHeight="324.0" prefWidth="200.0" />
-                                <Label layoutX="104.0" layoutY="23.0" text="Visi vartotojai" />
-                                <Button fx:id="deleteUserButton" layoutX="410.0" layoutY="307.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="43.0" prefWidth="158.0" text="Panaikinti" textFill="RED">
-                                    <font>
-                                        <Font size="21.0" />
-                                    </font>
-                                </Button>
+                        <Button layoutX="454.0" layoutY="473.0" mnemonicParsing="false" onAction="#logOut" prefHeight="35.0" prefWidth="103.0" text="Atsijungti" textFill="RED">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                             </children>
                         </AnchorPane>
                     </content>

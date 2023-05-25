@@ -64,6 +64,7 @@ public class LoginControl {
             Parent root = fxmlLoader.load();
             MainUserWindowControl mainUserWindowControl = fxmlLoader.getController();
             mainUserWindowControl.setLoggedInUser(user);
+            mainUserWindowControl.loadUserdata();
             Scene scene = new Scene(root);
             Stage stage = (Stage) this.loginName.getScene().getWindow();
             stage.setScene(scene);
@@ -76,6 +77,7 @@ public class LoginControl {
             Parent root = fxmlLoader.load();
             MainWindowControl mainWindowControl = fxmlLoader.getController();
             mainWindowControl.setLoggedInUser(user);
+            mainWindowControl.loadUserdata();
             Scene scene = new Scene(root);
             Stage stage = (Stage) this.loginName.getScene().getWindow();
             stage.setScene(scene);
@@ -95,29 +97,6 @@ public class LoginControl {
         stage.setScene(scene);
         stage.show();
     }
-
-    /*public static boolean validatePassword(String password, String storedHashedPassword) {
-        boolean isValid = false;
-
-        try {
-            byte[] hashedBytes = Base64.getDecoder().decode(storedHashedPassword);
-
-            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), hashedBytes, 10000, 256);
-            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-            byte[] enteredHashedBytes = keyFactory.generateSecret(spec).getEncoded();
-
-            isValid = Base64.getEncoder().encodeToString(enteredHashedBytes).equals(storedHashedPassword);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-
-        return isValid;
-    }*/
-
-        /*public LoginControl() {
-            String encryptionKey = System.getenv("KRISTIS_APP_ENCRYPTION_KEY");
-            secretKey = Objects.requireNonNullElse(encryptionKey, "m#5j$H0@lN^cQw8K");
-        }*/
 
         public String encrypt(String password) throws Exception {
             SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);

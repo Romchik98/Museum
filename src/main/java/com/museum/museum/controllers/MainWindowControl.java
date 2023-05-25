@@ -339,32 +339,29 @@ public class MainWindowControl{
         }
     }
 
-    public void setAllUsersList() throws SQLException {
-        this.userList.getItems().clear();
-        for (User user : this.getUsers())
-            this.userList.getItems().add(user.getLogin());
+    public void logOut(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Taip");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Ne");
+        alert.setTitle("Atsijungimas");
+        alert.setHeaderText("");
+        alert.setContentText("Ar tikrai norite atsijungti?");
+
+        if(alert.showAndWait().get() == ButtonType.OK) {
+            FXMLLoader fxmlLoader = new FXMLLoader((Start.class.getResource("login-window.fxml")));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) loginName.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
-    private ArrayList<User> getUsers() throws SQLException {
-        ArrayList<User> users = DatabaseControllers.getAllUsers();
-        this.users = users;
-        return users;
-    }
-
-    public void selectAdminUser(MouseEvent mouseEvent) throws SQLException {
-        /*if (this.userList.getSelectionModel().getSelectedItem() != null) {
-            String userName = this.userList.getSelectionModel().getSelectedItem().toString();
-            for (User user : this.users) {
-                if(user.getName().equals(userName))
-                    selectedAdminUser = user;
-            }
-        }*/
-    }
-
-    public void resetUser(ActionEvent actionEvent) {
-    }
-
-    public void deleteUser(ActionEvent actionEvent) {
+    public void loadUserdata() {
+        loginName.setText(loggedInUser.getName());
+        //password.setText(loggedInUser.getPassword());
+        name.setText(loggedInUser.getName());
+        surname.setText(loggedInUser.getUserSurname());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
