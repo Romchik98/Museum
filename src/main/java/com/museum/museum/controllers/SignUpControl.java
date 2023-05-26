@@ -29,6 +29,8 @@ public class SignUpControl {
     @FXML
     public PasswordField password;
     @FXML
+    public PasswordField repeatPassword;
+    @FXML
     public TextField name;
     @FXML
     public TextField surname;
@@ -92,23 +94,28 @@ public class SignUpControl {
     public String getPassword() throws Exception {
         LoginControl loginControl = new LoginControl();
         String password = this.password.getText();
+        String repeatPassword = this.repeatPassword.getText();
         char ch;
         boolean upChars = false, lowChars = false, digits = false, special = false;
 
-            for(int i=0; i<password.length(); i++) {
-                ch = password.charAt(i);
-                if(Character.isUpperCase(ch))
-                    upChars = true;
-                else if(Character.isLowerCase(ch))
-                    lowChars = true;
-                else if(Character.isDigit(ch))
-                    digits = true;
-                else
-                    special = true;
+        for(int i=0; i<password.length(); i++) {
+            ch = password.charAt(i);
+            if(Character.isUpperCase(ch))
+                upChars = true;
+            else if(Character.isLowerCase(ch))
+                lowChars = true;
+            else if(Character.isDigit(ch))
+                digits = true;
+            else
+                special = true;
             }
         if(upChars && lowChars && digits && special && password.length() > 7) {
-            loginControl.encrypt(this.password.getText());
-            return password;
+            if(password.equals(repeatPassword)) {
+                return loginControl.encrypt(this.password.getText());
+            } else {
+                LoginControl.alertMessage("Slaptažodžiai nesutampa.");
+                return "";
+            }
         } else {
             LoginControl.alertMessage("Minimalus slaptažodžio ilgis yra 8 simboliai. " +
                     "Slaptažodis privalo turėti bent 1 didžiąją raidę, 1 mažąją raidę, " +
