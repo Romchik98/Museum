@@ -8,6 +8,7 @@ import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -178,6 +179,8 @@ public class MainWindowControl{
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
         ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike);
+        /*ObservableList<String> list = FXCollections.observableArrayList("fizinis","skaitmeninis","visi");
+        FilteredList<Exhibit> filteredExhibits = new FilteredList<>(exhibits, i-> i.);*/
         this.exhibits = exhibits;
         return exhibits;
     }
@@ -263,15 +266,6 @@ public class MainWindowControl{
     public void deleteExhibit() throws SQLException, IOException {
         if(selectedExhibit != null) {
             DatabaseControllers.deleteExhibit(selectedExhibit.getId());
-
-            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionsList.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();*/
         }
         else
             LoginControl.alertMessage("Pasirinkite eksponatą");

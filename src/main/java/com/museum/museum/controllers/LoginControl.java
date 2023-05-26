@@ -4,32 +4,17 @@ import com.museum.museum.ds.User;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.Start;
 
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Base64;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Base64;
-import java.util.Objects;
 
 
 public class LoginControl {
@@ -38,14 +23,9 @@ public class LoginControl {
     public TextField loginName;
     @FXML
     public PasswordField password;
-
-    private Connection connection;
-    private Statement statement;
-
+    @FXML
+    public Button infoButton;
     private static final String ALGORITHM = "AES";
-    private static final int KEY_SIZE = 16;
-
-    private final String secretKey = "F3B9E8C7D6A5A4B3C2D1E0F1A2B3C4D5";
 
     public static void alertMessage(String s) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -54,10 +34,10 @@ public class LoginControl {
         alert.showAndWait();
     }
 
-    public void ValidateLogin(ActionEvent actionEvent) throws Exception {
+    public void ValidateLogin() throws Exception {
         User user = DatabaseControllers.validateLogin(loginName.getText(), password.getText());
 
-        if (user.getUserType().equals("User") && user != null)
+        if (user.getUserType().equals("User"))
         {
             alertMessage("Prisijungta kaip vartotojas");
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
@@ -70,7 +50,7 @@ public class LoginControl {
             stage.setScene(scene);
             stage.show();
         }
-        else if (user.getUserType().equals("Admin") && user != null)
+        else if (user.getUserType().equals("Admin"))
         {
             alertMessage("Prisijungta kaip administratorius");
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
@@ -89,7 +69,7 @@ public class LoginControl {
 
     }
 
-    public void startSignUp(ActionEvent actionEvent) throws IOException{
+    public void startSignUp() throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader((Start.class.getResource("sign-up-form.fxml")));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -99,6 +79,7 @@ public class LoginControl {
     }
 
         public String encrypt(String password) throws Exception {
+            String secretKey = "F3B9E8C7D6A5A4B3C2D1E0F1A2B3C4D5";
             SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.ENCRYPT_MODE, keySpec);
@@ -113,5 +94,14 @@ public class LoginControl {
             byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedPassword.getBytes()));
             return new String(decrypted);
         }*/
+
+    public void openInfo() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader((Start.class.getResource("information-window.fxml")));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }

@@ -52,15 +52,6 @@ public class ForwardExhibitControl {
         DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getSelectionModel().getSelectedItem().toString()), selectedExhibit.getId());
         System.out.println(this.comboMuseum.getSelectionModel().getSelectedItem().toString());
         this.goBack();
-        /*Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost/museum");
-
-        ResultSet rs = con.createStatement().executeQuery("select * from museum");
-        ObservableList data = FXCollections.observableArrayList();
-        while (rs.next()) {
-            data.add(new String(rs.getString(1)));
-        }
-        comboMuseum.setItems(data);*/
     }
 
     public void loadComboBox() throws SQLException, IOException, ClassNotFoundException {

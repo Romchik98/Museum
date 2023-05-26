@@ -91,11 +91,30 @@ public class SignUpControl {
 
     public String getPassword() throws Exception {
         LoginControl loginControl = new LoginControl();
-        String password = loginControl.encrypt(this.password.getText());
-        if (password.length() > 0)
+        String password = this.password.getText();
+        char ch;
+        boolean upChars = false, lowChars = false, digits = false, special = false;
+
+            for(int i=0; i<password.length(); i++) {
+                ch = password.charAt(i);
+                if(Character.isUpperCase(ch))
+                    upChars = true;
+                else if(Character.isLowerCase(ch))
+                    lowChars = true;
+                else if(Character.isDigit(ch))
+                    digits = true;
+                else
+                    special = true;
+            }
+        if(upChars && lowChars && digits && special && password.length() > 7) {
+            loginControl.encrypt(this.password.getText());
             return password;
-        LoginControl.alertMessage("Įveskite slaptažodį");
-        return "";
+        } else {
+            LoginControl.alertMessage("Minimalus slaptažodžio ilgis yra 8 simboliai. " +
+                    "Slaptažodis privalo turėti bent 1 didžiąją raidę, 1 mažąją raidę, " +
+                    "1 skaičių ir 1 specialųjį simbolį.");
+            return "";
+        }
     }
 
     public String getName() {

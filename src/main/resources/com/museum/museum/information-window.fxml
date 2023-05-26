@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.museum.museum.controllers.LoginControl">
+   <children>
+      <TextArea editable="false" layoutX="-2.0" layoutY="-1.0" prefHeight="406.0" prefWidth="608.0" text="&#10;&#10;&#10;&#10;Atviros priegos muziejaus kolekcijų valdymo sistema. Sistemos tikslas – &#10;palengvinti muziejaus kolekcijų informacijos saugojimą ir valdymą fiziniams &#10;bei skaitmeniniams eksponatams. &#10;Programa pasiekiama: https://github.com/Romchik98/Museum&#10;&#10;&#10;&#10;&#10;&#10;© Roman Didenko, Vilnius, 2023&#10;">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextArea>
+      <Label layoutX="209.0" layoutY="25.0" text="Sistemos informacija">
+         <font>
+            <Font size="20.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
