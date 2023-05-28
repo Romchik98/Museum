@@ -66,7 +66,6 @@ public class LoginControl {
         }
         else
             alertMessage("Neteisingi prisijungimo duomenys");
-
     }
 
     public void startSignUp() throws IOException{
@@ -88,10 +87,12 @@ public class LoginControl {
         }
 
         /*public String decrypt(String encryptedPassword) throws Exception {
+            String secretKey = "F3B9E8C7D6A5A4B3C2D1E0F1A2B3C4D5";
             SecretKeySpec keySpec = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
             cipher.init(Cipher.DECRYPT_MODE, keySpec);
             byte[] decrypted = cipher.doFinal(Base64.getDecoder().decode(encryptedPassword.getBytes()));
+            System.out.println(decrypted);
             return new String(decrypted);
         }*/
 

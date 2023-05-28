@@ -50,7 +50,7 @@ public class ForwardExhibitControl {
 
     public void forwardExhibit(ActionEvent actionEvent) throws SQLException, IOException, ClassNotFoundException {
         DatabaseControllers.forwardExhibit(new Exhibit(this.comboMuseum.getSelectionModel().getSelectedItem().toString()), selectedExhibit.getId());
-        System.out.println(this.comboMuseum.getSelectionModel().getSelectedItem().toString());
+        //System.out.println(this.comboMuseum.getSelectionModel().getSelectedItem().toString());
         this.goBack();
     }
 

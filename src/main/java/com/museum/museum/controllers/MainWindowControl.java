@@ -8,7 +8,6 @@ import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +22,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class MainWindowControl{
 
@@ -31,6 +32,8 @@ public class MainWindowControl{
     public ListView<String> collectionsList;
     @FXML
     public ListView exhibitsList;
+    @FXML
+    public ComboBox<String> typeFilter;
     @FXML
     public ListView exhibitDataList;
     @FXML
@@ -110,11 +113,12 @@ public class MainWindowControl{
 
     private ArrayList<Collection> getCollections() throws SQLException {
         ArrayList<Collection> collections = DatabaseControllers.getAllCollections();
+        Collections.sort(collections, Comparator.comparing(Collection ::getName));
         this.collections = collections;
         return collections;
     }
 
-    public void selectCollection(MouseEvent mouseEvent) throws SQLException{
+    public void selectCollection() throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
             String collectionName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
             for (Collection collection : this.collections) {
@@ -178,13 +182,25 @@ public class MainWindowControl{
     //Exhibits//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
-        ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike);
-        /*ObservableList<String> list = FXCollections.observableArrayList("fizinis","skaitmeninis","visi");
-        FilteredList<Exhibit> filteredExhibits = new FilteredList<>(exhibits, i-> i.);*/
+        String type = getFilterType();
+        ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike, type);
+        Collections.sort(exhibits, Comparator.comparing(Exhibit ::getName));
         this.exhibits = exhibits;
         return exhibits;
     }
 
+    public String getFilterType() {
+        String type = typeFilter.getValue();
+        System.out.println(type);
+        return type;
+    }
+    public void loadChoiceBox() {
+        ObservableList<String> list = FXCollections.observableArrayList("Visi", "Skaitmeniniai", "Fiziniai");
+        typeFilter.setItems(list);
+    }
+    public void selectFilter(ActionEvent actionEvent) throws SQLException{
+        selectCollection();
+    }
     public void setExhibitsList(int collectionIdLike) throws SQLException{
         this.exhibitsList.getItems().clear();
         for (Exhibit exhibit : this.getExhibits(collectionIdLike)) {
@@ -316,8 +332,9 @@ public class MainWindowControl{
     public void setLoggedInUser(User user) throws SQLException {
         this.loggedInUser = user;
         this.setCollectionsList();
-        //this.setAllUsersList();
         this.setMuseumsList();
+        this.loadChoiceBox();
+        //typeFilter.setOnAction(this::getFilterType);
     }
 
     public void updateUser(ActionEvent actionEvent) throws Exception {
@@ -371,6 +388,7 @@ public class MainWindowControl{
 
     private ArrayList<Museum> getMuseums() throws SQLException {
         ArrayList<Museum> museums = DatabaseControllers.getAllMuseums();
+        Collections.sort(museums, Comparator.comparing(Museum ::getName));
         this.museums = museums;
         return museums;
     }
@@ -485,6 +503,5 @@ public class MainWindowControl{
         Image myImage = new Image("E:\\uni\\Museum\\src\\main\\resources\\images\\" + exhibitName + ".jpg");
         exhibitImage.setImage(myImage);
     }
-
 }
 

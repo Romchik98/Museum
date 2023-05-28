@@ -104,7 +104,7 @@ public class CreateExhibitControl {
     }
 
     public void createExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
-        for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId)) {
+        for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId, "visi")) {
             if (exhibit.getName().equals(this.exhibitName.getText())) {
                 LoginControl.alertMessage("Eksponatas jau egzistuoja");
                 break;

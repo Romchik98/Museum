@@ -101,7 +101,7 @@ public class MainUserWindowControl {
     //Exhibits//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
-        ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike);
+        ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike, "visi");
         this.exhibits = exhibits;
         return exhibits;
     }

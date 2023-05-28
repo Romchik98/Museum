@@ -153,14 +153,22 @@ public class DatabaseControllers {
         return exhibits;
     }
 
-    public static ArrayList<Exhibit> getExhibits(int collectionId) throws SQLException {
+    public static ArrayList<Exhibit> getExhibits(int collectionId, String filterType) throws SQLException {
         ArrayList<Exhibit> exhibits = new ArrayList<>();
 
         connection = DatabaseConnection.connectToDb();
         statement = connection.createStatement();
 
-        String query1 = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "'";
-        ResultSet rs1 = statement.executeQuery(query1);
+        String query;
+        if(filterType == "Skaitmeniniai") {
+            query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "' AND type = 'skaitmeninis'";
+        } else if (filterType == "Fiziniai") {
+            query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "' AND type = 'fizinis'";
+        } else {
+            query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "'";
+        }
+
+        ResultSet rs1 = statement.executeQuery(query);
         while (rs1.next()) {
             exhibits.add(new Exhibit(rs1.getInt(1), rs1.getString("name"), rs1.getString("description"),
                     rs1.getString("date_of_creation"), rs1.getString("date_of_discovery"),
