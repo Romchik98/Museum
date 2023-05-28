@@ -4,7 +4,6 @@ import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,11 +28,11 @@ public class EditCollectionControl {
         this.loggedInUser = user;
     }
 
-    public void setSelectedCollection(Collection collection) throws SQLException {
+    public void setSelectedCollection(Collection collection) {
         this.selectedCollection = collection;
     }
 
-    public void updateCollection(ActionEvent actionEvent) throws IOException, SQLException {
+    public void updateCollection() throws IOException, SQLException {
         if (this.collectionName.getText().length() < 1) {
             LoginControl.alertMessage("Įveskite kolekcijos pavadinimą");
         } else {
@@ -43,26 +42,14 @@ public class EditCollectionControl {
     }
 
     public void goBack() throws IOException, SQLException {
-        if(loggedInUser.getUserType().equals("Admin")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
-        /*else {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }*/
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+        mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
+        Stage stage = (Stage) this.collectionName.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void loadCollectionData() {

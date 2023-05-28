@@ -18,7 +18,7 @@ class CreateCollectionControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(999, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        String message = collection.newCollection("xxx", "xxx", user);
+        String message = collection.newCollection("xxx", "xxx");
 
         assertEquals("Collection created", message);
     }
@@ -28,7 +28,7 @@ class CreateCollectionControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(1, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        String message = collection.newCollection("", "xxx", user);
+        String message = collection.newCollection("", "xxx");
 
         assertEquals("Please fill name field", message);
     }
@@ -38,7 +38,7 @@ class CreateCollectionControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(1, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        String message = collection.newCollection("xxx", "", user);
+        String message = collection.newCollection("xxx", "");
 
         assertEquals("Please fill description field", message);
     }
@@ -48,8 +48,8 @@ class CreateCollectionControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(1, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        collection.newCollection("xxx", "xxx", user);
-        String message = collection.newCollection("xxx", "xxx", user);
+        collection.newCollection("xxx", "xxx");
+        String message = collection.newCollection("xxx", "xxx");
 
         assertEquals("Course already exists", message);
     }

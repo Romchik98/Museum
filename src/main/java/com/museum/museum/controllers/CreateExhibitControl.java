@@ -4,23 +4,16 @@ import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CreateExhibitControl {
@@ -69,7 +62,7 @@ public class CreateExhibitControl {
         this.selectedCollectionId = collectionId;
     }
 
-    public void chooseExhibitType(ActionEvent event) {
+    public void chooseExhibitType() {
         if(rButton1.isSelected()) {
             exhibitDescription.setDisable(false);
             exhibitDateOfCreation.setDisable(false);
@@ -103,7 +96,7 @@ public class CreateExhibitControl {
         }
     }
 
-    public void createExhibit(ActionEvent actionEvent) throws SQLException, IOException   {
+    public void createExhibit() throws SQLException, IOException   {
         for(Exhibit exhibit : DatabaseControllers.getExhibits(selectedCollectionId, "visi")) {
             if (exhibit.getName().equals(this.exhibitName.getText())) {
                 LoginControl.alertMessage("Eksponatas jau egzistuoja");
@@ -117,30 +110,18 @@ public class CreateExhibitControl {
                         this.exhibitMaterials.getText(), this.exhibitType.getText(), this.exhibitStatus.getSelectionModel().getSelectedItem().toString(), this.exhibitLicence.getText(), this.exhibitLink.getText(),  this.exhibitCurrentPlace.getText()));
             }
         }
-        this.goBack();
+        goBack();
     }
 
     public void goBack() throws IOException, SQLException {
-        //if(loggedInUser.getUserType().equals("Admin")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.exhibitName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        //}
-        /*else {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-use-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.exhibitName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }*/
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+        mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
+        Stage stage = (Stage) this.exhibitName.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public String newExhibit(int selectedCollectionId, String name) throws SQLException {
@@ -151,16 +132,16 @@ public class CreateExhibitControl {
                 return("Exhibit already exists");
             }
         }
-        if(isValidInput(name) == false) {
+        if(!isValidInput(name)) {
             return ("Please fill name field");
         }
-        if(doesExist == false)
+        if(!doesExist)
         {
             try {
                 DatabaseControllers.createExhibit(new Exhibit(name, selectedCollectionId));
                 return("Exhibit created");
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
                 return("Error creating exhibit" + e);
             }
         }
@@ -168,9 +149,7 @@ public class CreateExhibitControl {
     }
 
     private boolean isValidInput(String input) {
-        if (input.length() == 0)
-            return false;
-        return true;
+        return input.length() != 0;
     }
 
 }

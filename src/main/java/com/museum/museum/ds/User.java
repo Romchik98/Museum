@@ -8,7 +8,7 @@ public class User {
     private String userName;
     private String userSurname;
 
-    public User(int id, String login, String password, String userType, String userName, String surname) {
+    public User(int id, String login, String password, String userType, String userName, String userSurname) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -22,10 +22,6 @@ public class User {
         this.password = password;
         this.userName = userName;
         this.userSurname = userSurname;
-    }
-
-    public User(String login, int anInt, String person_name, String person_surname) {
-
     }
 
     public User(int id, String userName, String userSurname, String userType) {
@@ -67,7 +63,7 @@ public class User {
 
     public String getName() { return userName; }
 
-    public void setName(String name) {
+    public void setName(String userName) {
         this.userName = userName;
     }
 
@@ -75,7 +71,7 @@ public class User {
         return userSurname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(String userSurname) {
         this.userSurname = userSurname;
     }
 

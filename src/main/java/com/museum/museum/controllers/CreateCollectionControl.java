@@ -47,29 +47,17 @@ public class CreateCollectionControl {
     }
 
     public void goBack() throws IOException, SQLException {
-        if(loggedInUser.getUserType().equals("Admin")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
-        else {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+        mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
+        Stage stage = (Stage) this.collectionName.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public String newCollection(String name, String description, User loggedInUser) throws IOException, SQLException {
+    public String newCollection(String name, String description) throws SQLException {
         boolean doesExist = false;
         for(Collection collection : DatabaseControllers.getAllCollections()) {
             if (collection.getName().equals(name)) {
@@ -77,19 +65,19 @@ public class CreateCollectionControl {
                 return ("Course already exists");
             }
         }
-        if(isValidInput(name) == false) {
+        if(isValidInput(name)) {
             return ("Please fill name field");
         }
-        if(isValidInput(description) == false) {
+        if(isValidInput(description)) {
             return ("Please fill description field");
         }
-        if(doesExist == false)
+        if(!doesExist)
         {
             try {
                 DatabaseControllers.createCollection(new Collection(name, description));
                 return ("Collection created");
             } catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
                 return ("Error creating Collection" + e);
             }
         }
@@ -97,9 +85,6 @@ public class CreateCollectionControl {
     }
 
     private boolean isValidInput(String input) {
-        if (input.length() == 0)
-            return false;
-        return true;
+        return input.length() == 0;
     }
-
 }

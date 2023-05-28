@@ -18,7 +18,7 @@ class CreateExhibitControlTest {
         DatabaseControllers.deleteExhibits("xxx");
         User user = new User(999, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        collection.newCollection("xxx", "xxx", user);
+        collection.newCollection("xxx", "xxx");
 
         CreateExhibitControl exhibit = new CreateExhibitControl();
         String message = exhibit.newExhibit(DatabaseControllers.getCollectionId("xxx"), "xxx");
@@ -31,7 +31,7 @@ class CreateExhibitControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(999, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        collection.newCollection("xxx", "xxx", user);
+        collection.newCollection("xxx", "xxx");
 
         CreateExhibitControl exhibit = new CreateExhibitControl();
         exhibit.newExhibit(DatabaseControllers.getCollectionId("xxx"), "xxx");
@@ -45,7 +45,7 @@ class CreateExhibitControlTest {
         DatabaseControllers.deleteCollections("xxx");
         User user = new User(999, "unit", "unit", "unit");
         CreateCollectionControl collection = new CreateCollectionControl();
-        collection.newCollection("xxx", "xxx", user);
+        collection.newCollection("xxx", "xxx");
 
         CreateExhibitControl exhibit = new CreateExhibitControl();
         String message = exhibit.newExhibit(DatabaseControllers.getCollectionId("xxx"), "");

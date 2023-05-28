@@ -5,41 +5,17 @@ import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Exhibit;
 import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DatabaseControllers {
     private static Connection connection;
     private static Statement statement;
     private static PreparedStatement preparedStatement;
-
-
-    /*public static int getLatestCollectionCreationId() throws SQLException {
-
-        connection = DatabaseConnection.connectToDb();
-        statement = connection.createStatement();
-        String query = "SELECT * FROM collection WHERE collection_id=(SELECT max(collection_id) FROM collection)";
-        ResultSet rs = statement.executeQuery(query);
-        int id = 0;
-        while (rs.next()) {
-            id = rs.getInt(1);
-        }
-        return id;
-    }*/
-
-    /*public static int getLatestExhibitCreationId() throws SQLException {
-
-        connection = DatabaseConnection.connectToDb();
-        statement = connection.createStatement();
-        String query = "SELECT * FROM exhibit WHERE exhibit_id=(SELECT max(exhibit_id) FROM exhibit)";
-        ResultSet rs = statement.executeQuery(query);
-        int id = 0;
-        while (rs.next()) {
-            id = rs.getInt(1);
-        }
-        return id;
-    }*/
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Users//
@@ -64,8 +40,7 @@ public class DatabaseControllers {
             }
             DatabaseConnection.disconnectFromDb(connection, statement);
 
-            User user = new User(id, userName, userSurname, userType);
-            return user;
+        return new User(id, userName, userSurname, userType);
     }
 
     public static void createUser(User user) {
@@ -98,41 +73,6 @@ public class DatabaseControllers {
         }
     }
 
-    public static ArrayList<User> getAllUsers() throws SQLException {//////not done
-        ArrayList<User> users = new ArrayList<>();
-        connection = DatabaseConnection.connectToDb();
-        statement = connection.createStatement();
-        String query1 = "SELECT * FROM user";
-        ResultSet rs1 = statement.executeQuery(query1);
-        while (rs1.next()) {
-            users.add(new User(rs1.getString("login"), rs1.getInt(1), rs1.getString("person_name"), rs1.getString("person_surname")));
-        }
-        DatabaseConnection.disconnectFromDb(connection, statement);
-        return users;
-    }
-
-    /*public static User getUser(int userId) throws SQLException{//webui
-        connection = DatabaseConnection.connectToDb();
-        statement = connection.createStatement();
-        String query = "SELECT * FROM user WHERE id = '" + userId + "'";
-        ResultSet rs = statement.executeQuery(query);
-        String userName = "null";
-        String userSurname = "null";
-        String userType = "null";
-        int id = 0;
-        while (rs.next()) {
-            id = rs.getInt(1);
-            userName = rs.getString("person_name");
-            userSurname = rs.getString("person_surname");
-            userType = rs.getString("person_type");
-        }
-        DatabaseConnection.disconnectFromDb(connection, statement);
-
-        User user = new User(id, userName, userSurname, userType);
-        return user;
-    }*/
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Exhibit//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -160,9 +100,9 @@ public class DatabaseControllers {
         statement = connection.createStatement();
 
         String query;
-        if(filterType == "Skaitmeniniai") {
+        if(Objects.equals(filterType, "Skaitmeniniai")) {
             query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "' AND type = 'skaitmeninis'";
-        } else if (filterType == "Fiziniai") {
+        } else if (Objects.equals(filterType, "Fiziniai")) {
             query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "' AND type = 'fizinis'";
         } else {
             query = "SELECT * FROM exhibit WHERE collection_id = '" + collectionId + "'";
@@ -239,13 +179,10 @@ public class DatabaseControllers {
             preparedStatement.setString(14, exhibit.getLicence());
             preparedStatement.execute();
 
-            /*int id = DatabaseControllers.getLatestExhibitCreationId();
-            exhibit.setId(id);*/
-
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("Eksponatas sukurtas");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             LoginControl.alertMessage("Klaida eksponato kūrimo metu" + e);
         }
     }
@@ -292,31 +229,6 @@ public class DatabaseControllers {
     //Collections//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*public static ArrayList<Collection> getCollections(int userId) throws SQLException {
-        ArrayList<Collection> collections = new ArrayList<>();
-        ArrayList<Integer> collectionId = new ArrayList<>();
-
-        connection = DatabaseConnection.connectToDb();
-        statement = connection.createStatement();
-
-        String query1 = "SELECT collection_id user FROM collection WHERE person_id = '" + userId + "'";
-        ResultSet rs = statement.executeQuery(query1);
-        while (rs.next()) {
-            collectionId.add(rs.getInt(1));
-        }
-        for (int i = 0; i < collectionId.size(); i++)
-        {
-            String query = "SELECT * FROM collection WHERE id = '" + collectionId.get(i) + "'";
-            ResultSet rs1 = statement.executeQuery(query);
-            while (rs1.next()) {
-                collections.add(new Collection(rs1.getInt(1), rs1.getString("course_name"), rs1.getString("description")));
-            }
-
-        }
-        DatabaseConnection.disconnectFromDb(connection, statement);
-        return collections;
-    }*/
-
     public static ArrayList<Collection> getAllCollections() throws SQLException {
         ArrayList<Collection> collections = new ArrayList<>();
 
@@ -333,7 +245,7 @@ public class DatabaseControllers {
         return collections;
     }
 
-    public static void editCollection(Collection collection, int id) throws SQLException {
+    public static void editCollection(Collection collection, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "UPDATE collection SET name = '" + collection.getName() + "', description = '" + collection.getDescription() + "' where collection_id = '" + id + "'";
@@ -354,9 +266,6 @@ public class DatabaseControllers {
             preparedStatement.setString(1, collection.getName());
             preparedStatement.setString(2, collection.getDescription());
             preparedStatement.execute();
-
-            /*int id = DatabaseControllers.getLatestCollectionCreationId();
-            collection.setId(id);*/
 
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("Kolekcija sukurta");
@@ -402,7 +311,28 @@ public class DatabaseControllers {
         return museums;
     }
 
-    public static void createMuseum(Museum museum, User user) throws SQLException{
+    public static ObservableList<String> loadComboBox() throws SQLException {
+        Connection connection = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String DB_URL = "jdbc:mysql://localhost/museum";
+            String USER = "root";
+            String PASS = "admin";
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException | ClassNotFoundException t) {
+            t.printStackTrace();
+        }
+
+        assert connection != null;
+        ResultSet rs = connection.createStatement().executeQuery("select * from museum");
+        ObservableList<String> data = FXCollections.observableArrayList();
+        while (rs.next()) {
+            data.add(rs.getString(2));
+        }
+        return data;
+    }
+
+    public static void createMuseum(Museum museum) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "INSERT INTO museum(`name`) VALUES (?)";
@@ -416,7 +346,7 @@ public class DatabaseControllers {
             DatabaseConnection.disconnectFromDb(connection, preparedStatement);
             LoginControl.alertMessage("Muziejus sukurtas");
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
             LoginControl.alertMessage("Klaida muziejaus kūrimo metu: " + e);
         }
     }
@@ -445,7 +375,7 @@ public class DatabaseControllers {
         LoginControl.alertMessage("Muziejus ištrintas");
     }
 
-    public static void editMuseum(Museum museum, int id) throws SQLException {
+    public static void editMuseum(Museum museum, int id) {
         try {
             connection = DatabaseConnection.connectToDb();
             String insertString = "UPDATE museum SET name = '" + museum.getName() + "' where museum_id = '" + id + "'";

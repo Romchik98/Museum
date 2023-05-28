@@ -20,20 +20,10 @@ public class Exhibit {
     private String link;
     private int museumId;
 
-    /*public Exhibit(String exhibitNameText, int selectedCollectionId, String exhibitDescriptionText, String exhibitDateOfCreationValue, String value, int collectionId, String exhibitConditionText, String exhibitPlaceOfCreationText, String exhibitPlaceOfDiscoveryText, String exhibitDimensionsText, String exhibitMaterialsText, String exhibitTypeText, String text, String name) {
-        this.collectionId = collectionId;
-        this.name = name;
-    }*/
-
-    public Exhibit(String name, int selectedCollectionId) {
+    public Exhibit(String name, int collectionId) {
         this.collectionId = collectionId;
         this.name = name;
     }
-
-    /*public Exhibit(String name, int selectedMuseumId) {
-        this.museumId = museumId;
-        this.name = name;
-    }*/
 
     public Exhibit(String currentPlace) {
         this.currentPlace = currentPlace;

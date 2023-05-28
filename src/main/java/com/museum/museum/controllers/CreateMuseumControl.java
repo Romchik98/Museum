@@ -5,7 +5,6 @@ import com.museum.museum.databaseUtilities.DatabaseControllers;
 import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +26,7 @@ public class CreateMuseumControl {
         this.loggedInUser = user;
     }
 
-    public void createMuseum(ActionEvent actionEvent) throws IOException, SQLException {
+    public void createMuseum() throws IOException, SQLException {
         boolean doesExist = false;
         for (Collection collection : DatabaseControllers.getAllCollections()) {
             if (collection.getName().equals(this.museumName.getText())) {
@@ -40,31 +39,20 @@ public class CreateMuseumControl {
                 break;
             }
         }
-        if (doesExist == false) {
-            DatabaseControllers.createMuseum(new Museum(this.museumName.getText()), this.loggedInUser);
+        if (!doesExist) {
+            DatabaseControllers.createMuseum(new Museum(this.museumName.getText()));
         }
         this.goBack();
     }
 
     public void goBack() throws IOException, SQLException {
-        if (loggedInUser.getUserType().equals("Admin")) {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.museumName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } else {
-            FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-user-window.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.museumName.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml"));
+        Parent root = fxmlLoader.load();
+        Scene scene = new Scene(root);
+        MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
+        mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
+        Stage stage = (Stage) this.museumName.getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 }

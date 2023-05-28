@@ -8,7 +8,6 @@ import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +22,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class MainWindowControl{
 
@@ -31,15 +30,15 @@ public class MainWindowControl{
     @FXML
     public ListView<String> collectionsList;
     @FXML
-    public ListView exhibitsList;
+    public ListView<String> exhibitsList;
     @FXML
     public ComboBox<String> typeFilter;
     @FXML
-    public ListView exhibitDataList;
+    public ListView<String> exhibitDataList;
     @FXML
     public ListView<String> museumsList;
     @FXML
-    public ListView forwardExhibitsList;
+    public ListView<String> forwardExhibitsList;
     @FXML
     public Button createCollectionButton;
     @FXML
@@ -53,17 +52,9 @@ public class MainWindowControl{
     @FXML
     public Button createMuseumButton;
     @FXML
-    public Button editMuseumButton;
-    @FXML
     public TabPane mainTab;
     @FXML
     public Tab collectionTab;
-
-    //accessibility tab
-    @FXML
-    public ListView userList;
-    @FXML
-    public ListView userAccessList;
 
     //settingsTab
     @FXML
@@ -79,28 +70,18 @@ public class MainWindowControl{
     @FXML
     public ImageView exhibitImage;
 
-
-    private Connection connection;
-    private Statement statement;
-
     private ArrayList<Collection> collections;
     private ArrayList<Exhibit> exhibits;
     private ArrayList<Exhibit> forwardExhibits;
     private ArrayList<Museum> museums;
     @FXML
     private ArrayList<Exhibit> exhibitData;
-    private ArrayList<User> users;
 
-    private User selectedAdminUser;
     private User loggedInUser;
     private Collection selectedCollection;
     private Exhibit selectedExhibit;
     private Museum selectedMuseum;
 
-
-    public void switchTab() {
-        this.mainTab.getSelectionModel().select(collectionTab);
-    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Collection//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +101,7 @@ public class MainWindowControl{
 
     public void selectCollection() throws SQLException{
         if (this.collectionsList.getSelectionModel().getSelectedItem() != null) {
-            String collectionName = this.collectionsList.getSelectionModel().getSelectedItem().toString();
+            String collectionName = this.collectionsList.getSelectionModel().getSelectedItem();
             for (Collection collection : this.collections) {
                 if(collection.getName().equals(collectionName))
                     selectedCollection = collection;
@@ -145,15 +126,6 @@ public class MainWindowControl{
         if(selectedCollection != null) {
             DatabaseControllers.deleteCollection(selectedCollection.getId());
             setCollectionsList();
-
-            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.collectionsList.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();*/
         }
         else
             LoginControl.alertMessage("Pasirinkite kolekciją");
@@ -198,7 +170,7 @@ public class MainWindowControl{
         ObservableList<String> list = FXCollections.observableArrayList("Visi", "Skaitmeniniai", "Fiziniai");
         typeFilter.setItems(list);
     }
-    public void selectFilter(ActionEvent actionEvent) throws SQLException{
+    public void selectFilter() throws SQLException{
         selectCollection();
     }
     public void setExhibitsList(int collectionIdLike) throws SQLException{
@@ -233,7 +205,7 @@ public class MainWindowControl{
         }
     }
 
-    public void selectExhibit(MouseEvent mouseEvent) throws SQLException{
+    public void selectExhibit() throws SQLException{
         if (this.exhibitsList.getSelectionModel().getSelectedItem() != null) {
             String exhibitName = this.exhibitsList.getSelectionModel().getSelectedItem().toString();
             for (Exhibit exhibit : this.exhibits) {
@@ -244,7 +216,7 @@ public class MainWindowControl{
         }
     }
 
-    public void createExhibit() throws SQLException, IOException {
+    public void createExhibit() throws IOException {
         if (selectedCollection != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-exhibit.fxml"));
             Parent root = fxmlLoader.load();
@@ -279,7 +251,7 @@ public class MainWindowControl{
             LoginControl.alertMessage("Pasirinkite kolekciją");
     }
 
-    public void deleteExhibit() throws SQLException, IOException {
+    public void deleteExhibit() throws SQLException {
         if(selectedExhibit != null) {
             DatabaseControllers.deleteExhibit(selectedExhibit.getId());
         }
@@ -334,14 +306,13 @@ public class MainWindowControl{
         this.setCollectionsList();
         this.setMuseumsList();
         this.loadChoiceBox();
-        //typeFilter.setOnAction(this::getFilterType);
     }
 
-    public void updateUser(ActionEvent actionEvent) throws Exception {
-        if(     loginName.getText() != "" &&
-                password.getText() != "" &&
-                name.getText() != "" &&
-                surname.getText() != "") {
+    public void updateUser() throws Exception {
+        if(!Objects.equals(loginName.getText(), "") &&
+                !Objects.equals(password.getText(), "") &&
+                !Objects.equals(name.getText(), "") &&
+                !Objects.equals(surname.getText(), "")) {
             LoginControl loginControl = new LoginControl();
             DatabaseControllers.editUser(loginName.getText(), loginControl.encrypt(password.getText()), name.getText(), surname.getText(), loggedInUser.getId());
         }
@@ -350,7 +321,7 @@ public class MainWindowControl{
         }
     }
 
-    public void logOut(ActionEvent event) throws IOException {
+    public void logOut() throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Taip");
         ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Ne");
@@ -388,14 +359,14 @@ public class MainWindowControl{
 
     private ArrayList<Museum> getMuseums() throws SQLException {
         ArrayList<Museum> museums = DatabaseControllers.getAllMuseums();
-        Collections.sort(museums, Comparator.comparing(Museum ::getName));
+        museums.sort(Comparator.comparing(Museum::getName));
         this.museums = museums;
         return museums;
     }
 
-    public void selectMuseum(MouseEvent mouseEvent) throws SQLException{
+    public void selectMuseum() throws SQLException{
         if (this.museumsList.getSelectionModel().getSelectedItem() != null) {
-            String museumName = this.museumsList.getSelectionModel().getSelectedItem().toString();
+            String museumName = this.museumsList.getSelectionModel().getSelectedItem();
             for (Museum museum : this.museums) {
                 if(museum.getName().equals(museumName))
                     selectedMuseum = museum;
@@ -417,7 +388,7 @@ public class MainWindowControl{
         return forwardExhibits;
     }
 
-    public void selectForwardExhibit(MouseEvent mouseEvent) throws SQLException{
+    public void selectForwardExhibit() throws SQLException{
         if (this.forwardExhibitsList.getSelectionModel().getSelectedItem() != null) {
             String exhibitName = this.forwardExhibitsList.getSelectionModel().getSelectedItem().toString();
             for (Exhibit exhibit : this.forwardExhibits) {
@@ -428,7 +399,7 @@ public class MainWindowControl{
         }
     }
 
-    public void forwardExhibit() throws SQLException, IOException, ClassNotFoundException {
+    public void forwardExhibit() throws SQLException, IOException {
         if (selectedExhibit != null) {
             FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("forward-exhibit.fxml"));
             Parent root = fxmlLoader.load();
@@ -437,7 +408,7 @@ public class MainWindowControl{
             ForwardExhibitControl forwardExhibitControl = fxmlLoader.getController();
             forwardExhibitControl.setLoggedInUser(loggedInUser);
             forwardExhibitControl.setSelectedExhibit(selectedExhibit);
-            forwardExhibitControl.loadComboBox();
+            forwardExhibitControl.comboMuseum.setItems(DatabaseControllers.loadComboBox());
 
             Stage stage = (Stage) this.forwardExhibitButton.getScene().getWindow();
             stage.setScene(scene);
@@ -447,7 +418,7 @@ public class MainWindowControl{
             LoginControl.alertMessage("Pasirinkite eksponatą");
     }
 
-    public void createMuseum() throws SQLException, IOException {
+    public void createMuseum() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("create-museum.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
@@ -459,19 +430,10 @@ public class MainWindowControl{
         stage.show();
     }
 
-    public void deleteMuseum() throws SQLException, IOException {
+    public void deleteMuseum() throws SQLException {
         if(selectedMuseum != null) {
             DatabaseControllers.deleteMuseum(selectedMuseum.getId());
             setMuseumsList();
-
-            /*FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("main-window.fxml")); //sketchy
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            MainWindowControl mainCollectionsWindow = fxmlLoader.getController();
-            mainCollectionsWindow.setLoggedInUser(this.loggedInUser);
-            Stage stage = (Stage) this.museumsList.getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();*/
         }
         else
             LoginControl.alertMessage("Pasirinkite muziejų");

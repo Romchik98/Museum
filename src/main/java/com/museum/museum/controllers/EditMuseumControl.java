@@ -2,10 +2,8 @@ package com.museum.museum.controllers;
 
 import com.museum.museum.Start;
 import com.museum.museum.databaseUtilities.DatabaseControllers;
-import com.museum.museum.ds.Collection;
 import com.museum.museum.ds.Museum;
 import com.museum.museum.ds.User;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -28,11 +26,11 @@ public class EditMuseumControl {
         this.loggedInUser = user;
     }
 
-    public void setSelectedMuseum(Museum museum) throws SQLException {
+    public void setSelectedMuseum(Museum museum) {
         this.selectedMuseum = museum;
     }
 
-    public void updateMuseum(ActionEvent actionEvent) throws IOException, SQLException {
+    public void updateMuseum() throws IOException, SQLException {
         if (this.museumName.getText().length() < 1) {
             LoginControl.alertMessage("Įveskite muziejaus pavadinimą");
         } else {

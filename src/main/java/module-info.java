@@ -11,6 +11,7 @@ module com.museum.museum {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.datatransfer;
+    requires mysql.connector.j;
 
     opens com.museum.museum to javafx.fxml;
     opens com.museum.museum.controllers to javafx.fxml;
