@@ -31,6 +31,8 @@ public class LoginControl {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(s);
         alert.initModality(Modality.APPLICATION_MODAL);
+        alert.setTitle("Pranešimas");
+        alert.setHeaderText("");
         alert.showAndWait();
     }
 

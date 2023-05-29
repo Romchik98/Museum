@@ -92,13 +92,13 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="382.0" prefWidth="649.0">
                             <children>
-                                <TextField fx:id="loginName" layoutX="380.0" layoutY="145.0" prefHeight="25.0" prefWidth="250.0" />
-                                <PasswordField fx:id="password" layoutX="380.0" layoutY="197.0" prefHeight="25.0" prefWidth="250.0" />
+                                <TextField fx:id="loginName" layoutX="380.0" layoutY="103.0" prefHeight="25.0" prefWidth="250.0" />
+                                <PasswordField fx:id="password" layoutX="380.0" layoutY="155.0" prefHeight="25.0" prefWidth="250.0" />
                                 <TextField fx:id="name" layoutX="380.0" layoutY="249.0" prefHeight="25.0" prefWidth="250.0" />
                                 <TextField fx:id="surname" layoutX="380.0" layoutY="301.0" prefHeight="25.0" prefWidth="250.0" />
                                 <Label layoutX="380.0" layoutY="232.0" text="Vardas:" />
-                                <Label layoutX="380.0" layoutY="180.0" text="Slaptažodis:" />
-                                <Label layoutX="380.0" layoutY="128.0" text="Vartotojo vardas:" />
+                                <Label layoutX="380.0" layoutY="138.0" text="Slaptažodis:" />
+                                <Label layoutX="380.0" layoutY="86.0" text="Vartotojo vardas:" />
                                 <Label layoutX="380.0" layoutY="284.0" text="Pavardė:" />
                                 <Button layoutX="432.0" layoutY="365.0" mnemonicParsing="false" onAction="#updateUser" prefHeight="51.0" prefWidth="146.0" text="Redaguoti" textFill="#3f46c6">
                                     <font>
@@ -115,6 +115,8 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
+                        <PasswordField fx:id="repeatPassword" layoutX="380.0" layoutY="202.0" prefHeight="25.0" prefWidth="250.0" />
+                        <Label layoutX="380.0" layoutY="185.0" text="Pakartokite slaptažodį:" />
                             </children>
                         </AnchorPane>
                     </content>

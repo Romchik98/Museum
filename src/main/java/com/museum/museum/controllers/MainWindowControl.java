@@ -20,7 +20,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -82,6 +81,17 @@ public class MainWindowControl{
     private Exhibit selectedExhibit;
     private Museum selectedMuseum;
 
+
+    public boolean deleteAlert() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.OK)).setText("Taip");
+        ((Button) alert.getDialogPane().lookupButton(ButtonType.CANCEL)).setText("Ne");
+        alert.setTitle("Ištrinimas");
+        alert.setHeaderText("");
+        alert.setContentText("Ar tikrai norite ištrinti įrašą?");
+
+        return alert.showAndWait().get() == ButtonType.OK;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Collection//
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +104,7 @@ public class MainWindowControl{
 
     private ArrayList<Collection> getCollections() throws SQLException {
         ArrayList<Collection> collections = DatabaseControllers.getAllCollections();
-        Collections.sort(collections, Comparator.comparing(Collection ::getName));
+        collections.sort(Comparator.comparing(Collection::getName));
         this.collections = collections;
         return collections;
     }
@@ -122,13 +132,15 @@ public class MainWindowControl{
         stage.show();
     }
 
-    public void deleteCollection() throws SQLException, IOException {
+    public void deleteCollection() throws SQLException {
         if(selectedCollection != null) {
-            DatabaseControllers.deleteCollection(selectedCollection.getId());
-            setCollectionsList();
-        }
-        else
+            if (deleteAlert()) {
+                DatabaseControllers.deleteCollection(selectedCollection.getId());
+                setCollectionsList();
+            }
+        } else {
             LoginControl.alertMessage("Pasirinkite kolekciją");
+        }
     }
 
     public void editCollection() throws SQLException, IOException {
@@ -142,7 +154,7 @@ public class MainWindowControl{
             editCollectionControl.setSelectedCollection(selectedCollection);
             editCollectionControl.loadCollectionData();
 
-            Stage stage = /*new Stage()*/(Stage) this.editCollectionButton.getScene().getWindow();
+            Stage stage = (Stage) this.editCollectionButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         }
@@ -156,14 +168,13 @@ public class MainWindowControl{
     private ArrayList<Exhibit> getExhibits(int collectionIdLike) throws SQLException {
         String type = getFilterType();
         ArrayList<Exhibit> exhibits = DatabaseControllers.getExhibits(collectionIdLike, type);
-        Collections.sort(exhibits, Comparator.comparing(Exhibit ::getName));
+        exhibits.sort(Comparator.comparing(Exhibit::getName));
         this.exhibits = exhibits;
         return exhibits;
     }
 
     public String getFilterType() {
         String type = typeFilter.getValue();
-        System.out.println(type);
         return type;
     }
     public void loadChoiceBox() {
@@ -207,7 +218,7 @@ public class MainWindowControl{
 
     public void selectExhibit() throws SQLException{
         if (this.exhibitsList.getSelectionModel().getSelectedItem() != null) {
-            String exhibitName = this.exhibitsList.getSelectionModel().getSelectedItem().toString();
+            String exhibitName = this.exhibitsList.getSelectionModel().getSelectedItem();
             for (Exhibit exhibit : this.exhibits) {
                 if(exhibit.getName().equals(exhibitName))
                     selectedExhibit = exhibit;
@@ -253,10 +264,12 @@ public class MainWindowControl{
 
     public void deleteExhibit() throws SQLException {
         if(selectedExhibit != null) {
-            DatabaseControllers.deleteExhibit(selectedExhibit.getId());
-        }
-        else
+            if (deleteAlert()) {
+                DatabaseControllers.deleteExhibit(selectedExhibit.getId());
+            }
+        } else {
             LoginControl.alertMessage("Pasirinkite eksponatą");
+        }
     }
 
     public void editExhibit() throws SQLException, IOException {
@@ -390,7 +403,7 @@ public class MainWindowControl{
 
     public void selectForwardExhibit() throws SQLException{
         if (this.forwardExhibitsList.getSelectionModel().getSelectedItem() != null) {
-            String exhibitName = this.forwardExhibitsList.getSelectionModel().getSelectedItem().toString();
+            String exhibitName = this.forwardExhibitsList.getSelectionModel().getSelectedItem();
             for (Exhibit exhibit : this.forwardExhibits) {
                 if(exhibit.getName().equals(exhibitName))
                     selectedExhibit = exhibit;
@@ -432,11 +445,13 @@ public class MainWindowControl{
 
     public void deleteMuseum() throws SQLException {
         if(selectedMuseum != null) {
-            DatabaseControllers.deleteMuseum(selectedMuseum.getId());
-            setMuseumsList();
-        }
-        else
+            if (deleteAlert()) {
+                DatabaseControllers.deleteMuseum(selectedMuseum.getId());
+                setMuseumsList();
+            }
+        } else {
             LoginControl.alertMessage("Pasirinkite muziejų");
+        }
     }
 
     public void editMuseum() throws SQLException, IOException {

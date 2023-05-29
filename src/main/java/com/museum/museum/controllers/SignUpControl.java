@@ -48,6 +48,7 @@ public class SignUpControl {
         return ("Failed");
     }
 
+    @FXML
     private void returnToPrevious() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Start.class.getResource("login-window.fxml"));
         Parent root = fxmlLoader.load();
